@@ -41,6 +41,8 @@ public class Categoria implements Serializable {
 		this.nombre = nombre;
 	}
 	
-	
+	public boolean sosCategoria(String nombre) {
+		return this.nombre.equals(nombre);
+	}
 	
 }

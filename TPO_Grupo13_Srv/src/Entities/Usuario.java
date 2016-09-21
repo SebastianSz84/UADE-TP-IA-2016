@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import Dao.VentaDAO;
+
 @Entity
 @Table(name="Usuario")
 public class Usuario implements Serializable {
@@ -74,6 +76,14 @@ public class Usuario implements Serializable {
 
 	public void setVentas(List<Venta> ventas) {
 		this.ventas = ventas;
+	}
+
+	public void addVenta(Venta venta) {
+		this.ventas.add(venta);
+	}
+
+	public boolean sosUsuario(String userName) {
+		return this.userName.equals(userName);
 	}
 
 }

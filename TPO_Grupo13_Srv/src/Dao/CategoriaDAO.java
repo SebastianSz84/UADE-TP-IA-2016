@@ -4,12 +4,12 @@ import Entities.Categoria;
 
 public class CategoriaDAO extends BaseDAO {
 	
-	public static Categoria getCategoria(int idCategoria)
+	public static Categoria get(int idCategoria)
 	{
-		return getEntity(Categoria.class, 1);
+		return getEntity(Categoria.class, idCategoria);
 	}
 
-	public static Categoria getCategoria(String nombre)
+	public static Categoria get(String nombre)
 	{
 		return (Categoria) getSession().createQuery("FROM Categoria C WHERE C.nombre = :nombre").setParameter("nombre", nombre).uniqueResult();
 	}
