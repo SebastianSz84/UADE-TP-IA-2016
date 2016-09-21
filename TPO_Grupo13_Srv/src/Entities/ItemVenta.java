@@ -15,7 +15,7 @@ public class ItemVenta implements Serializable {
 	@Column
 	private int cantidad;
 	@Column
-	private String estadoEntrega;
+	private double precio;
 	@ManyToOne
 	@JoinColumn(name="codigoProducto")
 	private Producto producto;
@@ -28,7 +28,6 @@ public class ItemVenta implements Serializable {
 		super();
 		this.cantidad = cantidad;		
 		this.producto = producto;
-		this.setEstadoEntrega("Pendiente"); // Lo inicializo así para nuestra DB, pero el estado lo mantiene Despacho
 	}
 
 	public Integer getId() {
@@ -47,12 +46,12 @@ public class ItemVenta implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public String getEstadoEntrega() {
-		return estadoEntrega;
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setEstadoEntrega(String estadoEntrega) {
-		this.estadoEntrega = estadoEntrega;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	public Producto getProducto() {
@@ -64,7 +63,6 @@ public class ItemVenta implements Serializable {
 	}
 
 	public String toString() {
-		return this.getProducto().getNombre() + " x " + this.getCantidad() + " [" +
-				this.getEstadoEntrega() + "]";
+		return this.getProducto().getNombre() + " x " + this.getCantidad();
 	}
 }

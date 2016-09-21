@@ -1,11 +1,19 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
-import Dao.VentaDAO;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="Usuario")
@@ -24,10 +32,12 @@ public class Usuario implements Serializable {
 	@Column
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="idUsuario")
 	private List<Venta> ventas;
 	
 	public Usuario() {
 		super();
+		ventas = new ArrayList<Venta>();
 	}
 	
 	public Usuario(String nombre, String apellido, String userName, String password) {

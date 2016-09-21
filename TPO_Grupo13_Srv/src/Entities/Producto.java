@@ -89,5 +89,8 @@ public class Producto implements Serializable {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	public boolean sosProducto(int codigo) {
+		return this.codigo == codigo;
+	}
 	
 }

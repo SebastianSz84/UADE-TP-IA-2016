@@ -19,14 +19,16 @@ public class Venta implements Serializable {
 	@Column
 	private String estado;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="idVenta")
 	private List<ItemVenta> items;
 	@Column
-	private Date fecha;
+	private Date fecha; // Es un getdate default en la base de datos
 	
+	@SuppressWarnings("deprecation")
 	public Venta() {
 		super();
 		this.setEstado("Pendiente"); //Lo inicializo en pendiente.
-		this.fecha = new Date(Calendar.getInstance().getTimeInMillis());
+		this.fecha = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
 		this.items = new ArrayList<ItemVenta>();
 	}
 

@@ -21,8 +21,6 @@ import Entities.Venta;
 
 public class EntitiesTests {
 
-	private int idVentaTest;
-	
 	@Before
 	public void initializeTestData() {
 		Categoria categoria = CategoriaDAO.get("categoriaTest");
@@ -70,17 +68,14 @@ public class EntitiesTests {
 		
 		ItemVenta itemVenta = new ItemVenta();
 		itemVenta.setProducto(producto);
+		itemVenta.setPrecio(123.543);
 		itemVenta.setCantidad(10);
 		
 		List<ItemVenta> itemsVenta = new ArrayList<ItemVenta>();
 		itemsVenta.add(itemVenta);
 		
 		Venta venta = new Venta();
-		venta.setEstado("Nueva");
-		venta.setFecha(Date.valueOf("20161010"));
 		venta.setItems(itemsVenta);
-		
-		VentaDAO.saveEntity(venta);
 		
 		// Act
 		Usuario newUsuario = new Usuario();
@@ -95,8 +90,11 @@ public class EntitiesTests {
 		Usuario usuario = UsuarioDAO.get("test@mail.com");
 
 		// Assert
+		Assert.assertTrue(usuario != null);
 		Assert.assertTrue(usuario.sosUsuario("test@mail.com"));
 		Assert.assertTrue(usuario.getVentas() != null && usuario.getVentas().size() > 0);
+		Assert.assertTrue(usuario.getVentas().get(0).getItems().get(0).getProducto().sosProducto(1857363));
+		
 		
 		UsuarioDAO.deleteEntity(usuario);
 		
