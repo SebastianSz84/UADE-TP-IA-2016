@@ -1,4 +1,4 @@
-package entities;
+package Entities;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -9,25 +9,25 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Venta")
-public class Venta implements Serializable {
+@Table(name="Carrito")
+public class Carrito implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column
 	private String estado;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<ItemVenta> items;
+	private List<ItemCarrito> items;
 	@Column
 	private Date fecha;
 	
-	public Venta() {
+	public Carrito() {
 		super();
 		this.setEstado("Pendiente"); //Lo inicializo en pendiente.
 		this.fecha = new Date(Calendar.getInstance().getTimeInMillis());
-		this.items = new ArrayList<ItemVenta>();
+		this.items = new ArrayList<ItemCarrito>();
 	}
 
 	public Date getFecha() {
@@ -58,11 +58,11 @@ public class Venta implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<ItemVenta> getItems() {
+	public List<ItemCarrito> getItems() {
 		return items;
 	}
 
-	public void setItems(List<ItemVenta> items) {
+	public void setItems(List<ItemCarrito> items) {
 		this.items = items;
 	}
 	
