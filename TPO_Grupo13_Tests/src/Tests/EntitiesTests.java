@@ -31,8 +31,6 @@ public class EntitiesTests {
 			categoria.setNombre("categoriaTest");
 			CategoriaDAO.saveEntity(categoria);		
 		}
-		
-
 	}
 
 	@Test
@@ -106,7 +104,7 @@ public class EntitiesTests {
 	
 	@After
 	public void removeTestData() {
-		Categoria categoria = CategoriaDAO.getCategoria("categoriaTest");
+		Categoria categoria = CategoriaDAO.get("categoriaTest");
 		
 		if (categoria != null)
 			CategoriaDAO.deleteEntity(categoria);		
