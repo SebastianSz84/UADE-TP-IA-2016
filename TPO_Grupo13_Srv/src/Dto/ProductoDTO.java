@@ -1,40 +1,19 @@
-package Entities;
+package Dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import Dto.ProductoDTO;
-
-@Entity
-@Table(name = "Producto")
-public class Producto implements Serializable {
+public class ProductoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
 	private Integer codigo;
-	@Column
 	private String nombre;
-	@Column
 	private String descripcion;
-	@Column
 	private String marca;
-	@Column
 	private double precio;
-	@Column
 	private String urlImagen;
-	@Column
 	private String origen;
-	@Column
 	private String datosExtra;
-	@ManyToOne
-	@JoinColumn(name = "idCategoria")
-	private Categoria categoria;
+	private CategoriaDTO categoria;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -100,30 +79,16 @@ public class Producto implements Serializable {
 		this.datosExtra = datosExtra;
 	}
 
-	public Categoria getCategoria() {
+	public CategoriaDTO getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(CategoriaDTO categoria) {
 		this.categoria = categoria;
 	}
 
 	public boolean sosProducto(int codigo) {
 		return this.codigo == codigo;
-	}
-
-	public ProductoDTO getDTO() {
-		ProductoDTO dto = new ProductoDTO();
-		dto.setCategoria(categoria.getDTO());
-		dto.setCodigo(codigo);
-		dto.setDatosExtra(datosExtra);
-		dto.setDescripcion(descripcion);
-		dto.setMarca(marca);
-		dto.setNombre(nombre);
-		dto.setOrigen(origen);
-		dto.setPrecio(precio);
-		dto.setUrlImagen(urlImagen);
-		return dto;
 	}
 
 }

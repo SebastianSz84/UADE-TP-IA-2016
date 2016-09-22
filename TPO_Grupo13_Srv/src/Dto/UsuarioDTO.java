@@ -1,46 +1,25 @@
-package Entities;
+package Dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column
 	private String nombre;
-	@Column
 	private String apellido;
-	@Column
 	private String userName;
-	@Column
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario")
-	private List<Venta> ventas;
+	private List<VentaDTO> ventas;
 
-	public Usuario() {
+	public UsuarioDTO() {
 		super();
-		ventas = new ArrayList<Venta>();
+		ventas = new ArrayList<VentaDTO>();
 	}
 
-	public Usuario(String nombre, String apellido, String userName, String password) {
+	public UsuarioDTO(String nombre, String apellido, String userName, String password) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -80,15 +59,15 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
-	public List<Venta> getVentas() {
+	public List<VentaDTO> getVentas() {
 		return ventas;
 	}
 
-	public void setVentas(List<Venta> ventas) {
+	public void setVentas(List<VentaDTO> ventas) {
 		this.ventas = ventas;
 	}
 
-	public void addVenta(Venta venta) {
+	public void addVenta(VentaDTO venta) {
 		this.ventas.add(venta);
 	}
 

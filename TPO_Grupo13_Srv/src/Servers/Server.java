@@ -1,4 +1,4 @@
-package controller;
+package Servers;
 
 public class Server {
 
