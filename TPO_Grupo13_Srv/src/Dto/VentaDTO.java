@@ -2,8 +2,6 @@ package Dto;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class VentaDTO implements Serializable {
@@ -14,12 +12,8 @@ public class VentaDTO implements Serializable {
 	private List<ItemVentaDTO> items;
 	private Date fecha; // Es un getdate default en la base de datos
 
-	@SuppressWarnings("deprecation")
 	public VentaDTO() {
 		super();
-		this.setEstado("Pendiente"); // Lo inicializo en pendiente.
-		this.fecha = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
-		this.items = new ArrayList<ItemVentaDTO>();
 	}
 
 	public Date getFecha() {

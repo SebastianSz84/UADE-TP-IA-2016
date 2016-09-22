@@ -85,7 +85,8 @@ public class Carrito implements Serializable {
 
 	public CarritoDTO getDTO() {
 		CarritoDTO dto = new CarritoDTO();
-		dto.setId(idUsuario);
+		dto.setIdUsuario(idUsuario);
+		dto.setUsuario(usuario.getDTO());
 		List<ItemCarritoDTO> lista = new ArrayList<ItemCarritoDTO>();
 		for (ItemCarrito ic : items) {
 			lista.add(ic.getDTO());

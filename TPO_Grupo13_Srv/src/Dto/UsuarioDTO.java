@@ -13,6 +13,7 @@ public class UsuarioDTO implements Serializable {
 	private String userName;
 	private String password;
 	private List<VentaDTO> ventas;
+	private CarritoDTO carrito;
 
 	public UsuarioDTO() {
 		super();
@@ -81,6 +82,18 @@ public class UsuarioDTO implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public CarritoDTO getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(CarritoDTO carrito) {
+		this.carrito = carrito;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
