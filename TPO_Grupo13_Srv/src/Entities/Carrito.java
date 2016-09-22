@@ -6,15 +6,26 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import Dto.CarritoDTO;
+import Dto.ItemCarritoDTO;
 
 @Entity
-@Table(name="Carrito")
+@Table(name = "Carrito")
 public class Carrito implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column
 	private String estado;
@@ -22,10 +33,10 @@ public class Carrito implements Serializable {
 	private List<ItemCarrito> items;
 	@Column
 	private Date fecha;
-	
+
 	public Carrito() {
 		super();
-		this.setEstado("Pendiente"); //Lo inicializo en pendiente.
+		this.setEstado("Pendiente"); // Lo inicializo en pendiente.
 		this.fecha = new Date(Calendar.getInstance().getTimeInMillis());
 		this.items = new ArrayList<ItemCarrito>();
 	}
@@ -65,5 +76,17 @@ public class Carrito implements Serializable {
 	public void setItems(List<ItemCarrito> items) {
 		this.items = items;
 	}
-	
+
+	public CarritoDTO getDTO() {
+		CarritoDTO dto = new CarritoDTO();
+		dto.setEstado(estado);
+		dto.setFecha(fecha);
+		dto.setId(id);
+		List<ItemCarritoDTO> lista = new ArrayList<ItemCarritoDTO>();
+		for (ItemCarrito ic : items) {
+			lista.add(ic.getDTO());
+		}
+		dto.setItems(lista);
+		return dto;
+	}
 }

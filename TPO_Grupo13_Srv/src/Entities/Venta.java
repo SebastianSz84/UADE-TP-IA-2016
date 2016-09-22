@@ -6,28 +6,40 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import Dto.ItemVentaDTO;
+import Dto.VentaDTO;
 
 @Entity
-@Table(name="Venta")
+@Table(name = "Venta")
 public class Venta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column
 	private String estado;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="idVenta")
+	@JoinColumn(name = "idVenta")
 	private List<ItemVenta> items;
 	@Column
 	private Date fecha; // Es un getdate default en la base de datos
-	
+
 	@SuppressWarnings("deprecation")
 	public Venta() {
 		super();
-		this.setEstado("Pendiente"); //Lo inicializo en pendiente.
+		this.setEstado("Pendiente"); // Lo inicializo en pendiente.
 		this.fecha = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
 		this.items = new ArrayList<ItemVenta>();
 	}
@@ -67,5 +79,18 @@ public class Venta implements Serializable {
 	public void setItems(List<ItemVenta> items) {
 		this.items = items;
 	}
-	
+
+	public VentaDTO getDTO() {
+		VentaDTO dto = new VentaDTO();
+		dto.setEstado(estado);
+		dto.setFecha(fecha);
+		dto.setId(id);
+		List<ItemVentaDTO> lista = new ArrayList<ItemVentaDTO>();
+		for (ItemVenta iv : items) {
+			lista.add(iv.getDTO());
+		}
+		dto.setItems(lista);
+		return dto;
+	}
+
 }

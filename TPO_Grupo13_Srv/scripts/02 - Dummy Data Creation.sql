@@ -1,3 +1,6 @@
+USE [UADE-TP-IA-2016]
+GO
+
 /*
 delete from Usuario
 delete from Producto

@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import Dto.UsuarioDTO;
+import Dto.VentaDTO;
+
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable {
@@ -104,4 +107,18 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
+	public UsuarioDTO getDTO() {
+		UsuarioDTO dto = new UsuarioDTO();
+		dto.setApellido(apellido);
+		dto.setId(id);
+		dto.setNombre(nombre);
+		dto.setPassword(password);
+		dto.setUserName(userName);
+		List<VentaDTO> lista = new ArrayList<VentaDTO>();
+		for (Venta v : ventas) {
+			lista.add(v.getDTO());
+		}
+		dto.setVentas(lista);
+		return dto;
+	}
 }
