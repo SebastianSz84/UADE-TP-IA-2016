@@ -36,13 +36,13 @@ public class PortalWeb {
 		if (nombre.trim().isEmpty())
 			return new ResultadoOperacion(false, "El nombre no puede estar vacio");
 
-		if (nombre.trim().isEmpty())
+		if (apellido.trim().isEmpty())
 			return new ResultadoOperacion(false, "El apellido no puede estar vacio");
 
-		if (nombre.trim().isEmpty())
+		if (userName.trim().isEmpty())
 			return new ResultadoOperacion(false, "El username no puede estar vacio");
 
-		if (nombre.trim().isEmpty())
+		if (password.trim().isEmpty())
 			return new ResultadoOperacion(false, "El password no puede estar vacio");
 
 		try {
