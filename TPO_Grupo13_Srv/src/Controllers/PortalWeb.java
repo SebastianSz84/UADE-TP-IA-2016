@@ -13,6 +13,12 @@ import Entities.Usuario;
 public class PortalWeb {
 	private static PortalWeb instancia;
 
+	private List<Usuario> usuarios;
+
+	private PortalWeb() {
+		usuarios = new ArrayList<Usuario>();
+	}
+
 	public static PortalWeb getInstancia() {
 		if (instancia == null) {
 			instancia = new PortalWeb();
@@ -60,4 +66,44 @@ public class PortalWeb {
 			return new ResultadoOperacion(false, "Error al crear usuario : " + ex.getMessage());
 		}
 	}
+
+	public ResultadoOperacion loginUsuario(String userName, String password) {
+		if (userName.trim().isEmpty())
+			return new ResultadoOperacion(false, "El username no puede estar vacio");
+
+		if (password.trim().isEmpty())
+			return new ResultadoOperacion(false, "El password no puede estar vacio");
+
+		try {
+			Usuario usuario = this.buscarUsuario(userName);
+
+			if (usuario == null)
+				return new ResultadoOperacion(false, "El usuario no existe");
+
+			if (usuario.tenesPassword(password)) {
+				return new ResultadoOperacion(true, "Exito");
+			} else {
+				return new ResultadoOperacion(false, "La clave es incorrecta");
+			}
+
+		} catch (Exception ex) {
+			return new ResultadoOperacion(false, "Error en el login de usuario : " + ex.getMessage());
+		}
+	}
+
+	private Usuario buscarUsuario(String userName) {
+
+		for (Usuario u : usuarios) {
+			if (u.sosUsuario(userName))
+				return u;
+		}
+
+		Usuario usuario = UsuarioDAO.get(userName);
+
+		if (usuario != null)
+			usuarios.add(usuario);
+
+		return usuario;
+	}
+
 }

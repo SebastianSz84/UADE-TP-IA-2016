@@ -25,16 +25,29 @@ public class EntitiesTests {
 		if (categoria == null) {
 			categoria = new Categoria();
 			categoria.setNombre("categoriaTest");
-			CategoriaDAO.saveEntity(categoria);		
+			CategoriaDAO.saveEntity(categoria);
 		}
+
+		Usuario usuario = UsuarioDAO.get("test@mail.com");
+		if (usuario != null) {
+			UsuarioDAO.deleteEntity(usuario);
+		}
+	}
+
+	@After
+	public void removeTestData() {
+		Categoria categoria = CategoriaDAO.get("categoriaTest");
+
+		if (categoria != null)
+			CategoriaDAO.deleteEntity(categoria);
 	}
 
 	@Test
 	public void nuevoProductoTest() {
-		  
+
 		// Arrange
 		Categoria categoria = CategoriaDAO.get("categoriaTest");
-		
+
 		// Act
 		Producto newProducto = new Producto();
 		newProducto.setCategoria(categoria);
@@ -47,34 +60,34 @@ public class EntitiesTests {
 		newProducto.setPrecio(123.987);
 		newProducto.setUrlImagen("#");
 		ProductoDAO.saveEntity(newProducto);
-		
+
 		Producto producto = ProductoDAO.get(987123);
-		  
+
 		// Assert
 		Assert.assertTrue(producto != null);
 		Assert.assertTrue(producto.getNombre().equals("nombreTest"));
 		Assert.assertTrue(producto.getCategoria().sosCategoria("categoriaTest"));
-		
+
 		ProductoDAO.deleteEntity(producto);
 	}
 
 	@Test
 	public void nuevoUsuarioTest() {
-		
+
 		// Arrange
 		Producto producto = ProductoDAO.get(1857363);
-		
+
 		ItemVenta itemVenta = new ItemVenta();
 		itemVenta.setProducto(producto);
 		itemVenta.setPrecio(123.543);
 		itemVenta.setCantidad(10);
-		
+
 		List<ItemVenta> itemsVenta = new ArrayList<ItemVenta>();
 		itemsVenta.add(itemVenta);
-		
+
 		Venta venta = new Venta();
 		venta.setItems(itemsVenta);
-		
+
 		// Act
 		Usuario newUsuario = new Usuario();
 		newUsuario.setNombre("usuarioTest");
@@ -82,9 +95,9 @@ public class EntitiesTests {
 		newUsuario.setUserName("test@mail.com");
 		newUsuario.setPassword("1234567");
 		newUsuario.addVenta(venta);
-		
-		UsuarioDAO.saveEntity(newUsuario);	
-		
+
+		UsuarioDAO.saveEntity(newUsuario);
+
 		Usuario usuario = UsuarioDAO.get("test@mail.com");
 
 		// Assert
@@ -92,18 +105,17 @@ public class EntitiesTests {
 		Assert.assertTrue(usuario.sosUsuario("test@mail.com"));
 		Assert.assertTrue(usuario.getVentas() != null && usuario.getVentas().size() > 0);
 		Assert.assertTrue(usuario.getVentas().get(0).getItems().get(0).getProducto().sosProducto(1857363));
-		
-		
+
 		UsuarioDAO.deleteEntity(usuario);
-		
+
 	}
-	
+
 	@Test
 	public void nuevoCarritoTest() {
-		
+
 		// Arrange
 		Producto producto = ProductoDAO.get(1857363);
-		
+
 		// Act
 		Usuario newUsuario = new Usuario();
 		newUsuario.setNombre("usuarioTest");
@@ -111,9 +123,9 @@ public class EntitiesTests {
 		newUsuario.setUserName("test@mail.com");
 		newUsuario.setPassword("1234567");
 		newUsuario.addItemACarrito(producto, 10);
-		
-		UsuarioDAO.saveEntity(newUsuario);	
-		
+
+		UsuarioDAO.saveEntity(newUsuario);
+
 		Usuario usuario = UsuarioDAO.get("test@mail.com");
 
 		// Assert
@@ -121,16 +133,7 @@ public class EntitiesTests {
 		Assert.assertTrue(usuario.sosUsuario("test@mail.com"));
 		Assert.assertTrue(usuario.getCarrito() != null && usuario.getCarrito().getItems().size() > 0);
 		Assert.assertTrue(usuario.getCarrito().getItems().get(0).getProducto().sosProducto(1857363));
-		
+
 		UsuarioDAO.deleteEntity(usuario);
 	}
-	
-	@After
-	public void removeTestData() {
-		Categoria categoria = CategoriaDAO.get("categoriaTest");
-		
-		if (categoria != null)
-			CategoriaDAO.deleteEntity(categoria);		
-	}
-	  
 }

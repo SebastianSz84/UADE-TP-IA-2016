@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
 	private String nombre;
 	@Column
 	private String apellido;
-	@Column
+	@Column(unique = true)
 	private String userName;
 	@Column
 	private String password;
@@ -145,5 +145,9 @@ public class Usuario implements Serializable {
 		}
 		dto.setVentas(lista);
 		return dto;
+	}
+
+	public boolean tenesPassword(String password) {
+		return this.password.equals(password);
 	}
 }
