@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import Dto.UsuarioDTO;
@@ -37,6 +38,9 @@ public class Usuario implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private List<Venta> ventas;
+
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Carrito carrito;
 
 	public Usuario() {
 		super();
@@ -97,6 +101,27 @@ public class Usuario implements Serializable {
 
 	public boolean sosUsuario(String userName) {
 		return this.userName.equals(userName);
+	}
+
+	public Carrito getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(Carrito carrito) {
+		this.carrito = carrito;
+	}
+
+	public void addItemACarrito(Producto producto, int cantidad) {
+		if (this.carrito == null)
+			this.carrito = new Carrito();
+
+		this.carrito.setUsuario(this);
+
+		this.carrito.addItem(producto, cantidad);
+	}
+
+	public void vaciarCarrito() {
+		this.carrito = new Carrito();
 	}
 
 	public Integer getId() {

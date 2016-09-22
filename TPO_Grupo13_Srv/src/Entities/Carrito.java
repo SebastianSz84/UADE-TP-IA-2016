@@ -1,9 +1,7 @@
 package Entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,10 +9,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import Dto.CarritoDTO;
 import Dto.ItemCarritoDTO;
@@ -24,49 +27,44 @@ import Dto.ItemCarritoDTO;
 public class Carrito implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	@Column
-	private String estado;
+	@Column(name = "idUsuario", unique = true, nullable = false)
+	@GeneratedValue(generator = "gen")
+	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "usuario"))
+	private Integer idUsuario;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idUsuario")
 	private List<ItemCarrito> items;
-	@Column
-	private Date fecha;
+
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Usuario usuario;
 
 	public Carrito() {
 		super();
-		this.setEstado("Pendiente"); // Lo inicializo en pendiente.
-		this.fecha = new Date(Calendar.getInstance().getTimeInMillis());
 		this.items = new ArrayList<ItemCarrito>();
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public String getEstado() {
-		return estado;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<ItemCarrito> getItems() {
@@ -77,11 +75,17 @@ public class Carrito implements Serializable {
 		this.items = items;
 	}
 
+	public void addItem(Producto producto, int cantidad) {
+		ItemCarrito item = new ItemCarrito();
+		item.setProducto(producto);
+		item.setCantidad(cantidad);
+		this.items.add(item);
+
+	}
+
 	public CarritoDTO getDTO() {
 		CarritoDTO dto = new CarritoDTO();
-		dto.setEstado(estado);
-		dto.setFecha(fecha);
-		dto.setId(id);
+		dto.setId(idUsuario);
 		List<ItemCarritoDTO> lista = new ArrayList<ItemCarritoDTO>();
 		for (ItemCarrito ic : items) {
 			lista.add(ic.getDTO());

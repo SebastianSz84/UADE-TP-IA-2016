@@ -1,6 +1,5 @@
 package Tests;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.junit.Test;
 import Dao.CategoriaDAO;
 import Dao.ProductoDAO;
 import Dao.UsuarioDAO;
-import Dao.VentaDAO;
 import Entities.Categoria;
 import Entities.ItemVenta;
 import Entities.Producto;
@@ -98,6 +96,33 @@ public class EntitiesTests {
 		
 		UsuarioDAO.deleteEntity(usuario);
 		
+	}
+	
+	@Test
+	public void nuevoCarritoTest() {
+		
+		// Arrange
+		Producto producto = ProductoDAO.get(1857363);
+		
+		// Act
+		Usuario newUsuario = new Usuario();
+		newUsuario.setNombre("usuarioTest");
+		newUsuario.setApellido("apellidoTest");
+		newUsuario.setUserName("test@mail.com");
+		newUsuario.setPassword("1234567");
+		newUsuario.addItemACarrito(producto, 10);
+		
+		UsuarioDAO.saveEntity(newUsuario);	
+		
+		Usuario usuario = UsuarioDAO.get("test@mail.com");
+
+		// Assert
+		Assert.assertTrue(usuario != null);
+		Assert.assertTrue(usuario.sosUsuario("test@mail.com"));
+		Assert.assertTrue(usuario.getCarrito() != null && usuario.getCarrito().getItems().size() > 0);
+		Assert.assertTrue(usuario.getCarrito().getItems().get(0).getProducto().sosProducto(1857363));
+		
+		UsuarioDAO.deleteEntity(usuario);
 	}
 	
 	@After
