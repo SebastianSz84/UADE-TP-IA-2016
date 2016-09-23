@@ -32,6 +32,7 @@ public class Carrito implements Serializable {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	@GeneratedValue(generator = "gen")
 	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "usuario"))
+
 	private Integer idUsuario;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
