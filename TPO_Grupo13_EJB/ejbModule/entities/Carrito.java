@@ -16,9 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import dto.CarritoDTO;
 import dto.ItemCarritoDTO;
 
@@ -31,7 +28,8 @@ public class Carrito implements Serializable {
 	@Id
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "usuario"))
+	// @GenericGenerator(name = "gen", strategy = "foreign", parameters =
+	// @Parameter(name = "property", value = "usuario"))
 
 	private Integer idUsuario;
 
