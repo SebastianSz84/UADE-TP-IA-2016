@@ -3,6 +3,8 @@
 	<name>TPO_Grupo13_EAR</name>
 	<comment></comment>
 	<projects>
+		<project>TPO_Grupo13_EJB</project>
+		<project>TPO_Grupo13_EJBClient</project>
 		<project>TPO_Grupo13_Web</project>
 	</projects>
 	<buildSpec>
