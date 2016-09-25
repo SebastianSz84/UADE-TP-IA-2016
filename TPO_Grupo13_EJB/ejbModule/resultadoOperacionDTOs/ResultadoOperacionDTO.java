@@ -1,11 +1,11 @@
-package dto;
+package resultadoOperacionDTOs;
 
-public class ResultadoOperacion {
+public class ResultadoOperacionDTO {
 
 	private boolean resultado;
 	private String message;
 
-	public ResultadoOperacion(boolean resultado, String message) {
+	public ResultadoOperacionDTO(boolean resultado, String message) {
 		super();
 		this.resultado = resultado;
 		this.message = message;

@@ -11,11 +11,12 @@ import dao.ProductoDAOBean;
 import dao.UsuarioDAOBean;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
-import dto.ResultadoOperacion;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
 import entities.Producto;
 import entities.Usuario;
+import resultadoOperacionDTOs.ResultadoOperacionDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
 public class Controlador implements IControlador {
 
@@ -30,26 +31,34 @@ public class Controlador implements IControlador {
 		usuarios = new ArrayList<Usuario>();
 	}
 
-	public List<ProductoDTO> listadoProductos() {
-		List<ProductoDTO> lista = new ArrayList<ProductoDTO>();
-		for (Producto p : productoDAOBean.listProductos()) {
-			lista.add(p.getDTO());
+	public ResultadoOperacionListadoProductosDTO listadoProductos() throws RemoteException {
+		try {
+
+			List<ProductoDTO> lista = new ArrayList<ProductoDTO>();
+			for (Producto p : productoDAOBean.listProductos()) {
+				lista.add(p.getDTO());
+			}
+			return new ResultadoOperacionListadoProductosDTO(true, "Usuario creado con exito", lista);
+		} catch (Exception ex) {
+			return new ResultadoOperacionListadoProductosDTO(false, "Error al listar productos" + ex.getMessage(),
+					null);
 		}
-		return lista;
+
 	}
 
-	public ResultadoOperacion altaUsuario(String nombre, String apellido, String userName, String password) {
+	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password)
+			throws RemoteException {
 		if (nombre.trim().isEmpty())
-			return new ResultadoOperacion(false, "El nombre no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El nombre no puede estar vacio");
 
 		if (apellido.trim().isEmpty())
-			return new ResultadoOperacion(false, "El apellido no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El apellido no puede estar vacio");
 
 		if (userName.trim().isEmpty())
-			return new ResultadoOperacion(false, "El username no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El username no puede estar vacio");
 
 		if (password.trim().isEmpty())
-			return new ResultadoOperacion(false, "El password no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El password no puede estar vacio");
 
 		try {
 
@@ -61,33 +70,33 @@ public class Controlador implements IControlador {
 
 			usuarioDAOBean.saveEntity(usuario);
 
-			return new ResultadoOperacion(true, "Usuario creado con exito");
+			return new ResultadoOperacionDTO(true, "Usuario creado con exito");
 		} catch (Exception ex) {
-			return new ResultadoOperacion(false, "Error al crear usuario : " + ex.getMessage());
+			return new ResultadoOperacionDTO(false, "Error al crear usuario : " + ex.getMessage());
 		}
 	}
 
-	public ResultadoOperacion loginUsuario(String userName, String password) {
+	public ResultadoOperacionDTO loginUsuario(String userName, String password) throws RemoteException {
 		if (userName.trim().isEmpty())
-			return new ResultadoOperacion(false, "El username no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El username no puede estar vacio");
 
 		if (password.trim().isEmpty())
-			return new ResultadoOperacion(false, "El password no puede estar vacio");
+			return new ResultadoOperacionDTO(false, "El password no puede estar vacio");
 
 		try {
 			Usuario usuario = this.buscarUsuario(userName);
 
 			if (usuario == null)
-				return new ResultadoOperacion(false, "El usuario no existe");
+				return new ResultadoOperacionDTO(false, "El usuario no existe");
 
 			if (usuario.tenesPassword(password)) {
-				return new ResultadoOperacion(true, "Exito");
+				return new ResultadoOperacionDTO(true, "Exito");
 			} else {
-				return new ResultadoOperacion(false, "La clave es incorrecta");
+				return new ResultadoOperacionDTO(false, "La clave es incorrecta");
 			}
 
 		} catch (Exception ex) {
-			return new ResultadoOperacion(false, "Error en el login de usuario : " + ex.getMessage());
+			return new ResultadoOperacionDTO(false, "Error en el login de usuario : " + ex.getMessage());
 		}
 	}
 
