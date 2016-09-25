@@ -8,7 +8,7 @@ import dto.ProductoDTO;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
 
-public interface BusinessDelegate {
+public interface Controlador {
 	public List<ProductoDTO> listadoProductos() throws RemoteException;
 
 	public List<ProductoDTO> listadoBestSellers() throws RemoteException;
