@@ -1,97 +1,86 @@
 package dao;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
+
 public class BaseDAO {
-	// private static SessionFactory _factory;
-	// private static Session _session;
-	//
-	// public static Session getSession() {
-	// if (_session == null) {
-	// // Create session
-	// Configuration cfg = new Configuration();
-	// cfg.addAnnotatedClass(Producto.class);
-	// cfg.addAnnotatedClass(Categoria.class);
-	// cfg.addAnnotatedClass(Usuario.class);
-	// cfg.addAnnotatedClass(Venta.class);
-	// cfg.addAnnotatedClass(ItemVenta.class);
-	// cfg.addAnnotatedClass(Carrito.class);
-	// cfg.addAnnotatedClass(ItemCarrito.class);
-	//
-	// cfg.configure("hibernate.cfg.xml");
-	// _factory = cfg.buildSessionFactory();
-	// _session = _factory.openSession();
-	// }
-	// return _session;
-	// }
-	//
-	// public static Session getNewSession() {
-	// return _factory.openSession();
-	// }
-	//
-	// public static <T> T getEntity(Class<T> cls, int id) {
-	// try {
-	// T entity = getSession().get(cls, id);
-	// return entity;
-	// } catch (Exception ex) {
-	// ex.printStackTrace();
-	// }
-	// return null;
-	// }
-	//
-	// public static <T> T getEntity(Class<T> cls, String id) {
-	// try {
-	// T entity = getSession().get(cls, id);
-	// return entity;
-	// } catch (Exception ex) {
-	// ex.printStackTrace();
-	// }
-	// return null;
-	// }
-	//
-	// public static <T> T saveEntity(T entity) {
-	// Transaction tx = getSession().beginTransaction();
-	// try {
-	// getSession().saveOrUpdate(entity);
-	// tx.commit();
-	// } catch (Exception ex) {
-	// tx.rollback();
-	// getSession().clear();
-	// throw ex;
-	// }
-	// return entity;
-	// }
-	//
-	// public static <T> void deleteEntity(T entity) {
-	// Transaction tx = getSession().beginTransaction();
-	// try {
-	// getSession().delete(entity);
-	// tx.commit();
-	// } catch (Exception ex) {
-	// tx.rollback();
-	// getSession().clear();
-	// throw ex;
-	// }
-	// }
-	//
-	// public static <T> List<T> getAll(Class<T> cls, String tabla) {
-	// try {
-	// List<T> list = getSession().createQuery("from " + tabla).list();
-	// return list;
-	// } catch (Exception ex) {
-	// ex.printStackTrace();
-	// }
-	// return null;
-	// }
-	//
-	// public static boolean deleteAll(String tabla) {
-	// Transaction tx = getSession().beginTransaction();
-	// String hql = String.format("delete from %s", tabla);
-	// try {
-	// getSession().createQuery(hql).executeUpdate();
-	// tx.commit();
-	// return true;
-	// } catch (Exception ex) {
-	// tx.rollback();
-	// }
-	// return false;
-	// }
+
+	@PersistenceContext(unitName = "unit1")
+	private EntityManager em;
+
+	public EntityManager getEntityManager() {
+		return em;
+	}
+
+	public <T> T getEntity(Class<T> cls, int id) {
+		try {
+			T entity = em.find(cls, id);
+			return entity;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public <T> T getEntity(Class<T> cls, String id) {
+		try {
+			T entity = em.find(cls, id);
+			return entity;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public <T> T saveEntity(T entity) {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		try {
+			em.persist(entity);
+			tx.commit();
+		} catch (Exception ex) {
+			tx.rollback();
+			throw ex;
+		}
+		return entity;
+	}
+
+	public <T> void deleteEntity(T entity) {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		try {
+			em.remove(entity);
+			tx.commit();
+		} catch (Exception ex) {
+			tx.rollback();
+			throw ex;
+		}
+	}
+
+	public <T> List<T> getAll(Class<T> cls, String tabla) {
+		try {
+			List<T> list = em.createQuery("from " + tabla).getResultList();
+			return list;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public boolean deleteAll(String tabla) {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		String hql = String.format("delete from %s", tabla);
+		try {
+			em.createQuery(hql).executeUpdate();
+			tx.commit();
+			return true;
+		} catch (Exception ex) {
+			tx.rollback();
+		}
+		return false;
+	}
 }
