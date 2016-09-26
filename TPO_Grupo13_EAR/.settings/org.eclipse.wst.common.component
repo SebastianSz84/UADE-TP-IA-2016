@@ -5,9 +5,6 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="TPO_Grupo13_EJBClient.jar" deploy-path="/" handle="module:/resource/TPO_Grupo13_EJBClient/TPO_Grupo13_EJBClient">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="TPO_Grupo13_Web.war" deploy-path="/" handle="module:/resource/TPO_Grupo13_Web/TPO_Grupo13_Web">
             <dependent-object/>
             <dependency-type>uses</dependency-type>

@@ -1,0 +1,12 @@
+    <div class="container" >
+      <form class="form-signin" >
+        <h2 class="form-signin-heading">Bienvenido!</h2>
+        <div class="alert alert-danger" ng-show="show">
+  		 	<strong>El cliente no existe.</strong>
+		</div>
+        <label for="inputNumber" class="sr-only">NroCliente</label>
+        <input id="inputNumber" ng-model="nroCliente" class="form-control" placeholder="Nro Cliente" required>
+        <button class="btn btn-lg btn-primary btn-block" ng-click="checkNumber()" type="submit">Ingresar</button>
+      </form>
+
+    </div> 
