@@ -46,7 +46,7 @@ public class ControladorBean implements Controlador {
 			for (Producto p : productoDAOBean.listProductos()) {
 				lista.add(p.getDTO());
 			}
-			return new ResultadoOperacionListadoProductosDTO(true, "Usuario creado con exito", lista);
+			return new ResultadoOperacionListadoProductosDTO(true, "Exito", lista);
 		} catch (Exception ex) {
 			return new ResultadoOperacionListadoProductosDTO(false, "Error al listar productos" + ex.getMessage(),
 					null);
