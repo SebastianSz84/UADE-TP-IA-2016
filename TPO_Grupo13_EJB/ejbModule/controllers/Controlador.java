@@ -7,8 +7,10 @@ import java.util.List;
 import javax.ejb.EJB;
 
 import controllers.interfaces.IControlador;
+import dao.CategoriaDAOBean;
 import dao.ProductoDAOBean;
 import dao.UsuarioDAOBean;
+import dao.VentaDAOBean;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
 import dto.UsuarioDTO;
@@ -24,6 +26,10 @@ public class Controlador implements IControlador {
 	private UsuarioDAOBean usuarioDAOBean;
 	@EJB
 	private ProductoDAOBean productoDAOBean;
+	@EJB
+	private CategoriaDAOBean categoriaDAOBean;
+	@EJB
+	private VentaDAOBean ventaDAOBean;
 
 	private List<Usuario> usuarios;
 

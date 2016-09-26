@@ -14,5 +14,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="../TPO_Grupo13_Web/lib/gson-2.4.jar"/>
+	<classpathentry kind="src" path="/TPO_Grupo13_EJB"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
