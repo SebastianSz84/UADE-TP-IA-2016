@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import controllers.interfaces.Controlador;
+import controllers.interfaces.RankingDTO;
 import dao.interfaces.CategoriaDAO;
 import dao.interfaces.ProductoDAO;
 import dao.interfaces.UsuarioDAO;
@@ -134,6 +135,15 @@ public class ControladorBean implements Controlador {
 			usuarios.add(usuario);
 
 		return usuario;
+	}
+
+	@Override
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
+		rankingDAOBean.deleteAll();
+		for (RankingDTO r : lista) {
+			rankingDAOBean.saveEntity(r);
+		}
+		return null;
 	}
 
 }
