@@ -1,4 +1,4 @@
-/entities/
 /controllers/
+/entities/
+/dto/
 /dao/
-/resultadoOperacionDTOs/
