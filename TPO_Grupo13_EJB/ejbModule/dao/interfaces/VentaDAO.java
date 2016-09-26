@@ -1,7 +1,10 @@
 package dao.interfaces;
 
+import javax.ejb.Local;
+
 import entities.Venta;
 
-public interface VentaDAO {
+@Local
+public interface VentaDAO extends BaseDAO {
 	public Venta get(int idVenta);
 }

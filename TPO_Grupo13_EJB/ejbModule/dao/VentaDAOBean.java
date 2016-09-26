@@ -1,14 +1,12 @@
 package dao;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.interfaces.VentaDAO;
 import entities.Venta;
 
 @Stateless
-@LocalBean
-public class VentaDAOBean extends BaseDAO implements VentaDAO {
+public class VentaDAOBean extends BaseDAOBean implements VentaDAO {
 
 	public VentaDAOBean() {
 

@@ -1,14 +1,12 @@
 package dao;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.interfaces.UsuarioDAO;
 import entities.Usuario;
 
 @Stateless
-@LocalBean
-public class UsuarioDAOBean extends BaseDAO implements UsuarioDAO {
+public class UsuarioDAOBean extends BaseDAOBean implements UsuarioDAO {
 
 	public UsuarioDAOBean() {
 	}

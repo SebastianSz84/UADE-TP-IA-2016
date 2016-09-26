@@ -1,16 +1,16 @@
 package controllers;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
-import controllers.interfaces.IControlador;
-import dao.CategoriaDAOBean;
-import dao.ProductoDAOBean;
-import dao.UsuarioDAOBean;
-import dao.VentaDAOBean;
+import controllers.interfaces.Controlador;
+import dao.interfaces.CategoriaDAO;
+import dao.interfaces.ProductoDAO;
+import dao.interfaces.UsuarioDAO;
+import dao.interfaces.VentaDAO;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
 import dto.UsuarioDTO;
@@ -20,24 +20,25 @@ import entities.Usuario;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
-public class Controlador implements IControlador {
+@Stateless
+public class ControladorBean implements Controlador {
 
 	@EJB
-	private UsuarioDAOBean usuarioDAOBean;
+	private UsuarioDAO usuarioDAOBean;
 	@EJB
-	private ProductoDAOBean productoDAOBean;
+	private ProductoDAO productoDAOBean;
 	@EJB
-	private CategoriaDAOBean categoriaDAOBean;
+	private CategoriaDAO categoriaDAOBean;
 	@EJB
-	private VentaDAOBean ventaDAOBean;
+	private VentaDAO ventaDAOBean;
 
 	private List<Usuario> usuarios;
 
-	public Controlador() {
+	public ControladorBean() {
 		usuarios = new ArrayList<Usuario>();
 	}
 
-	public ResultadoOperacionListadoProductosDTO listadoProductos() throws RemoteException {
+	public ResultadoOperacionListadoProductosDTO listadoProductos() {
 		try {
 
 			List<ProductoDTO> lista = new ArrayList<ProductoDTO>();
@@ -52,8 +53,7 @@ public class Controlador implements IControlador {
 
 	}
 
-	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password)
-			throws RemoteException {
+	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password) {
 		if (nombre.trim().isEmpty())
 			return new ResultadoOperacionDTO(false, "El nombre no puede estar vacio");
 
@@ -82,7 +82,7 @@ public class Controlador implements IControlador {
 		}
 	}
 
-	public ResultadoOperacionDTO loginUsuario(String userName, String password) throws RemoteException {
+	public ResultadoOperacionDTO loginUsuario(String userName, String password) {
 		if (userName.trim().isEmpty())
 			return new ResultadoOperacionDTO(false, "El username no puede estar vacio");
 
@@ -106,18 +106,18 @@ public class Controlador implements IControlador {
 		}
 	}
 
-	public List<ProductoDTO> listadoBestSellers() throws RemoteException {
+	public List<ProductoDTO> listadoBestSellers() {
 		return null;
 	}
 
-	public CarritoDTO crearCarrito(UsuarioDTO u) throws RemoteException {
+	public CarritoDTO crearCarrito(UsuarioDTO u) {
 		return null;
 	}
 
-	public void modificarCarrito(CarritoDTO c) throws RemoteException {
+	public void modificarCarrito(CarritoDTO c) {
 	}
 
-	public VentaDTO confirmarCarrito(CarritoDTO c) throws RemoteException {
+	public VentaDTO confirmarCarrito(CarritoDTO c) {
 		return null;
 	}
 

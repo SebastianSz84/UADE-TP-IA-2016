@@ -1,10 +1,11 @@
 package resultadoOperacionDTOs;
 
+import java.io.Serializable;
 import java.util.List;
 
 import dto.ProductoDTO;
 
-public class ResultadoOperacionListadoProductosDTO extends ResultadoOperacionDTO {
+public class ResultadoOperacionListadoProductosDTO extends ResultadoOperacionDTO implements Serializable {
 
 	private List<ProductoDTO> productos;
 

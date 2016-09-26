@@ -11,7 +11,7 @@ import entities.Producto;
  * Session Bean implementation class ProductoDAOBean
  */
 @Stateless
-public class ProductoDAOBean extends BaseDAO implements ProductoDAO {
+public class ProductoDAOBean extends BaseDAOBean implements ProductoDAO {
 
 	/**
 	 * Default constructor.

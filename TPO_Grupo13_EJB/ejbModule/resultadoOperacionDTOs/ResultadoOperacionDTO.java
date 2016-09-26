@@ -1,6 +1,8 @@
 package resultadoOperacionDTOs;
 
-public class ResultadoOperacionDTO {
+import java.io.Serializable;
+
+public class ResultadoOperacionDTO implements Serializable {
 
 	private boolean resultado;
 	private String message;

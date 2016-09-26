@@ -9,7 +9,7 @@ import entities.Categoria;
  * Session Bean implementation class CategoriaDAOBean
  */
 @Stateless
-public class CategoriaDAOBean extends BaseDAO implements CategoriaDAO {
+public class CategoriaDAOBean extends BaseDAOBean implements CategoriaDAO {
 
 	/**
 	 * Default constructor.

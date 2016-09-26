@@ -1,6 +1,4 @@
-/dto/
 /entities/
-/META-INF/
-/dao/
 /controllers/
-/controller/
+/dao/
+/resultadoOperacionDTOs/

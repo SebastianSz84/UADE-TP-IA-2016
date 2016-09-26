@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
-public class BaseDAO {
+import dao.interfaces.BaseDAO;
+
+public class BaseDAOBean implements BaseDAO {
 
 	@PersistenceContext(unitName = "unit1")
 	private EntityManager em;
@@ -60,6 +62,7 @@ public class BaseDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> List<T> getAll(Class<T> cls, String tabla) {
 		try {
 			List<T> list = em.createQuery("from " + tabla).getResultList();

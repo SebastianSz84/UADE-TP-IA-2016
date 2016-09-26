@@ -1,7 +1,10 @@
 package dao.interfaces;
 
+import javax.ejb.Local;
+
 import entities.Usuario;
 
-public interface UsuarioDAO {
+@Local
+public interface UsuarioDAO extends BaseDAO {
 	public Usuario get(String userName);
 }
