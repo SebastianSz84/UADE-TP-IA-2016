@@ -26,4 +26,6 @@ public interface Controlador {
 	public void modificarCarrito(CarritoDTO c);
 
 	public VentaDTO confirmarCarrito(CarritoDTO c);
+
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista);
 }

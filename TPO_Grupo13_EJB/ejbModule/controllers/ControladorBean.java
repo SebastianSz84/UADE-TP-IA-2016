@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import controllers.interfaces.Controlador;
+import controllers.interfaces.RankingDTO;
 import dao.interfaces.CategoriaDAO;
 import dao.interfaces.ProductoDAO;
 import dao.interfaces.UsuarioDAO;
@@ -45,7 +46,7 @@ public class ControladorBean implements Controlador {
 			for (Producto p : productoDAOBean.listProductos()) {
 				lista.add(p.getDTO());
 			}
-			return new ResultadoOperacionListadoProductosDTO(true, "Usuario creado con exito", lista);
+			return new ResultadoOperacionListadoProductosDTO(true, "Exito", lista);
 		} catch (Exception ex) {
 			return new ResultadoOperacionListadoProductosDTO(false, "Error al listar productos" + ex.getMessage(),
 					null);
@@ -134,6 +135,15 @@ public class ControladorBean implements Controlador {
 			usuarios.add(usuario);
 
 		return usuario;
+	}
+
+	@Override
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
+		rankingDAOBean.deleteAll();
+		for (RankingDTO r : lista) {
+			rankingDAOBean.saveEntity(r);
+		}
+		return null;
 	}
 
 }

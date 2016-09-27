@@ -35,12 +35,8 @@ public class ListadoProductos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
-
 		ResultadoOperacionListadoProductosDTO res = BusinessDelegate.getInstancia().listadoProductos();
-		if (res.getProductos() == null) {
+		if (res.sosExitoso()) {
 			String listaGson = new Gson().toJson(res.getProductos());
 			PrintWriter out = response.getWriter();
 			response.setCharacterEncoding("utf8");

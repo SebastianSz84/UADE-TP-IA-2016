@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -48,8 +49,15 @@ public class BusinessDelegate {
 		try {
 			return controlador.listadoProductos();
 		} catch (Exception e) {
-			e.printStackTrace();
+			return new ResultadoOperacionListadoProductosDTO(false, "Error al obtener el listado de productos.", null);
 		}
-		return null;
+	}
+
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
+		try {
+			return controlador.actualizarBestSellers(lista);
+		} catch (Exception e) {
+			return new ResultadoOperacionDTO(false, "Error al actualizar el listado de Best Sellers.");
+		}
 	}
 }
