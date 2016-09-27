@@ -7,13 +7,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import controllers.interfaces.Controlador;
-import controllers.interfaces.RankingDTO;
 import dao.interfaces.CategoriaDAO;
 import dao.interfaces.ProductoDAO;
+import dao.interfaces.RankingDAO;
 import dao.interfaces.UsuarioDAO;
 import dao.interfaces.VentaDAO;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
+import dto.RankingDTO;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
 import entities.Producto;
@@ -32,6 +33,8 @@ public class ControladorBean implements Controlador {
 	private CategoriaDAO categoriaDAOBean;
 	@EJB
 	private VentaDAO ventaDAOBean;
+	@EJB
+	private RankingDAO rankingDAOBean;
 
 	private List<Usuario> usuarios;
 
@@ -139,7 +142,7 @@ public class ControladorBean implements Controlador {
 
 	@Override
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
-		rankingDAOBean.deleteAll();
+		rankingDAOBean.deleteAll("ranking");
 		for (RankingDTO r : lista) {
 			rankingDAOBean.saveEntity(r);
 		}

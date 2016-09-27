@@ -14,6 +14,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import controllers.BusinessDelegate;
+import dto.ProductoDTO;
+import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import utils.ParserJson;
 
@@ -54,8 +56,10 @@ public class ListadoBestSellers extends HttpServlet {
 		List<RankingDTO> listaBestSellers = new ArrayList<>();
 		for (int i = 0; i < itemsBS.size(); i++) {
 			RankingDTO itBS = new RankingDTO();
-			itBS.setCodigoProducto(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
-			itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
+			ProductoDTO p = new ProductoDTO();
+			p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
+			itBS.setProducto(p);
+			itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").getAsInt());
 			listaBestSellers.add(itBS);
 		}
 
