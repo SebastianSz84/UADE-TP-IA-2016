@@ -17,8 +17,10 @@ import dto.ProductoDTO;
 import dto.RankingDTO;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
+import entities.Categoria;
 import entities.Producto;
 import entities.Usuario;
+import integracion.dto.ProdXMLDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -149,4 +151,26 @@ public class ControladorBean implements Controlador {
 		return null;
 	}
 
+	@Override
+	public void nuevoProducto(ProdXMLDTO prodDTO) {
+		Producto p = new Producto();
+		Categoria c = categoriaDAOBean.get(prodDTO.getCategoria());
+
+		if (c == null) {
+			c = new Categoria();
+			c.setNombre(prodDTO.getCategoria());
+			categoriaDAOBean.saveEntity(c);
+		}
+
+		p.setCategoria(c);
+		p.setCodigo(Integer.parseInt(prodDTO.getCodigo()));
+		p.setDatosExtra(prodDTO.getDatosExtra());
+		p.setDescripcion(prodDTO.getDescripcion());
+		p.setMarca(prodDTO.getMarca());
+		p.setNombre(prodDTO.getNombre());
+		p.setOrigen(prodDTO.getOrigen());
+		p.setPrecio(prodDTO.getPrecio());
+		p.setUrlImagen(prodDTO.getUrlImagen());
+		productoDAOBean.saveEntity(p);
+	}
 }
