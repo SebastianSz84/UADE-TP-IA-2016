@@ -11,9 +11,11 @@ public class PruebaRest {
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
-		urlConnection.setRequestProperty("Content-Type", "text/plain");
-		IOUtils.write("Juanito", urlConnection.getOutputStream());
-		if (urlConnection.getResponseCode() != 200) {
+		urlConnection.setRequestProperty("Content-Type", "application/json");
+		IOUtils.write("{\"ranking\":[{\"codigo\":\"1\",\"posicion\":\"3\"}]}", urlConnection.getOutputStream());
+		if (urlConnection.getResponseCode() != 200)
+
+		{
 			throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
 		}
 		String response = IOUtils.toString(urlConnection.getInputStream());
