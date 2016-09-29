@@ -41,6 +41,10 @@ public class Producto implements Serializable {
 	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
 	private Ranking Ranking;
 
+	public Producto() {
+		super();
+	}
+
 	public Integer getCodigo() {
 		return codigo;
 	}

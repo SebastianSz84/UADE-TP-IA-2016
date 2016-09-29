@@ -17,7 +17,8 @@ public class RestServicesTests {
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/json");
-			IOUtils.write("{\"ranking\":[{\"codigo\":\"1\",\"posicion\":\"3\"}]}", urlConnection.getOutputStream());
+			IOUtils.write("{\"ranking\":[{\"codigo\":\"1857363\",\"posicion\":\"3\"}]}",
+					urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
 			}

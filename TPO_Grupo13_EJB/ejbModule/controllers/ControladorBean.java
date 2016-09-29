@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CategoriaDAO;
@@ -19,6 +20,7 @@ import dto.UsuarioDTO;
 import dto.VentaDTO;
 import entities.Categoria;
 import entities.Producto;
+import entities.Ranking;
 import entities.Usuario;
 import integracion.dto.ProdXMLDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
@@ -112,12 +114,22 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
+	@Transactional
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
 
 		try {
-			rankingDAOBean.deleteAll("ranking");
+			rankingDAOBean.deleteAll("Ranking");
 			for (RankingDTO r : lista) {
-				rankingDAOBean.saveEntity(r);
+
+				Ranking ranking = new Ranking();
+
+				Producto p = productoDAOBean.get(r.getProducto().getCodigo());
+
+				ranking.setProducto(p);
+				ranking.setCodigoProducto(p.getCodigo());
+				ranking.setPosicion(r.getPosicion());
+
+				rankingDAOBean.saveEntity(ranking);
 			}
 			return new ResultadoOperacionDTO(true, "BestSellers acutalizados con exito");
 		} catch (Exception ex) {
