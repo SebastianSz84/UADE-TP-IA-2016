@@ -64,7 +64,7 @@ public class ListadoBestSellers extends HttpServlet {
 		}
 
 		ResultadoOperacionDTO res = BusinessDelegate.getInstancia().actualizarBestSellers(listaBestSellers);
-		if (res == null || !res.sosExitoso()) {
+		if (!res.sosExitoso()) {
 			response.getWriter().append("Error al actualizar el listado de Best Sellers.");
 		}
 	}

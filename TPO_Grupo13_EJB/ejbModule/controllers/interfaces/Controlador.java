@@ -31,6 +31,6 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista);
 
-	public void nuevoProducto(ProdXMLDTO prodDTO);
+	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO);
 
 }

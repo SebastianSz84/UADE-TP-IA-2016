@@ -142,35 +142,44 @@ public class ControladorBean implements Controlador {
 		return usuario;
 	}
 
-	@Override
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
-		rankingDAOBean.deleteAll("ranking");
-		for (RankingDTO r : lista) {
-			rankingDAOBean.saveEntity(r);
+		try {
+			rankingDAOBean.deleteAll("ranking");
+			for (RankingDTO r : lista) {
+				rankingDAOBean.saveEntity(r);
+			}
+			return new ResultadoOperacionDTO(true, "BestSellers acutalizados con exito");
+		} catch (Exception ex) {
+			return new ResultadoOperacionDTO(false, "Error al actualizar BestSellers : " + ex.getMessage());
 		}
-		return null;
 	}
 
-	@Override
-	public void nuevoProducto(ProdXMLDTO prodDTO) {
-		Producto p = new Producto();
-		Categoria c = categoriaDAOBean.get(prodDTO.getCategoria());
+	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO) {
+		try {
+			Producto p = new Producto();
+			Categoria c = categoriaDAOBean.get(prodDTO.getCategoria());
 
-		if (c == null) {
-			c = new Categoria();
-			c.setNombre(prodDTO.getCategoria());
-			categoriaDAOBean.saveEntity(c);
+			if (c == null) {
+				c = new Categoria();
+				c.setNombre(prodDTO.getCategoria());
+				categoriaDAOBean.saveEntity(c);
+			}
+
+			p.setCategoria(c);
+			p.setCodigo(Integer.parseInt(prodDTO.getCodigo()));
+			p.setDatosExtra(prodDTO.getDatosExtra());
+			p.setDescripcion(prodDTO.getDescripcion());
+			p.setMarca(prodDTO.getMarca());
+			p.setNombre(prodDTO.getNombre());
+			p.setOrigen(prodDTO.getOrigen());
+			p.setPrecio(prodDTO.getPrecio());
+			p.setUrlImagen(prodDTO.getUrlImagen());
+			productoDAOBean.saveEntity(p);
+
+			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
+		} catch (Exception ex) {
+			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
+
 		}
-
-		p.setCategoria(c);
-		p.setCodigo(Integer.parseInt(prodDTO.getCodigo()));
-		p.setDatosExtra(prodDTO.getDatosExtra());
-		p.setDescripcion(prodDTO.getDescripcion());
-		p.setMarca(prodDTO.getMarca());
-		p.setNombre(prodDTO.getNombre());
-		p.setOrigen(prodDTO.getOrigen());
-		p.setPrecio(prodDTO.getPrecio());
-		p.setUrlImagen(prodDTO.getUrlImagen());
-		productoDAOBean.saveEntity(p);
 	}
 }
