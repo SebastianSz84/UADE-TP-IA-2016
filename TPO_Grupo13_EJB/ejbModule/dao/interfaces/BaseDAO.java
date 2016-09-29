@@ -13,6 +13,6 @@ public interface BaseDAO {
 
 	public <T> List<T> getAll(Class<T> cls, String tabla);
 
-	public boolean deleteAll(String tabla);
+	public void deleteAll(String tabla);
 
 }
