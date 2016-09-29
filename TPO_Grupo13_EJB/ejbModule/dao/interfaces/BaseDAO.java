@@ -2,7 +2,11 @@ package dao.interfaces;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 public interface BaseDAO {
+	public EntityManager getEntityManager();
+
 	public <T> T getEntity(Class<T> cls, int id);
 
 	public <T> T getEntity(Class<T> cls, String id);

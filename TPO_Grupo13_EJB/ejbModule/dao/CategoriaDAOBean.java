@@ -11,11 +11,7 @@ import entities.Categoria;
 @Stateless
 public class CategoriaDAOBean extends BaseDAOBean implements CategoriaDAO {
 
-	/**
-	 * Default constructor.
-	 */
 	public CategoriaDAOBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Categoria get(int idCategoria) {
