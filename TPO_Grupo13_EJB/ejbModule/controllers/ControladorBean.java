@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityTransaction;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CategoriaDAO;
@@ -72,9 +71,6 @@ public class ControladorBean implements Controlador {
 		if (password.trim().isEmpty())
 			return new ResultadoOperacionDTO(false, "El password no puede estar vacio");
 
-		EntityTransaction trx = usuarioDAOBean.getEntityManager().getTransaction();
-		trx.begin();
-
 		try {
 
 			Usuario usuario = new Usuario();
@@ -85,12 +81,9 @@ public class ControladorBean implements Controlador {
 
 			usuarioDAOBean.saveEntity(usuario);
 
-			trx.commit();
-
 			return new ResultadoOperacionDTO(true, "Usuario creado con exito");
 
 		} catch (Exception ex) {
-			trx.rollback();
 			return new ResultadoOperacionDTO(false, "Error al crear usuario : " + ex.getMessage());
 		}
 	}
@@ -121,25 +114,19 @@ public class ControladorBean implements Controlador {
 
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
 
-		EntityTransaction trx = rankingDAOBean.getEntityManager().getTransaction();
-		trx.begin();
 		try {
 			rankingDAOBean.deleteAll("ranking");
 			for (RankingDTO r : lista) {
 				rankingDAOBean.saveEntity(r);
 			}
-			trx.commit();
 			return new ResultadoOperacionDTO(true, "BestSellers acutalizados con exito");
 		} catch (Exception ex) {
-			trx.rollback();
 			return new ResultadoOperacionDTO(false, "Error al actualizar BestSellers : " + ex.getMessage());
 		}
 	}
 
 	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO) {
 
-		EntityTransaction trx = productoDAOBean.getEntityManager().getTransaction();
-		trx.begin();
 		try {
 			Producto p = new Producto();
 			Categoria c = categoriaDAOBean.get(prodDTO.getCategoria());
@@ -161,11 +148,8 @@ public class ControladorBean implements Controlador {
 			p.setUrlImagen(prodDTO.getUrlImagen());
 			productoDAOBean.saveEntity(p);
 
-			trx.commit();
-
 			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
 		} catch (Exception ex) {
-			trx.rollback();
 			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
 		}
 	}
