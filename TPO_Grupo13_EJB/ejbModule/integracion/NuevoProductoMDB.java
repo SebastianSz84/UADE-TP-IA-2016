@@ -36,9 +36,9 @@ public class NuevoProductoMDB implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			String nuevoProdXML = ((TextMessage) message).getText();
-			ProdXMLDTO prodDTO = (ProdXMLDTO) JAXBContext.newInstance(ProdXMLDTO.class).createUnmarshaller()
+			ProdXMLDTO prodXMLDTO = (ProdXMLDTO) JAXBContext.newInstance(ProdXMLDTO.class).createUnmarshaller()
 					.unmarshal(new StringReader(nuevoProdXML));
-			controladorBean.nuevoProducto(prodDTO);
+			controladorBean.nuevoProducto(prodXMLDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

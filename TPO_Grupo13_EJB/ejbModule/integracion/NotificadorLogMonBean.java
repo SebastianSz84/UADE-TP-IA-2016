@@ -56,14 +56,13 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 		}
 	}
 
-	private String getVentaXML(VentaDTOXML venta) throws Exception {
-
-		JAXBContext jc = JAXBContext.newInstance(VentaDTO.class);
+	private String getVentaXML(VentaDTO venta) throws Exception {
+		VentaDTOXML venXML = new VentaDTOXML(venta);
+		JAXBContext jc = JAXBContext.newInstance(VentaDTOXML.class);
 		Marshaller m = jc.createMarshaller();
 		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		StringWriter writer = new StringWriter();
-		m.marshal(venta, writer);
+		m.marshal(venXML, writer);
 		return writer.toString();
-
 	}
 }
