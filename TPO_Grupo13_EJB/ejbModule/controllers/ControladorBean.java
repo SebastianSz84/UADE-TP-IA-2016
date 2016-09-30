@@ -151,7 +151,7 @@ public class ControladorBean implements Controlador {
 			}
 
 			p.setCategoria(c);
-			p.setCodigo(Integer.parseInt(prodDTO.getCodigo()));
+			p.setCodigo(prodDTO.getCodigo());
 			p.setDatosExtra(prodDTO.getDatosExtra());
 			p.setDescripcion(prodDTO.getDescripcion());
 			p.setMarca(prodDTO.getMarca());

@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import dto.ProductoDTO;
+
 @XmlRootElement(name = "producto")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ProdXMLDTO implements Serializable {
@@ -16,7 +18,7 @@ public class ProdXMLDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@XmlElement
-	private String codigo;
+	private int codigo;
 	@XmlElement
 	private String nombre;
 	@XmlElement
@@ -34,11 +36,27 @@ public class ProdXMLDTO implements Serializable {
 	@XmlElement
 	private String categoria;
 
-	public String getCodigo() {
+	public ProdXMLDTO() {
+
+	}
+
+	public ProdXMLDTO(ProductoDTO prodDTO) {
+		this.setCategoria(prodDTO.getCategoria().getNombre());
+		this.setCodigo(prodDTO.getCodigo());
+		this.setDatosExtra(prodDTO.getDatosExtra());
+		this.setDescripcion(prodDTO.getDescripcion());
+		this.setMarca(prodDTO.getMarca());
+		this.setNombre(prodDTO.getNombre());
+		this.setOrigen(prodDTO.getOrigen());
+		this.setPrecio(prodDTO.getPrecio());
+		this.setUrlImagen(prodDTO.getUrlImagen());
+	}
+
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
