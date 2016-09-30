@@ -1,8 +1,5 @@
-/META-INF/
-/controllers/
-/dao/
-/dto/
-/entities/
 /integracion/
+/controllers/
+/configuracion/
+/config.properties
 /resultadoOperacionDTOs/
-/scripts/

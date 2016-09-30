@@ -33,4 +33,5 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO);
 
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta);
 }

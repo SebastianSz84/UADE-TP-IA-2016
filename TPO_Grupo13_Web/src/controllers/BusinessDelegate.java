@@ -47,4 +47,8 @@ public class BusinessDelegate {
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
 		return controlador.actualizarBestSellers(lista);
 	}
+
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
+		return controlador.actualizarEstadoVenta(numeroVenta);
+	}
 }

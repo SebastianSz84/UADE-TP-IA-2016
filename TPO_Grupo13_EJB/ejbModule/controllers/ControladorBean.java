@@ -22,6 +22,7 @@ import entities.Categoria;
 import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
+import entities.Venta;
 import integracion.dto.ProdXMLDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
@@ -194,5 +195,20 @@ public class ControladorBean implements Controlador {
 			usuarios.add(usuario);
 
 		return usuario;
+	}
+
+	@Override
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
+		try {
+			Venta v = ventaDAOBean.get(numeroVenta);
+			if (v == null) {
+				return new ResultadoOperacionDTO(false, "Venta " + Integer.toString(numeroVenta) + " no encontrada.");
+			}
+			v.setEstado("Entregado");
+			ventaDAOBean.saveEntity(v);
+			return new ResultadoOperacionDTO(true, "Venta " + Integer.toString(numeroVenta) + " actualizada.");
+		} catch (Exception e) {
+			return new ResultadoOperacionDTO(false, e.getMessage());
+		}
 	}
 }

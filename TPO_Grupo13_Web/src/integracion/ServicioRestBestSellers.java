@@ -50,7 +50,7 @@ public class ServicioRestBestSellers {
 			if (res == null || !res.sosExitoso()) {
 				return "{\"estado\":\"ERROR\", \"mensaje\":\"" + res.getMessage() + "\"}";
 			} else {
-				return "{\"estado\":\"OK\", \"mensaje\":\"Actualización exitosa\"}";
+				return "{\"estado\":\"OK\", \"mensaje\":\"Actualizacion exitosa\"}";
 			}
 		} catch (Exception e) {
 			return "{\"estado\":\"ERROR\", \"mensaje\":\"" + e.getMessage() + "\"}";

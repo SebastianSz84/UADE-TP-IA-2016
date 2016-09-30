@@ -25,6 +25,7 @@ public class RestServicesTests {
 			String response = IOUtils.toString(urlConnection.getInputStream());
 			System.out.println("Respuesta: " + response);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 }
