@@ -1,2 +1,6 @@
 /config.properties
 /integracion/
+/controllers/
+/helpers/
+/dto/
+/dao/

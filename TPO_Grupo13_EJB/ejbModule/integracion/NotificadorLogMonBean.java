@@ -22,7 +22,6 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 
 	@Override
 	public void asincronica(String notif, ConfiguracionComunicacion conf) {
-		// TODO Auto-generated method stub
 
 	}
 

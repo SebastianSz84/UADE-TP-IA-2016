@@ -2,6 +2,7 @@ package integracion.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class VentaDTOXML implements Serializable {
 	private List<ItemVentaDTOXML> items;
 	@XmlElement
 	private Date fecha;
+	@XmlElement
+	private Time hora;
+	@XmlElement
+	private static String descripcion = "Grupo13";
 
 	public VentaDTOXML() {
 		super();
@@ -40,6 +45,7 @@ public class VentaDTOXML implements Serializable {
 		this.setEstado(venta.getEstado());
 		this.setFecha(venta.getFecha());
 		this.setId(venta.getId());
+		// this.setHora(venta.getHora());
 		this.items = new ArrayList<ItemVentaDTOXML>();
 		for (ItemVentaDTO itDTO : venta.getItems()) {
 			ItemVentaDTOXML itXML = new ItemVentaDTOXML();
@@ -80,5 +86,25 @@ public class VentaDTOXML implements Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Time getHora() {
+		return hora;
+	}
+
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
+
+	public static String getDescripcion() {
+		return descripcion;
+	}
+
+	public static void setDescripcion(String descripcion) {
+		VentaDTOXML.descripcion = descripcion;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }
