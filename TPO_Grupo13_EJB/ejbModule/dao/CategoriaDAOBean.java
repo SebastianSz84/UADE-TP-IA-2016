@@ -20,6 +20,6 @@ public class CategoriaDAOBean extends BaseDAOBean implements CategoriaDAO {
 
 	public Categoria get(String nombre) {
 		return (Categoria) getEntityManager().createQuery("FROM Categoria C WHERE C.nombre = :nombre")
-				.setParameter("nombre", nombre);
+				.setParameter("nombre", nombre).getSingleResult();
 	}
 }
