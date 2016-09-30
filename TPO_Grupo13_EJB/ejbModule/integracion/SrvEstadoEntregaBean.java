@@ -26,6 +26,6 @@ public class SrvEstadoEntregaBean implements SrvEstadoEntrega {
 		ResultadoOperacionDTO res = controlador.actualizarEstadoVenta(numeroVenta);
 		ResEntregaXMLDTO resXML = new ResEntregaXMLDTO(res.sosExitoso(), res.getMessage());
 
-		return XMLHelper.fromXML(resXML);
+		return XMLHelper.fromXML(ResEntregaXMLDTO.class, resXML);
 	}
 }

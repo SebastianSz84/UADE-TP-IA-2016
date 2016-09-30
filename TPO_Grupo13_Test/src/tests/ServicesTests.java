@@ -6,7 +6,7 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-public class RestServicesTests {
+public class ServicesTests {
 
 	@Test
 	public void ActualizarBestSellersOK() {
