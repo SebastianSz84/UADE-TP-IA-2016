@@ -29,8 +29,9 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	@Override
 	public String infVenta(VentaDTO venta, ConfiguracionComunicacion conf) {
 		try {
-			URL url = new URL("http://" + conf.getPropiedad("ip") + ":" + conf.getPropiedad("puerto") + "/"
-					+ conf.getPropiedad("url") + "?wsdl");
+			URL url = new URL("http://" + conf.getPropiedad("informarVenta", "ip") + ":"
+					+ conf.getPropiedad("informarVenta", "puerto") + "/" + conf.getPropiedad("informarVenta", "url")
+					+ "?wsdl");
 			String mensajeXML = this.getVentaXML(venta);
 
 			// logger.info("SALIDA SINC XML: \n" + mensajeXML);

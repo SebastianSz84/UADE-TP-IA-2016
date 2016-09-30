@@ -44,9 +44,10 @@ public class ConfiguracionComunicacion {
 		return instancia;
 	}
 
-	public String getPropiedad(String nombre) {
+	public String getPropiedad(String funcionalidad, String nombre) {
 		if (props != null) {
-			return props.getProperty(nombre);
+			String id = props.getProperty(funcionalidad);
+			return props.getProperty(nombre + id);
 		}
 		return "";
 	}

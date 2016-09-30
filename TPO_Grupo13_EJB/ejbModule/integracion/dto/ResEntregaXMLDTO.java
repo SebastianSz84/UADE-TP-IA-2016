@@ -19,6 +19,10 @@ public class ResEntregaXMLDTO {
 		this.message = message;
 	}
 
+	public ResEntregaXMLDTO() {
+		super();
+	}
+
 	public boolean isResultado() {
 		return resultado;
 	}
