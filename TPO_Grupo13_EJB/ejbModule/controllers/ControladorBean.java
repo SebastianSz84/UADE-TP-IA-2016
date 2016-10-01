@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CategoriaDAO;
@@ -17,8 +18,12 @@ import dto.ProductoDTO;
 import dto.RankingDTO;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
+import entities.Categoria;
 import entities.Producto;
+import entities.Ranking;
 import entities.Usuario;
+import entities.Venta;
+import integracion.dto.ProdXMLDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -44,7 +49,6 @@ public class ControladorBean implements Controlador {
 
 	public ResultadoOperacionListadoProductosDTO listadoProductos() {
 		try {
-
 			List<ProductoDTO> lista = new ArrayList<ProductoDTO>();
 			for (Producto p : productoDAOBean.listProductos()) {
 				lista.add(p.getDTO());
@@ -81,6 +85,7 @@ public class ControladorBean implements Controlador {
 			usuarioDAOBean.saveEntity(usuario);
 
 			return new ResultadoOperacionDTO(true, "Usuario creado con exito");
+
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error al crear usuario : " + ex.getMessage());
 		}
@@ -107,6 +112,58 @@ public class ControladorBean implements Controlador {
 
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error en el login de usuario : " + ex.getMessage());
+		}
+	}
+
+	@Transactional
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
+
+		try {
+			rankingDAOBean.deleteAll("Ranking");
+			for (RankingDTO r : lista) {
+
+				Ranking ranking = new Ranking();
+
+				Producto p = productoDAOBean.get(r.getProducto().getCodigo());
+
+				ranking.setProducto(p);
+				ranking.setCodigoProducto(p.getCodigo());
+				ranking.setPosicion(r.getPosicion());
+
+				rankingDAOBean.saveEntity(ranking);
+			}
+			return new ResultadoOperacionDTO(true, "BestSellers acutalizados con exito");
+		} catch (Exception ex) {
+			return new ResultadoOperacionDTO(false, "Error al actualizar BestSellers : " + ex.getMessage());
+		}
+	}
+
+	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO) {
+
+		try {
+			Producto p = new Producto();
+			Categoria c = categoriaDAOBean.get(prodDTO.getCategoria());
+
+			if (c == null) {
+				c = new Categoria();
+				c.setNombre(prodDTO.getCategoria());
+				categoriaDAOBean.saveEntity(c);
+			}
+
+			p.setCategoria(c);
+			p.setCodigo(prodDTO.getCodigo());
+			p.setDatosExtra(prodDTO.getDatosExtra());
+			p.setDescripcion(prodDTO.getDescripcion());
+			p.setMarca(prodDTO.getMarca());
+			p.setNombre(prodDTO.getNombre());
+			p.setOrigen(prodDTO.getOrigen());
+			p.setPrecio(prodDTO.getPrecio());
+			p.setUrlImagen(prodDTO.getUrlImagen());
+			productoDAOBean.saveEntity(p);
+
+			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
+		} catch (Exception ex) {
+			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
 		}
 	}
 
@@ -141,12 +198,17 @@ public class ControladorBean implements Controlador {
 	}
 
 	@Override
-	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
-		rankingDAOBean.deleteAll("ranking");
-		for (RankingDTO r : lista) {
-			rankingDAOBean.saveEntity(r);
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
+		try {
+			Venta v = ventaDAOBean.get(numeroVenta);
+			if (v == null) {
+				return new ResultadoOperacionDTO(false, "Venta " + Integer.toString(numeroVenta) + " no encontrada.");
+			}
+			v.setEstado("Entregado");
+			ventaDAOBean.saveEntity(v);
+			return new ResultadoOperacionDTO(true, "Venta " + Integer.toString(numeroVenta) + " actualizada.");
+		} catch (Exception e) {
+			return new ResultadoOperacionDTO(false, e.getMessage());
 		}
-		return null;
 	}
-
 }

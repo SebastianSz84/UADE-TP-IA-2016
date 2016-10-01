@@ -1,0 +1,43 @@
+
+<div class="container">
+  <h2> {{ title }}</h2>
+
+  
+  
+  <div><label>Search: <input ng-model="searchProduct"></label>
+  </div>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Marca</th>
+       <!--   ACA QUIERO AGREGAR ICONO!-->
+        <th ng-click="sortBy('precio')">Precio</th>
+        <th ng-click="sortBy('categoria')" >Categoria</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="(key, value) in products| orderBy:propertyName:reverse | filter: searchProduct" >
+        <td>{{value.nombre}}</td>
+        <td>{{value.descripcion}}</td>
+        <td>{{value.marca}}</td>
+        <td>{{value.precio}}</td>
+        <td>{{value.categoria.nombre}}</td>
+        <td>
+			<select>
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+

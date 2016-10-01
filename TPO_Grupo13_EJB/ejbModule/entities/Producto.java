@@ -2,11 +2,13 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import dto.ProductoDTO;
@@ -35,6 +37,13 @@ public class Producto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
+
+	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
+	private Ranking Ranking;
+
+	public Producto() {
+		super();
+	}
 
 	public Integer getCodigo() {
 		return codigo;
