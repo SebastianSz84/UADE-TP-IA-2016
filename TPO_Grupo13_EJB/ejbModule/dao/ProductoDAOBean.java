@@ -13,11 +13,7 @@ import entities.Producto;
 @Stateless
 public class ProductoDAOBean extends BaseDAOBean implements ProductoDAO {
 
-	/**
-	 * Default constructor.
-	 */
 	public ProductoDAOBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Producto get(int codigo) {

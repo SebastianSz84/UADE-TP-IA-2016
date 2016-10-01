@@ -1,11 +1,13 @@
 package controllers;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
 
 import controllers.interfaces.Controlador;
+import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -23,7 +25,6 @@ public class BusinessDelegate {
 			controlador = (Controlador) context.lookup("ejb:" + "TPO_Grupo13_EAR" + "/" + "TPO_Grupo13_EJB" + "/" + ""
 					+ "/" + "ControladorBean" + "!" + Controlador.class.getName());
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -36,25 +37,18 @@ public class BusinessDelegate {
 	}
 
 	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password) {
-		try {
-			return controlador.altaUsuario(nombre, apellido, userName, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		return controlador.altaUsuario(nombre, apellido, userName, password);
 	}
 
 	public ResultadoOperacionListadoProductosDTO listadoProductos() {
-		try {
-			return controlador.listadoProductos();
-		} catch (Exception e) {
-			return new ResultadoOperacionListadoProductosDTO(false, "Error al obtener el listado de productos.", null);
-		}
+		return controlador.listadoProductos();
 	}
-	/*
-	 * public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO>
-	 * lista) { try { return controlador.actualizarBestSellers(lista); } catch
-	 * (Exception e) { return new ResultadoOperacionDTO(false,
-	 * "Error al actualizar el listado de Best Sellers."); } }
-	 */
+
+	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
+		return controlador.actualizarBestSellers(lista);
+	}
+
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
+		return controlador.actualizarEstadoVenta(numeroVenta);
+	}
 }

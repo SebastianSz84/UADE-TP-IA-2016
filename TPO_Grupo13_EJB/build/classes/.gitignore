@@ -1,6 +1,6 @@
+/config.properties
+/integracion/
 /controllers/
-/dao/
+/helpers/
 /dto/
-/entities/
-/resultadoOperacionDTOs/
-/scripts/
+/dao/

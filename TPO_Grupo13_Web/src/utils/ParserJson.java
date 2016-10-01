@@ -34,4 +34,14 @@ public class ParserJson {
 		}
 		return null;
 	}
+
+	public static JsonObject parsearJsonObject(String jsonBestSellers) {
+		try {
+			JsonElement jEle = new JsonParser().parse(jsonBestSellers);
+			return jEle.getAsJsonObject();
+		} catch (JsonSyntaxException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
