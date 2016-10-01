@@ -1,13 +1,11 @@
 package controllers;
 
 import java.util.Hashtable;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
 
 import controllers.interfaces.Controlador;
-import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -53,12 +51,10 @@ public class BusinessDelegate {
 			return new ResultadoOperacionListadoProductosDTO(false, "Error al obtener el listado de productos.", null);
 		}
 	}
-
-	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista) {
-		try {
-			return controlador.actualizarBestSellers(lista);
-		} catch (Exception e) {
-			return new ResultadoOperacionDTO(false, "Error al actualizar el listado de Best Sellers.");
-		}
-	}
+	/*
+	 * public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO>
+	 * lista) { try { return controlador.actualizarBestSellers(lista); } catch
+	 * (Exception e) { return new ResultadoOperacionDTO(false,
+	 * "Error al actualizar el listado de Best Sellers."); } }
+	 */
 }

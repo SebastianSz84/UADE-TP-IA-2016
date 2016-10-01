@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import controllers.BusinessDelegate;
 import dto.ProductoDTO;
 import dto.RankingDTO;
-import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import utils.ParserJson;
 
 /**
@@ -63,10 +61,13 @@ public class ListadoBestSellers extends HttpServlet {
 			listaBestSellers.add(itBS);
 		}
 
-		ResultadoOperacionDTO res = BusinessDelegate.getInstancia().actualizarBestSellers(listaBestSellers);
-		if (res == null || !res.sosExitoso()) {
-			response.getWriter().append("Error al actualizar el listado de Best Sellers.");
-		}
+		/*
+		 * ResultadoOperacionDTO res =
+		 * BusinessDelegate.getInstancia().actualizarBestSellers(
+		 * listaBestSellers); if (res == null || !res.sosExitoso()) {
+		 * response.getWriter().
+		 * append("Error al actualizar el listado de Best Sellers."); }
+		 */
 	}
 
 }

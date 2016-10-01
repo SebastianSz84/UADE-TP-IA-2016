@@ -4,9 +4,14 @@
         <div class="alert alert-danger" ng-show="show">
   		 	<strong>El cliente no existe.</strong>
 		</div>
-        <label for="inputNumber" class="sr-only">NroCliente</label>
-        <input id="inputNumber" ng-model="nroCliente" class="form-control" placeholder="Nro Cliente" required>
+		<div class="row">       
+			<label for="inputUser" class="sr-only">Usuario</label>
+        	<input id="inputUser" ng-model="user" class="form-control" placeholder="Usuario" required>
+		</div>
+		<div class="row">       
+			<label for="inputPassword" class="sr-only">Password</label>
+        	<input id="inputPassword" ng-model="password" type="password"  class="form-control" placeholder="Password" required>
+		</div>
         <button class="btn btn-lg btn-primary btn-block" ng-click="checkNumber()" type="submit">Ingresar</button>
       </form>
-
     </div> 

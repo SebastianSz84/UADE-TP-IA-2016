@@ -1,22 +1,27 @@
 /**
- * Created by gusta on 23/11/2015.
+ * Created by gusta
  */
-angular.module('distribuidas')
+angular.module('integracion')
     .controller('LoginCtrl', function($scope, $rootScope, $state, $http) {
     	$scope.show = false;
     	$scope.checkNumber = function (){
     		$http({
-                'method':'get',
-                'url':'http://localhost:8080/AD_Cliente_Web/ServletLogin?nroCliente=' +$scope.nroCliente
-            })
+                'method':'post',
+                'url':'http://localhost:8080/TPO_Grupo13_Web/ServletLogin',
+                'params' : {
+                	'user': $scope.user,        
+                	'password': $scope.password
+                }         
+    		})
             .success(function (data) {
                 if(data=="true"){
-            		$rootScope.nroCliente = $scope.nroCliente;
+            		$rootScope.user = $scope.user;
             		$state.go('home');
                 }
                 else{
                 	$scope.show = true;
-                	$scope.nroCliente= '';
+                	$scope.user= '';
+                	$scope.password= '';
                 }
             }).
             error(function (data, status) {

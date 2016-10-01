@@ -1,7 +1,7 @@
 /**
  * Created by gusta on 23/11/2015.
  */
-angular.module('distribuidas', [
+angular.module('integracion', [
     'ui.router'
 ])
 .config(function ($stateProvider, $urlRouterProvider) {
