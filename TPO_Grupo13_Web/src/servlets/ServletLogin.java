@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,10 @@ public class ServletLogin extends HttpServlet {
 		// doGet(request, response);
 		String user = request.getParameter("user");
 		String password = request.getParameter("password");
-		System.out.println(password);
+
+		boolean exists = true;
+		PrintWriter out = response.getWriter();
+		out.print(exists);
 
 	}
 
