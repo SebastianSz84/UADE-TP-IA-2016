@@ -7,6 +7,10 @@ import dto.ProductoDTO;
 
 public class ResultadoOperacionListadoProductosDTO extends ResultadoOperacionDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<ProductoDTO> productos;
 
 	public ResultadoOperacionListadoProductosDTO(boolean resultado, String message, List<ProductoDTO> productos) {
