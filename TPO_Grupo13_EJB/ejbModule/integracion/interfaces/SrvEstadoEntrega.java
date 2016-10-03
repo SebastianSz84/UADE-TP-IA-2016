@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 @Remote
 public interface SrvEstadoEntrega {
 
-	public String notificarEntregaDespacho(int numeroVenta);
+	public String notificarEstadoDespacho(int numeroVenta, String estado);
 
 }
