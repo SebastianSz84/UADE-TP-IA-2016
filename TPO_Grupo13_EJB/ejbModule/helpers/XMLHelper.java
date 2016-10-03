@@ -9,10 +9,10 @@ import javax.xml.bind.Marshaller;
 
 public class XMLHelper {
 
-	public static <T> String fromXML(Class<T> cls, T xml) {
+	public static <T> String toString(T xml) {
 		JAXBContext jc;
 		try {
-			jc = JAXBContext.newInstance(cls);
+			jc = JAXBContext.newInstance(xml.getClass());
 			Marshaller m = jc.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			StringWriter writer = new StringWriter();

@@ -1,18 +1,20 @@
 package integracion;
 
-import java.io.StringWriter;
 import java.net.URL;
 
 import javax.ejb.Stateless;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+
+import org.apache.log4j.Logger;
 
 import dto.VentaDTO;
+import helpers.XMLHelper;
 import integracion.dto.VentaDTOXML;
 import integracion.interfaces.NotificadorLogMon;
 
 @Stateless
 public class NotificadorLogMonBean implements NotificadorLogMon {
+
+	private static Logger logger = Logger.getLogger(NotificadorLogMonBean.class);
 
 	@Override
 	public void sincronica(String notif, ConfiguracionComunicacion conf) {
@@ -31,9 +33,10 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			URL url = new URL("http://" + conf.getPropiedad("informarVenta", "ip") + ":"
 					+ conf.getPropiedad("informarVenta", "puerto") + "/" + conf.getPropiedad("informarVenta", "url")
 					+ "?wsdl");
-			String mensajeXML = this.getVentaXML(venta);
+			VentaDTOXML venXML = new VentaDTOXML(venta);
+			String mensajeXML = XMLHelper.toString(venXML);
 
-			// logger.info("SALIDA SINC XML: \n" + mensajeXML);
+			logger.info("SALIDA SINC XML: \n" + mensajeXML);
 			System.out.print("SALIDA SINC XML: \n" + mensajeXML);
 
 			// Le paso la url dinamica de la ubicacion del wsdl
@@ -50,19 +53,8 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			// logger.error("++Error al intentar mandar info venta sincronico: "
-			// + e.getStackTrace().toString());
+			logger.error("++Error al intentar mandar info venta sincronico: " + e.getStackTrace().toString());
 			return "Se ha producido un error: " + e.getMessage();
 		}
-	}
-
-	private String getVentaXML(VentaDTO venta) throws Exception {
-		VentaDTOXML venXML = new VentaDTOXML(venta);
-		JAXBContext jc = JAXBContext.newInstance(VentaDTOXML.class);
-		Marshaller m = jc.createMarshaller();
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		StringWriter writer = new StringWriter();
-		m.marshal(venXML, writer);
-		return writer.toString();
 	}
 }

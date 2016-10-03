@@ -55,7 +55,7 @@ public class TestNuevoProductoMDB extends HttpServlet {
 
 			ProdXMLDTO resXML = new ProdXMLDTO(prodDTO);
 
-			String resString = XMLHelper.fromXML(ProdXMLDTO.class, resXML);
+			String resString = XMLHelper.toString(resXML);
 
 			System.out.println(resString);
 
