@@ -14,6 +14,8 @@ public class UsuarioDTO implements Serializable {
 	private String password;
 	private List<VentaDTO> ventas;
 	private CarritoDTO carrito;
+	private String coordenadasX;
+	private String coordenadasY;
 
 	public UsuarioDTO() {
 		super();
@@ -94,6 +96,22 @@ public class UsuarioDTO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCoordenadasX() {
+		return coordenadasX;
+	}
+
+	public void setCoordenadasX(String coordenadasX) {
+		this.coordenadasX = coordenadasX;
+	}
+
+	public String getCoordenadasY() {
+		return coordenadasY;
+	}
+
+	public void setCoordenadasY(String coordenadasY) {
+		this.coordenadasY = coordenadasY;
 	}
 
 }

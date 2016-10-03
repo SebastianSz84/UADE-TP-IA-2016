@@ -1,2 +1,10 @@
-/resultadoOperacionDTOs/
+/META-INF/
+/config.properties
+/controllers/
+/dao/
+/dto/
+/entities/
+/helpers/
 /integracion/
+/resultadoOperacionDTOs/
+/scripts/

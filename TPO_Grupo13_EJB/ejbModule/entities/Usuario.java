@@ -38,6 +38,10 @@ public class Usuario implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private List<Venta> ventas;
+	@Column
+	private String coordenadasX;
+	@Column
+	private String coordenadasY;
 
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Carrito carrito;
@@ -47,12 +51,15 @@ public class Usuario implements Serializable {
 		ventas = new ArrayList<Venta>();
 	}
 
-	public Usuario(String nombre, String apellido, String userName, String password) {
+	public Usuario(String nombre, String apellido, String userName, String password, String coordenadasX,
+			String coordenadasY) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.userName = userName;
 		this.password = password;
+		this.coordenadasX = coordenadasX;
+		this.coordenadasY = coordenadasY;
 	}
 
 	public String getNombre() {
@@ -144,6 +151,8 @@ public class Usuario implements Serializable {
 			lista.add(v.getDTO());
 		}
 		dto.setVentas(lista);
+		dto.setCoordenadasX(coordenadasX);
+		dto.setCoordenadasY(coordenadasY);
 		return dto;
 	}
 
