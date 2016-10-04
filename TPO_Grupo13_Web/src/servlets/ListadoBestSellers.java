@@ -15,7 +15,7 @@ import com.google.gson.JsonObject;
 
 import dto.ProductoDTO;
 import dto.RankingDTO;
-import utils.ParserJson;
+import helpers.ParserJson;
 
 /**
  * Servlet implementation class ListadoBestSellers

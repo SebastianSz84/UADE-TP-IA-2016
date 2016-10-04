@@ -5,9 +5,9 @@ import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.google.gson.Gson;
+
 import controllers.interfaces.Controlador;
-import helpers.XMLHelper;
-import integracion.dto.ResEntregaXMLDTO;
 import integracion.interfaces.SrvEstadoEntrega;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
@@ -24,8 +24,6 @@ public class SrvEstadoEntregaBean implements SrvEstadoEntrega {
 	@WebMethod
 	public String notificarEstadoDespacho(int numeroVenta, String estado) {
 		ResultadoOperacionDTO res = controlador.actualizarEstadoVenta(numeroVenta, estado);
-		ResEntregaXMLDTO resXML = new ResEntregaXMLDTO(res.sosExitoso(), res.getMessage());
-
-		return XMLHelper.toString(resXML);
+		return new Gson().toJson(res);
 	}
 }

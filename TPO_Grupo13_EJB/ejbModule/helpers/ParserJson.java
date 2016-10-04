@@ -1,9 +1,10 @@
-package utils;
+package helpers;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -35,13 +36,17 @@ public class ParserJson {
 		return null;
 	}
 
-	public static JsonObject parsearJsonObject(String jsonBestSellers) {
+	public static JsonObject parsearJsonObject(String jsonString) {
 		try {
-			JsonElement jEle = new JsonParser().parse(jsonBestSellers);
+			JsonElement jEle = new JsonParser().parse(jsonString);
 			return jEle.getAsJsonObject();
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static <T> String toString(T cls) {
+		return new Gson().toJson(cls);
 	}
 }

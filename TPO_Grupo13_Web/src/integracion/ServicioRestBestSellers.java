@@ -17,8 +17,8 @@ import com.google.gson.JsonObject;
 import controllers.BusinessDelegate;
 import dto.ProductoDTO;
 import dto.RankingDTO;
+import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
-import utils.ParserJson;
 
 @Path("/bestSellers")
 public class ServicioRestBestSellers {
