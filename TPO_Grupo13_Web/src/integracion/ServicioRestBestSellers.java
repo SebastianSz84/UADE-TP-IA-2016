@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jboss.logging.Logger;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -20,6 +22,8 @@ import utils.ParserJson;
 
 @Path("/bestSellers")
 public class ServicioRestBestSellers {
+
+	private static Logger logger = Logger.getLogger(ServicioRestBestSellers.class);
 
 	@POST
 	@Path("/actualizar")
@@ -48,11 +52,14 @@ public class ServicioRestBestSellers {
 
 			ResultadoOperacionDTO res = BusinessDelegate.getInstancia().actualizarBestSellers(listaBestSellers);
 			if (res == null || !res.sosExitoso()) {
+				logger.error("Error en actualizacion: " + res.getMessage());
 				return "{\"estado\":\"ERROR\", \"mensaje\":\"" + res.getMessage() + "\"}";
 			} else {
+				logger.info("Actualizacion exitosa");
 				return "{\"estado\":\"OK\", \"mensaje\":\"Actualizacion exitosa\"}";
 			}
 		} catch (Exception e) {
+			logger.error("Error en actualizacion: " + e.getMessage());
 			return "{\"estado\":\"ERROR\", \"mensaje\":\"" + e.getMessage() + "\"}";
 		}
 	}

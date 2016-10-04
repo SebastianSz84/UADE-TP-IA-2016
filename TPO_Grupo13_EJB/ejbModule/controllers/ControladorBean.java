@@ -198,13 +198,13 @@ public class ControladorBean implements Controlador {
 	}
 
 	@Override
-	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado) {
 		try {
 			Venta v = ventaDAOBean.get(numeroVenta);
 			if (v == null) {
 				return new ResultadoOperacionDTO(false, "Venta " + Integer.toString(numeroVenta) + " no encontrada.");
 			}
-			v.setEstado("Entregado");
+			v.setEstado(estado);
 			ventaDAOBean.saveEntity(v);
 			return new ResultadoOperacionDTO(true, "Venta " + Integer.toString(numeroVenta) + " actualizada.");
 		} catch (Exception e) {

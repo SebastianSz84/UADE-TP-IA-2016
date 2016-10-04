@@ -21,7 +21,7 @@ public class ServicesTests {
 			urlConnection.setRequestProperty("Content-Type", "application/json");
 
 			// ACT
-			IOUtils.write("{\"ranking\":[{\"codigo\":\"1857363\",\"posicion\":\"3\"}]}",
+			IOUtils.write("{\"ranking\":[{\"codigo\":\"1857363\",\"posicion\":\"1\"}]}",
 					urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());

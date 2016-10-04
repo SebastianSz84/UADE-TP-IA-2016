@@ -23,7 +23,7 @@ public class SrvEstadoEntregaBean implements SrvEstadoEntrega {
 
 	@WebMethod
 	public String notificarEstadoDespacho(int numeroVenta, String estado) {
-		ResultadoOperacionDTO res = controlador.actualizarEstadoVenta(numeroVenta);
+		ResultadoOperacionDTO res = controlador.actualizarEstadoVenta(numeroVenta, estado);
 		ResEntregaXMLDTO resXML = new ResEntregaXMLDTO(res.sosExitoso(), res.getMessage());
 
 		return XMLHelper.toString(resXML);

@@ -48,7 +48,7 @@ public class BusinessDelegate {
 		return controlador.actualizarBestSellers(lista);
 	}
 
-	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta) {
-		return controlador.actualizarEstadoVenta(numeroVenta);
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado) {
+		return controlador.actualizarEstadoVenta(numeroVenta, estado);
 	}
 }

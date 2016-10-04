@@ -33,5 +33,5 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO);
 
-	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta);
+	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado);
 }
