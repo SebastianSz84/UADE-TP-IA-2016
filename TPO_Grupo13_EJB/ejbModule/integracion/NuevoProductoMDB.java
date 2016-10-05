@@ -7,9 +7,10 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
+import com.google.gson.Gson;
+
 import controllers.interfaces.Controlador;
-import helpers.XMLHelper;
-import integracion.dto.ProdXMLDTO;
+import dto.ProductoDTO;
 
 /**
  * Message-Driven Bean implementation class for: NuevoProductoMDB
@@ -33,9 +34,9 @@ public class NuevoProductoMDB implements MessageListener {
 	 */
 	public void onMessage(Message message) {
 		try {
-			String nuevoProdXML = ((TextMessage) message).getText();
-			ProdXMLDTO prodXMLDTO = XMLHelper.toXML(ProdXMLDTO.class, nuevoProdXML);
-			controladorBean.nuevoProducto(prodXMLDTO);
+			String nuevoProdJSON = ((TextMessage) message).getText();
+			ProductoDTO prodDTO = new Gson().fromJson(nuevoProdJSON, ProductoDTO.class);
+			controladorBean.nuevoProducto(prodDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -6,9 +6,9 @@ import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+
 import dto.VentaDTO;
-import helpers.XMLHelper;
-import integracion.dto.VentaDTOXML;
 import integracion.interfaces.NotificadorLogMon;
 
 @Stateless
@@ -33,11 +33,11 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			URL url = new URL("http://" + conf.getPropiedad("informarVenta", "ip") + ":"
 					+ conf.getPropiedad("informarVenta", "puerto") + "/" + conf.getPropiedad("informarVenta", "url")
 					+ "?wsdl");
-			VentaDTOXML venXML = new VentaDTOXML(venta);
-			String mensajeXML = XMLHelper.toString(venXML);
 
-			logger.info("SALIDA SINC XML: \n" + mensajeXML);
-			System.out.print("SALIDA SINC XML: \n" + mensajeXML);
+			String mensajeJSON = new Gson().toJson(venta);
+
+			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
+			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
 
 			// Le paso la url dinamica de la ubicacion del wsdl
 			// LogisticaMonitoreoWS port = new

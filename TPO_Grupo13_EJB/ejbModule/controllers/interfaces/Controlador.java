@@ -9,7 +9,6 @@ import dto.ProductoDTO;
 import dto.RankingDTO;
 import dto.UsuarioDTO;
 import dto.VentaDTO;
-import integracion.dto.ProdXMLDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -31,7 +30,7 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista);
 
-	public ResultadoOperacionDTO nuevoProducto(ProdXMLDTO prodDTO);
+	public ResultadoOperacionDTO nuevoProducto(ProductoDTO prodDTO);
 
 	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado);
 }
