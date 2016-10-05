@@ -9,7 +9,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="../TPO_Grupo13_EJB/lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="../TPO_Grupo13_EJB/lib/gson-2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
