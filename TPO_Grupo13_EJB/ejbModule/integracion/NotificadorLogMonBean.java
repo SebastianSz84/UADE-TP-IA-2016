@@ -14,7 +14,6 @@ import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import dto.VentaDTO;
@@ -93,7 +92,8 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			urlConnection.setDoOutput(true);
 			// urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/json");
-			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
+			// TODO: agregar el método para enviar el json en la conexión url.
+			urlConnection.getOutputStream().write(mensajeJSON.getBytes());
 
 			String respuesta = urlConnection.getResponseMessage();
 
