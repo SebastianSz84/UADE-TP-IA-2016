@@ -52,10 +52,6 @@ public class TestNuevoProductoMDB extends HttpServlet {
 
 			ProductoDTO prodDTO = BusinessDelegate.getInstancia().listadoProductos().getProductos().get(0);
 
-			// ProdXMLDTO resXML = new ProdXMLDTO(prodDTO);
-
-			// String resString = XMLHelper.toString(resXML);
-
 			System.out.println(ParserJson.toString(prodDTO));
 
 			message.setText(ParserJson.toString(prodDTO));

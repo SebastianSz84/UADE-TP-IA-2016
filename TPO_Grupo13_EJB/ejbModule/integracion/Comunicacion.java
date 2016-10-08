@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConfiguracionComunicacion {
+public class Comunicacion {
 
-	private static ConfiguracionComunicacion instancia;
+	private static Comunicacion instancia;
 	private Properties props;
 	private static String propFileName = "config.properties";
 	private InputStream inputStream;
 
-	private ConfiguracionComunicacion() throws IOException {
+	private Comunicacion() throws IOException {
 		try {
 			props = new Properties();
 
@@ -33,10 +33,10 @@ public class ConfiguracionComunicacion {
 		}
 	}
 
-	public static ConfiguracionComunicacion getInstancia() {
+	public static Comunicacion getInstancia() {
 		if (instancia == null) {
 			try {
-				instancia = new ConfiguracionComunicacion();
+				instancia = new Comunicacion();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

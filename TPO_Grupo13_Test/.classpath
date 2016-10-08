@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="../TPO_Grupo13_Test/lib/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="../TPO_Grupo13_Test/lib/junit-4.12-javadoc.jar"/>
 	<classpathentry kind="lib" path="../TPO_Grupo13_Test/lib/junit-4.12-sources.jar"/>
-	<classpathentry kind="lib" path="../TPO_Grupo13_Test/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
