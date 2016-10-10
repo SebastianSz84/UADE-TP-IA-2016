@@ -6,9 +6,9 @@ import dto.VentaDTO;
 
 @Local
 public interface NotificadorLogMon {
-	public void sincronica(String notif);
+	public void sincronica(String notif, Configuracion conf);
 
-	public void asincronica(Object cls);
+	public void asincronica(Object cls, Configuracion conf);
 
-	public String infVenta(VentaDTO venta);
+	public String infVenta(VentaDTO venta, Configuracion conf);
 }

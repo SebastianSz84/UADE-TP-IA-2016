@@ -1,6 +1,5 @@
 package integracion;
 
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 
@@ -18,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import dto.VentaDTO;
 import helpers.ParserJson;
+import integracion.interfaces.Configuracion;
 import integracion.interfaces.NotificadorLogMon;
 
 @Stateless
@@ -26,14 +26,36 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	private static Logger logger = Logger.getLogger(NotificadorLogMonBean.class);
 
 	@Override
-	public void sincronica(String notif) {
+	public void sincronica(String notif, Configuracion conf) {
+		try {
+			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
+
+			String mensajeJSON = ParserJson.toString(notif);
+
+			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
+			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
+
+			// TODO: nos tienen que pasar el WSDL para generar la interfaz
+			// contra LogMon.
+			// LogisticaMonitoreoWS port = new
+			// LogisticaMonitoreoBeanService(url).getLogisticaMonitoreoWSPort();
+			// String respuesta = port.infLog(mensajeJSON);
+
+			String respuesta = "";
+
+			logger.info("++Info respuesta de informar venta sincronico: " + respuesta);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Error al intentar mandar info venta sincronico: " + e.getStackTrace().toString());
+		}
 	}
 
 	@Override
-	public void asincronica(Object cls) {
+	public void asincronica(Object cls, Configuracion conf) {
 		try {
-			String ip = Comunicacion.getInstancia().getPropiedad("logAsync", "ip");
-			String port = Comunicacion.getInstancia().getPropiedad("logAsync", "puerto");
+			String ip = conf.getIp();
+			String port = conf.getPuerto();
 			String user = Comunicacion.getInstancia().getPropiedad("logAsync", "user");
 			String pass = Comunicacion.getInstancia().getPropiedad("logAsync", "pass");
 			String cola = "logAsync";
@@ -77,7 +99,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	}
 
 	@Override
-	public String infVenta(VentaDTO venta) {
+	public String infVenta(VentaDTO venta, Configuracion conf) {
 		try {
 			URL url = new URL("http://" + Comunicacion.getInstancia().getPropiedad("informarVenta", "ip") + ":"
 					+ Comunicacion.getInstancia().getPropiedad("informarVenta", "puerto") + "/"
@@ -88,14 +110,13 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
 			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
 
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setDoOutput(true);
-			// urlConnection.setRequestMethod("POST");
-			urlConnection.setRequestProperty("Content-Type", "application/json");
-			// TODO: agregar el método para enviar el json en la conexión url.
-			urlConnection.getOutputStream().write(mensajeJSON.getBytes());
+			// TODO: nos tienen que pasar el WSDL para generar la interfaz
+			// contra LogMon.
+			// LogisticaMonitoreoWS port = new
+			// LogisticaMonitoreoBeanService(url).getLogisticaMonitoreoWSPort();
+			// String respuesta = port.infVenta(mensajeJSON);
 
-			String respuesta = urlConnection.getResponseMessage();
+			String respuesta = "";
 
 			logger.info("++Info respuesta de informar venta sincronico: " + respuesta);
 
