@@ -132,7 +132,7 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://127.0.0.1:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://sebalaptop:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "grupo2");
 			env.put(Context.SECURITY_CREDENTIALS, "grupo2");
 			namingContext = new InitialContext(env);
