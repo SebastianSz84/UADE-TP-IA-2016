@@ -10,8 +10,6 @@ import integracion.interfaces.Configuracion;
 @Stateless
 public class ConfiguracionBean implements Configuracion {
 
-	private String funcionalidad;
-	private String tipo;
 	private String ip;
 	private String puerto;
 	private String user;
@@ -22,26 +20,6 @@ public class ConfiguracionBean implements Configuracion {
 	 * Default constructor.
 	 */
 	public ConfiguracionBean() {
-	}
-
-	@Override
-	public String getFuncionalidad() {
-		return funcionalidad;
-	}
-
-	@Override
-	public void setFuncionalidad(String funcionalidad) {
-		this.funcionalidad = funcionalidad;
-	}
-
-	@Override
-	public String getTipo() {
-		return tipo;
-	}
-
-	@Override
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	@Override
@@ -92,5 +70,9 @@ public class ConfiguracionBean implements Configuracion {
 	@Override
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String toString() {
+		return ip + "\n" + puerto + "\n" + user + "\n" + pass + "\n" + url;
 	}
 }

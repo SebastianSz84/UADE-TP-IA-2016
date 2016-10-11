@@ -50,28 +50,17 @@ public class Comunicacion {
 		if (props == null) {
 			return null;
 		}
+
 		ConfiguracionBean conf = new ConfiguracionBean();
-
-		if ("informarVenta".equals(funcionalidad)) {
-			String id = props.getProperty(funcionalidad);
-		} else if ("log".equals(funcionalidad)) {
-			String id = props.getProperty("logAsync");
-			if (!Boolean.valueOf(props.getProperty("logAsync", "activa" + id))) {
-				id = props.getProperty("logSync");
-			}
-		}
-
-		conf.setFuncionalidad(funcionalidad);
-		conf.setIp(getPropiedad(funcionalidad, "ip"));
-		conf.setPass(getPropiedad(funcionalidad, "pass"));
-		conf.setPuerto(getPropiedad(funcionalidad, "puerto"));
-		conf.setTipo(getPropiedad(funcionalidad, "tipo"));
-		conf.setUrl(getPropiedad(funcionalidad, "url"));
-		conf.setUser(getPropiedad(funcionalidad, "user"));
+		conf.setIp(getPropiedad("ip"));
+		conf.setPass(getPropiedad("pass"));
+		conf.setPuerto(getPropiedad("puerto"));
+		conf.setUrl(getPropiedad("url"));
+		conf.setUser(getPropiedad("user"));
 		return conf;
 	}
 
-	private String getPropiedad(String funcionalidad, String nombre) {
+	private String getPropiedad(String nombre) {
 		if (props != null) {
 			return props.getProperty(nombre);
 		}

@@ -5,14 +5,6 @@ import javax.ejb.Local;
 @Local
 public interface Configuracion {
 
-	String getFuncionalidad();
-
-	void setFuncionalidad(String funcionalidad);
-
-	String getTipo();
-
-	void setTipo(String tipo);
-
 	String getIp();
 
 	void setIp(String ip);

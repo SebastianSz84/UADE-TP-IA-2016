@@ -56,13 +56,13 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 		try {
 			String ip = conf.getIp();
 			String port = conf.getPuerto();
-			String user = Comunicacion.getInstancia().getPropiedad("logAsync", "user");
-			String pass = Comunicacion.getInstancia().getPropiedad("logAsync", "pass");
-			String cola = "logAsync";
+			String user = conf.getUser();
+			String pass = conf.getPass();
 
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://" + ip + ":" + port));
+			env.put(Context.PROVIDER_URL,
+					System.getProperty(Context.PROVIDER_URL, "http-remoting://" + ip + ":" + port));
 			env.put(Context.SECURITY_PRINCIPAL, System.getProperty("username", user));
 			env.put(Context.SECURITY_CREDENTIALS, System.getProperty("password", pass));
 			Context context = new InitialContext(env);
@@ -70,7 +70,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
 			ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
 			// buscar la Cola en JNDI
-			String destinationString = System.getProperty("destination", cola);
+			String destinationString = System.getProperty("destination", "jms/queue/logmon");
 			Destination destination = (Destination) context.lookup(destinationString);
 			// crear la connection y la session a partir de la connection
 			Connection connection = connectionFactory.createConnection(System.getProperty("username", user),
@@ -101,9 +101,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	@Override
 	public String infVenta(VentaDTO venta, Configuracion conf) {
 		try {
-			URL url = new URL("http://" + Comunicacion.getInstancia().getPropiedad("informarVenta", "ip") + ":"
-					+ Comunicacion.getInstancia().getPropiedad("informarVenta", "puerto") + "/"
-					+ Comunicacion.getInstancia().getPropiedad("informarVenta", "url"));
+			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
 
 			String mensajeJSON = ParserJson.toString(venta);
 
