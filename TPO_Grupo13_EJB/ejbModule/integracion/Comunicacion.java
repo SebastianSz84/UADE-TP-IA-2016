@@ -46,7 +46,7 @@ public class Comunicacion {
 		return instancia;
 	}
 
-	public Configuracion getConfiguracion(String funcionalidad) {
+	public Configuracion getConfiguracion() {
 		if (props == null) {
 			return null;
 		}

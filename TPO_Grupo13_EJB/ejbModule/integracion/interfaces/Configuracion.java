@@ -25,4 +25,7 @@ public interface Configuracion {
 
 	void setUrl(String url);
 
+	String getTipo();
+
+	void setTipo(String tipo);
 }

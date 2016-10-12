@@ -23,6 +23,7 @@ import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
 import entities.Venta;
+import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 
@@ -39,6 +40,8 @@ public class ControladorBean implements Controlador {
 	private VentaDAO ventaDAOBean;
 	@EJB
 	private RankingDAO rankingDAOBean;
+	@EJB
+	private AdminNotificaciones admNotif;
 
 	private List<Usuario> usuarios;
 
@@ -209,5 +212,10 @@ public class ControladorBean implements Controlador {
 		} catch (Exception e) {
 			return new ResultadoOperacionDTO(false, e.getMessage());
 		}
+	}
+
+	@Override
+	public ResultadoOperacionDTO testNotificacionLogMon() {
+		return admNotif.enviarNotificacion("Operacion dummy");
 	}
 }

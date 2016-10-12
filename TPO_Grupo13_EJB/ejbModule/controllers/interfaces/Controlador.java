@@ -33,4 +33,6 @@ public interface Controlador {
 	public ResultadoOperacionDTO nuevoProducto(ProductoDTO prodDTO);
 
 	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado);
+
+	public ResultadoOperacionDTO testNotificacionLogMon();
 }

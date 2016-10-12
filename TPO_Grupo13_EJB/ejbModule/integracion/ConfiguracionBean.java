@@ -15,6 +15,7 @@ public class ConfiguracionBean implements Configuracion {
 	private String user;
 	private String pass;
 	private String url;
+	private String tipo;
 
 	/**
 	 * Default constructor.
@@ -72,7 +73,18 @@ public class ConfiguracionBean implements Configuracion {
 		this.url = url;
 	}
 
+	@Override
 	public String toString() {
 		return ip + "\n" + puerto + "\n" + user + "\n" + pass + "\n" + url;
+	}
+
+	@Override
+	public String getTipo() {
+		return tipo;
+	}
+
+	@Override
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }

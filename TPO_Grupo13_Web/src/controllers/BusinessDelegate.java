@@ -51,4 +51,8 @@ public class BusinessDelegate {
 	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado) {
 		return controlador.actualizarEstadoVenta(numeroVenta, estado);
 	}
+
+	public ResultadoOperacionDTO testNotificacionLogMon() {
+		return controlador.testNotificacionLogMon();
+	}
 }
