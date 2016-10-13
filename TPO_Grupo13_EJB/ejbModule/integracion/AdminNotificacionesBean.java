@@ -3,9 +3,8 @@ package integracion;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import com.google.gson.Gson;
-
 import dto.VentaDTO;
+import helpers.ParserJson;
 import integracion.interfaces.AdminNotificaciones;
 import integracion.interfaces.Configuracion;
 import integracion.interfaces.NotificadorLogMon;
@@ -30,21 +29,21 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 	public ResultadoOperacionDTO enviarInfoVenta(VentaDTO venta) {
 		Configuracion conf = Comunicacion.getInstancia().getConfiguracion();
 
-		notificador.sincronica(new Gson().toJson(venta), conf);
-
-		return null;
+		return notificador.sincronica(ParserJson.toString(venta), conf);
 	}
 
 	@Override
-	public ResultadoOperacionDTO enviarNotificacion(String operacion) {
+	public ResultadoOperacionDTO enviarNotificacion(String notif) {
 		Configuracion conf = Comunicacion.getInstancia().getConfiguracion();
 
-		if (conf.getTipo().equals("Async")) {
-			notificador.asincronica(operacion, conf);
+		if (conf == null) {
+			return new ResultadoOperacionDTO(false, "Error al abrir el archivo de configuracion");
 		} else {
-			notificador.sincronica(operacion, conf);
+			if (conf.getTipo().equals("Async")) {
+				return notificador.asincronica(notif, conf);
+			} else {
+				return notificador.sincronica(notif, conf);
+			}
 		}
-
-		return null;
 	}
 }

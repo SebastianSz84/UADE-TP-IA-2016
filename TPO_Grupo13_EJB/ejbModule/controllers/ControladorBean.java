@@ -178,10 +178,13 @@ public class ControladorBean implements Controlador {
 	}
 
 	public void modificarCarrito(CarritoDTO c) {
+		admNotif.enviarNotificacion("Carrito modificado: " + c.toString());
 	}
 
 	public VentaDTO confirmarCarrito(CarritoDTO c) {
-		return null;
+		VentaDTO venDTO = new VentaDTO();
+		admNotif.enviarInfoVenta(venDTO);
+		return venDTO;
 	}
 
 	private Usuario buscarUsuario(String userName) {

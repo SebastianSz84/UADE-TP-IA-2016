@@ -57,6 +57,7 @@ public class Comunicacion {
 		conf.setPuerto(getPropiedad("puerto"));
 		conf.setUrl(getPropiedad("url"));
 		conf.setUser(getPropiedad("user"));
+		conf.setTipo(getPropiedad("tipo"));
 		return conf;
 	}
 

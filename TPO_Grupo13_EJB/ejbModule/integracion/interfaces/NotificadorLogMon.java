@@ -3,12 +3,13 @@ package integracion.interfaces;
 import javax.ejb.Local;
 
 import dto.VentaDTO;
+import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
 @Local
 public interface NotificadorLogMon {
-	public void sincronica(String notif, Configuracion conf);
+	public ResultadoOperacionDTO sincronica(String notif, Configuracion conf);
 
-	public void asincronica(Object cls, Configuracion conf);
+	public ResultadoOperacionDTO asincronica(String notif, Configuracion conf);
 
-	public String infVenta(VentaDTO venta, Configuracion conf);
+	public ResultadoOperacionDTO infVenta(VentaDTO venta, Configuracion conf);
 }
