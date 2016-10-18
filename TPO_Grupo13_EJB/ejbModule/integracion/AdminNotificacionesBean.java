@@ -18,6 +18,8 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 
 	@EJB
 	private NotificadorLogMon notificador;
+	@EJB
+	private Configuracion configuracion;
 
 	/**
 	 * Default constructor.
@@ -27,22 +29,18 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 
 	@Override
 	public ResultadoOperacionDTO enviarInfoVenta(VentaDTO venta) {
-		Configuracion conf = Comunicacion.getInstancia().getConfiguracion();
-
-		return notificador.sincronica(ParserJson.toString(venta), conf);
+		return notificador.sincronica(ParserJson.toString(venta), configuracion);
 	}
 
 	@Override
 	public ResultadoOperacionDTO enviarNotificacion(String notif) {
-		Configuracion conf = Comunicacion.getInstancia().getConfiguracion();
-
-		if (conf == null) {
+		if (configuracion == null) {
 			return new ResultadoOperacionDTO(false, "Error al abrir el archivo de configuracion");
 		} else {
-			if (conf.getTipo().equals("Async")) {
-				return notificador.asincronica(notif, conf);
+			if (configuracion.getTipo().equals("Async")) {
+				return notificador.asincronica(notif, configuracion);
 			} else {
-				return notificador.sincronica(notif, conf);
+				return notificador.sincronica(notif, configuracion);
 			}
 		}
 	}

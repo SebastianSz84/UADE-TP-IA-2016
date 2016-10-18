@@ -217,6 +217,8 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
+	// PARA TESTS!!!!!!!!!!!!!!!
+
 	@Override
 	public ResultadoOperacionDTO testNotificacionLogMon() {
 		return admNotif.enviarNotificacion("Operacion dummy");
