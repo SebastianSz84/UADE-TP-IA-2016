@@ -16,16 +16,19 @@
        <!--   ACA QUIERO AGREGAR ICONO!-->
         <th ng-click="sortBy('precio')">Precio</th>
         <th ng-click="sortBy('categoria')" >Categoria</th>
+        <th ng-click="sortBy('fecha')">Fecha</th>
         <th>Cantidad</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr  ng-repeat="(key, value) in products| orderBy:propertyName:reverse | filter: searchProduct" >
-        <td>{{value.nombre}}</td>
-        <td>{{value.descripcion}}</td>
-        <td>{{value.marca}}</td>
-        <td>{{value.precio}}</td>
-        <td>{{value.categoria.nombre}}</td>
+      <tr  ng-repeat="(key, item) in products| orderBy:propertyName:reverse | filter: searchProduct" >
+        <td>{{item.nombre}}</td>
+        <td>{{item.descripcion}}</td>
+        <td>{{item.marca}}</td>
+        <td>{{item.precio}}</td>
+        <td>{{item.categoria.nombre}}</td>
+        <td>NO TENGO FECHAS</td>
         <td>
 			<select>
 			  <option value="1">1</option>
@@ -34,6 +37,9 @@
 			  <option value="4">4</option>
 			  <option value="5">5</option>
 			</select>
+        </td>
+        <td><button type="button" class="btn btn-success" ng-click="add()">Agregar
+        </button>
         </td>
       </tr>
     </tbody>

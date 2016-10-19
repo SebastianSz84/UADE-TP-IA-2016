@@ -4,7 +4,9 @@
 angular.module('integracion')
     .controller('LoginCtrl', function($scope, $rootScope, $state, $http) {
     	$scope.show = false;
+    	$scope.errorMessage = "";
     	$scope.checkNumber = function (){
+    		if($scope.user &&  $scope.password){
     		$http({
                 'method':'post',
                 'url':'http://localhost:8080/TPO_Grupo13_Web/ServletLogin',
@@ -14,12 +16,13 @@ angular.module('integracion')
                 }         
     		})
             .success(function (data) {
-                if(data=="true"){
-            		$rootScope.user = $scope.user;
+                if(angular.isObject(data)){
+            		$rootScope.user = data;
             		$state.go('home');
                 }
-                else{
+                else if (angular.isString(data)){
                 	$scope.show = true;
+                	$scope.errorMessage = data;
                 	$scope.user= '';
                 	$scope.password= '';
                 }
@@ -28,6 +31,10 @@ angular.module('integracion')
                 console.log(data);
                 console.log(status);
             });
-
+    		}
+    		else{
+    			$scope.show = true;
+            	$scope.errorMessage = "Complete todos los campos";
+    		}
     	};
     });

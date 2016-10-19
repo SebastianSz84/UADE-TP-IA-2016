@@ -13,6 +13,6 @@ public class UsuarioDAOBean extends BaseDAOBean implements UsuarioDAO {
 
 	public Usuario get(String userName) {
 		return (Usuario) getEntityManager().createQuery("FROM Usuario C WHERE C.userName =:userName")
-				.setParameter("userName", userName).getResultList();
+				.setParameter("userName", userName).getSingleResult();
 	}
 }

@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import controllers.BusinessDelegate;
+import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
+
 /**
  * Servlet implementation class ServletLogin
  */
@@ -42,13 +47,21 @@ public class ServletLogin extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
-		String user = request.getParameter("user");
+		String userName = request.getParameter("user");
 		String password = request.getParameter("password");
-
-		boolean exists = true;
-		PrintWriter out = response.getWriter();
-		out.print(exists);
-
+		ResultadoOperacionUsuarioDTO res = BusinessDelegate.getInstancia().login(userName, password);
+		if (res.sosExitoso()) {
+			String usuario = new Gson().toJson(res.getUsuario());
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/json");
+			out.print(usuario);
+		} else {
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/text");
+			out.print(res.getMessage());
+		}
 	}
 
 }

@@ -26,6 +26,7 @@ import entities.Venta;
 import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 
 @Stateless
 public class ControladorBean implements Controlador {
@@ -93,27 +94,27 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public ResultadoOperacionDTO loginUsuario(String userName, String password) {
+	public ResultadoOperacionUsuarioDTO loginUsuario(String userName, String password) {
 		if (userName.trim().isEmpty())
-			return new ResultadoOperacionDTO(false, "El username no puede estar vacio");
+			return new ResultadoOperacionUsuarioDTO(false, "El username no puede estar vacio", null);
 
 		if (password.trim().isEmpty())
-			return new ResultadoOperacionDTO(false, "El password no puede estar vacio");
+			return new ResultadoOperacionUsuarioDTO(false, "El password no puede estar vacio", null);
 
 		try {
 			Usuario usuario = this.buscarUsuario(userName);
 
 			if (usuario == null)
-				return new ResultadoOperacionDTO(false, "El usuario no existe");
+				return new ResultadoOperacionUsuarioDTO(false, "El usuario no existe", null);
 
 			if (usuario.tenesPassword(password)) {
-				return new ResultadoOperacionDTO(true, "Exito");
+				return new ResultadoOperacionUsuarioDTO(true, "Exito", usuario.getDTO());
 			} else {
-				return new ResultadoOperacionDTO(false, "La clave es incorrecta");
+				return new ResultadoOperacionUsuarioDTO(false, "La clave es incorrecta", null);
 			}
 
 		} catch (Exception ex) {
-			return new ResultadoOperacionDTO(false, "Error en el login de usuario : " + ex.getMessage());
+			return new ResultadoOperacionUsuarioDTO(false, "Error en el login de usuario : " + ex.getMessage(), null);
 		}
 	}
 

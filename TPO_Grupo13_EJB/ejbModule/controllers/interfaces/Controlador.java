@@ -11,6 +11,7 @@ import dto.UsuarioDTO;
 import dto.VentaDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 
 @Remote
 public interface Controlador {
@@ -20,7 +21,7 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password);
 
-	public ResultadoOperacionDTO loginUsuario(String userName, String password);
+	public ResultadoOperacionUsuarioDTO loginUsuario(String userName, String password);
 
 	public CarritoDTO crearCarrito(UsuarioDTO u);
 

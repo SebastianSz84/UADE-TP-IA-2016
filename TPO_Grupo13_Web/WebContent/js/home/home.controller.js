@@ -23,4 +23,7 @@ angular.module('integracion')
     		    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
     		    $scope.propertyName = propertyName;
     		  };
+    	$scope.add = function(){
+    		alert("crear carrito");
+    	}
     });
