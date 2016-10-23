@@ -5,10 +5,19 @@ angular.module('integracion')
     .controller('HomeCtrl', function($scope, $http, $rootScope, $timeout) {
     	
     	$scope.user = $rootScope.user;
-    	if ($scope.user)
+    	$scope.carrito = null;
+    	if ($scope.user){
     		$scope.title = "Bienvenido, " +$scope.user.nombre+"!";
-    	else
+    	}
+    	else{
     		$scope.title = "Bienvenido!"
+    		$scope.user = {
+    				id: 1
+    		};
+    	}
+    		
+    			
+    			
     	$scope.products = [];
     	
     	$http({
@@ -27,10 +36,43 @@ angular.module('integracion')
     		    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
     		    $scope.propertyName = propertyName;
     		  };
-    	$scope.add = function(){
-    		alert("crear carrito");
-    	}
-    	
+    
+    		$scope.add = function(scope){
+    			if(scope.quantity){
+    				var subTotal = scope.item.precio * parseInt(scope.quantity);
+    	    		if($scope.carrito){
+    	    			$scope.carrito.items.push({
+    	    				"cantidad" : scope.quantity,
+	    					"producto" : scope.item,
+	    					"subTotal": subTotal
+    	    			})
+    	    		}
+    	    		else{
+    	    			$scope.carrito = {
+    	    				"idUsuario": $scope.user.id,
+    	    				"items": [{
+    	    					"cantidad" : scope.quantity,
+    	    					"producto" : scope.item,
+    	    					"subTotal": subTotal
+    	    				}]
+    	    			}
+    	    		}
+    			}
+    			else {
+    				alert("debe seleccionar un valor");
+    			}
+    		}
+    		
+    		$scope.confirmCart = function(scope){
+    			
+    		}
+    		
+    		$scope.removeItem = function(key){
+    			$scope.carrito.items.splice(key, 1);
+    		}
+    		
+    		
+    	//NO FUNCA NO SE PORQUE TODAVIA
     	$scope.getBestSellers = function(){
         	$http({
                 'method':'get',

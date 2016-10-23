@@ -1,15 +1,65 @@
 
 <div class="container">
+   <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Carrito</h4>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>SubTotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="(key, item) in carrito.items" >
+        <td>{{item.producto.nombre}}</td>
+        <td>{{item.cantidad}}</td>
+        <td>{{item.producto.precio}}</td>
+        <td>{{item.subTotal}}</td>
+        <td><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
   <h2> {{ title }}</h2>
 
   
   
   <div class="row">
-  <div class="col-xs-6 col-sm-6 col-lg-6"><label>Search: <input ng-model="searchProduct"></label>
-  </div>
-  <div class="col-xs-6 col-sm-6 col-lg-6"> <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
-  		Best Sellers
+  <div class="col-xs-6 col-sm-6 col-lg-6">
+  <label>Search: <input ng-model="searchProduct"></label>
+  <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
+  		Ver Best Sellers
         </button>
+  </div>
+  <div class="col-xs-6 col-sm-6 col-lg-6"> 
+  	  	<button type="button" class="btn btn-primary" data-target="#myModal" data-toggle="modal">
+  			Ver Carrito
+        </button>
+       <button type="button" class="btn btn-info" ng-click="confirmCart(this)">
+  			Confirmar Carrito
+       </button>
   </div>
   </div>
   <div class="table-responsive">
@@ -36,7 +86,7 @@
         <td>{{item.categoria.nombre}}</td>
         <td>NO TENGO FECHAS</td>
         <td>
-			<select>
+			<select ng-model="quantity">
 			  <option value="1">1</option>
 			  <option value="2">2</option>
 			  <option value="3">3</option>
@@ -44,7 +94,7 @@
 			  <option value="5">5</option>
 			</select>
         </td>
-        <td><button type="button" class="btn btn-success" ng-click="add()">Agregar
+        <td><button type="button" class="btn btn-success" ng-click="add(this)">Agregar
         </button>
         </td>
       </tr>
