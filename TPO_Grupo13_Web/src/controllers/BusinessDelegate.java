@@ -7,6 +7,7 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 
 import controllers.interfaces.Controlador;
+import dto.CarritoDTO;
 import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
@@ -64,5 +65,9 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionListadoRankingDTO listadoBestSellers() {
 		return controlador.listadoBestSellers();
+	}
+
+	public ResultadoOperacionDTO saveCarrito(CarritoDTO carrito) {
+		return controlador.crearCarrito(carrito);
 	}
 }

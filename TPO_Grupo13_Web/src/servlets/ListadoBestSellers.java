@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import controllers.BusinessDelegate;
+import dto.ProductoDTO;
+import dto.RankingDTO;
+import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 
 /**
@@ -59,18 +66,20 @@ public class ListadoBestSellers extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * JsonObject jObj = ParserJson.parsearJsonObject(request); JsonArray
-		 * itemsBS = jObj.getAsJsonArray("items");
-		 * 
-		 * List<RankingDTO> listaBestSellers = new ArrayList<>(); for (int i =
-		 * 0; i < itemsBS.size(); i++) { RankingDTO itBS = new RankingDTO();
-		 * ProductoDTO p = new ProductoDTO();
-		 * p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt()
-		 * ); itBS.setProducto(p);
-		 * itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").
-		 * getAsInt()); listaBestSellers.add(itBS); }
-		 */
+
+		JsonObject jObj = ParserJson.parsearJsonObject(request);
+		JsonArray itemsBS = jObj.getAsJsonArray("items");
+
+		List<RankingDTO> listaBestSellers = new ArrayList<>();
+		for (int i = 0; i < itemsBS.size(); i++) {
+			RankingDTO itBS = new RankingDTO();
+			ProductoDTO p = new ProductoDTO();
+			p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
+			itBS.setProducto(p);
+			itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").getAsInt());
+			listaBestSellers.add(itBS);
+		}
+
 		doGet(request, response);
 
 		/*

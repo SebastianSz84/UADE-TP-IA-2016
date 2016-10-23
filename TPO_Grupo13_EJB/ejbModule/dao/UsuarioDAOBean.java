@@ -15,4 +15,8 @@ public class UsuarioDAOBean extends BaseDAOBean implements UsuarioDAO {
 		return (Usuario) getEntityManager().createQuery("FROM Usuario C WHERE C.userName =:userName")
 				.setParameter("userName", userName).getSingleResult();
 	}
+
+	public Usuario get(int idUsuario) {
+		return getEntityManager().find(Usuario.class, idUsuario);
+	}
 }

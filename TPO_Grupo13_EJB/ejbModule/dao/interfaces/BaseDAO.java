@@ -13,6 +13,8 @@ public interface BaseDAO {
 
 	public <T> T saveEntity(T entity);
 
+	public <T> T updateEntity(T entity);
+
 	public <T> void deleteEntity(T entity);
 
 	public <T> List<T> getAll(Class<T> cls, String tabla);

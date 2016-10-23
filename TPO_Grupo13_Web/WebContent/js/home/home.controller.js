@@ -5,7 +5,6 @@ angular.module('integracion')
     .controller('HomeCtrl', function($scope, $http, $rootScope, $timeout) {
     	
     	$scope.user = $rootScope.user;
-    	$scope.carrito = null;
     	if ($scope.user){
     		$scope.title = "Bienvenido, " +$scope.user.nombre+"!";
     	}
@@ -16,7 +15,10 @@ angular.module('integracion')
     		};
     	}
     		
-    			
+    	$scope.carrito = {
+    			"idUsuario": $scope.user.id,
+    			"items": []
+    	};
     			
     	$scope.products = [];
     	
@@ -40,30 +42,41 @@ angular.module('integracion')
     		$scope.add = function(scope){
     			if(scope.quantity){
     				var subTotal = scope.item.precio * parseInt(scope.quantity);
-    	    		if($scope.carrito){
     	    			$scope.carrito.items.push({
     	    				"cantidad" : scope.quantity,
 	    					"producto" : scope.item,
 	    					"subTotal": subTotal
-    	    			})
-    	    		}
-    	    		else{
-    	    			$scope.carrito = {
-    	    				"idUsuario": $scope.user.id,
-    	    				"items": [{
-    	    					"cantidad" : scope.quantity,
-    	    					"producto" : scope.item,
-    	    					"subTotal": subTotal
-    	    				}]
-    	    			}
-    	    		}
+    	    			});
+    	    			alert("Item agregado a carrito");
     			}
     			else {
-    				alert("debe seleccionar un valor");
+    				alert("debe seleccionar la cantidad");
     			}
     		}
     		
-    		$scope.confirmCart = function(scope){
+    		$scope.saveCarrito = function(){
+    			if($scope.carrito.items.length>0){
+	    	    	$http({
+	    	            'method':'post',
+	    	            'url':'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
+	                    'params' : {
+	                    	'carrito': $scope.carrito
+	                    }  
+	    			})
+	    	        .success(function (data) {
+	    	        	console.log(data);
+	    	        }).
+	    	        error(function (data, status) {
+	    	            console.log(data);
+	    	            console.log(status);
+	    	        });
+    			}
+    			else{
+    				alert("El carrito esta vacio");
+    			}
+    		}
+    		
+    		$scope.confirmCarrito = function(){
     			
     		}
     		

@@ -41,6 +41,11 @@ public class BaseDAOBean implements BaseDAO {
 		return entity;
 	}
 
+	public <T> T updateEntity(T entity) {
+		em.merge(entity);
+		return entity;
+	}
+
 	public <T> void deleteEntity(T entity) {
 		em.remove(entity);
 	}

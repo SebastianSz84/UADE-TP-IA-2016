@@ -11,28 +11,31 @@
           <h4 class="modal-title">Carrito</h4>
         </div>
         <div class="modal-body">
-            <div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>SubTotal</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  ng-repeat="(key, item) in carrito.items" >
-        <td>{{item.producto.nombre}}</td>
-        <td>{{item.cantidad}}</td>
-        <td>{{item.producto.precio}}</td>
-        <td>{{item.subTotal}}</td>
-        <td><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+            <div class="table-responsive" ng-if="carrito.items.length > 0">
+			  <table class="table">
+			    <thead>
+			      <tr>
+			        <th>Nombre</th>
+			        <th>Cantidad</th>
+			        <th>Precio</th>
+			        <th>SubTotal</th>
+			        <th></th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr  ng-repeat="(key, item) in carrito.items" >
+			        <td>{{item.producto.nombre}}</td>
+			        <td>{{item.cantidad}}</td>
+			        <td>{{item.producto.precio}}</td>
+			        <td>{{item.subTotal}}</td>
+			        <td><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+			<div ng-if="carrito.items.length == 0" >
+				No tiene elementos en el carrito.
+			</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -45,23 +48,38 @@
   <h2> {{ title }}</h2>
 
   
-  
   <div class="row">
-  <div class="col-xs-6 col-sm-6 col-lg-6">
+  <div class="col-xs-12 col-sm-6 col-lg-6">
   <label>Search: <input ng-model="searchProduct"></label>
   <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
   		Ver Best Sellers
         </button>
   </div>
-  <div class="col-xs-6 col-sm-6 col-lg-6"> 
+  <div class="col-xs-12 col-sm-6 col-lg-6"> 
   	  	<button type="button" class="btn btn-primary" data-target="#myModal" data-toggle="modal">
   			Ver Carrito
         </button>
-       <button type="button" class="btn btn-info" ng-click="confirmCart(this)">
-  			Confirmar Carrito
-       </button>
+        <button type="button" class="btn btn-info" ng-click="saveCarrito()">
+       		Guardar Carrito
+       	</button>
+	    <button type="button" class="btn btn-danger" ng-click="confirmCarrito()">
+	  		Confirmar Carrito
+	   	</button>
   </div>
   </div>
+  <div ng-if="successMessage" class="alert alert-success">
+  <strong>Success!</strong> {{successMessage}}
+</div>
+
+<div ng-if="infoMessage" class="alert alert-info">
+  <strong>Info!</strong> {{infoMessage}}
+</div>
+
+<div ng-if="alertMessage" class="alert alert-danger">
+  <strong>Danger!</strong> {{alertMessage}}
+</div>
+  
+  <br>
   <div class="table-responsive">
   <table class="table">
     <thead>
@@ -69,10 +87,15 @@
         <th>Nombre</th>
         <th>Descripcion</th>
         <th>Marca</th>
-       <!--   ACA QUIERO AGREGAR ICONO!-->
-        <th ng-click="sortBy('precio')">Precio</th>
-        <th ng-click="sortBy('categoria')" >Categoria</th>
-        <th ng-click="sortBy('fecha')">Fecha</th>
+        <th>
+        	<span ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
+        	Precio</th>
+        <th> 
+        	<span ng-click="sortBy('categoria')" class="glyphicon glyphicon-sort"></span>
+        	Categoria</th>
+        <th>
+        	<span ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
+        	Fecha</th>
         <th>Cantidad</th>
         <th></th>
       </tr>

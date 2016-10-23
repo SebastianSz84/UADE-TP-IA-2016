@@ -8,17 +8,20 @@ import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
 import controllers.interfaces.Controlador;
+import dao.interfaces.CarritoDAO;
 import dao.interfaces.CategoriaDAO;
 import dao.interfaces.ProductoDAO;
 import dao.interfaces.RankingDAO;
 import dao.interfaces.UsuarioDAO;
 import dao.interfaces.VentaDAO;
 import dto.CarritoDTO;
+import dto.ItemCarritoDTO;
 import dto.ProductoDTO;
 import dto.RankingDTO;
-import dto.UsuarioDTO;
 import dto.VentaDTO;
+import entities.Carrito;
 import entities.Categoria;
+import entities.ItemCarrito;
 import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
@@ -44,6 +47,8 @@ public class ControladorBean implements Controlador {
 	private RankingDAO rankingDAOBean;
 	@EJB
 	private AdminNotificaciones admNotif;
+	@EJB
+	private CarritoDAO carritoDAOBean;
 
 	private List<Usuario> usuarios;
 
@@ -183,8 +188,46 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public CarritoDTO crearCarrito(UsuarioDTO u) {
-		return null;
+	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO) {
+		try {
+			Carrito c;
+			Boolean isNew = false;
+			List<ItemCarrito> items = new ArrayList<ItemCarrito>();
+			Usuario u = usuarioDAOBean.get(carritoDTO.getIdUsuario());
+			c = carritoDAOBean.get(u.getId());
+			if (c == null) {
+				c = new Carrito();
+				isNew = true;
+			}
+			c.setIdUsuario(u.getId());
+			c.setUsuario(u);
+
+			for (ItemCarritoDTO ic : carritoDTO.getItems()) {
+				Producto p = new Producto();
+				Categoria cate = new Categoria();
+				cate.setId(ic.getProducto().getCategoria().getId());
+				cate.setNombre(ic.getProducto().getCategoria().getNombre());
+				p.setCategoria(cate);
+				p.setCodigo(ic.getProducto().getCodigo());
+				p.setDatosExtra(ic.getProducto().getDatosExtra());
+				p.setDescripcion(ic.getProducto().getDescripcion());
+				p.setMarca(ic.getProducto().getMarca());
+				p.setNombre(ic.getProducto().getNombre());
+				p.setOrigen(ic.getProducto().getOrigen());
+				p.setPrecio(ic.getProducto().getPrecio());
+				p.setUrlImagen(ic.getProducto().getUrlImagen());
+				items.add(new ItemCarrito(ic.getCantidad(), p));
+			}
+			c.setItems(items);
+			if (isNew)
+				carritoDAOBean.saveEntity(c);
+			else
+				carritoDAOBean.updateEntity(c);
+
+			return new ResultadoOperacionDTO(true, "Carrito guardado");
+		} catch (Exception ex) {
+			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
+		}
 	}
 
 	public void modificarCarrito(CarritoDTO c) {
@@ -233,4 +276,5 @@ public class ControladorBean implements Controlador {
 	public ResultadoOperacionDTO testNotificacionLogMon() {
 		return admNotif.enviarNotificacion("Operacion dummy");
 	}
+
 }

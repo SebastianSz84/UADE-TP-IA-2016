@@ -7,7 +7,6 @@ import javax.ejb.Remote;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
 import dto.RankingDTO;
-import dto.UsuarioDTO;
 import dto.VentaDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
@@ -24,7 +23,7 @@ public interface Controlador {
 
 	public ResultadoOperacionUsuarioDTO loginUsuario(String userName, String password);
 
-	public CarritoDTO crearCarrito(UsuarioDTO u);
+	public ResultadoOperacionDTO crearCarrito(CarritoDTO u);
 
 	public void modificarCarrito(CarritoDTO c);
 

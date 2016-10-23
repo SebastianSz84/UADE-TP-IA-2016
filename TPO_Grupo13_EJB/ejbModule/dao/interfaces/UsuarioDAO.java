@@ -7,4 +7,6 @@ import entities.Usuario;
 @Local
 public interface UsuarioDAO extends BaseDAO {
 	public Usuario get(String userName);
+
+	public Usuario get(int idUsuario);
 }
