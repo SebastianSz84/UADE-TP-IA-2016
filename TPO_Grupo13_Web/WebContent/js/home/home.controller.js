@@ -4,6 +4,9 @@
 angular.module('integracion')
     .controller('HomeCtrl', function($scope, $http, $rootScope, $timeout) {
     	
+    	$scope.successMessage = "";
+    	$scope.infoMessage = "";
+    	$scope.dangerMessage = "";
     	$scope.user = $rootScope.user;
     	if ($scope.user){
     		$scope.title = "Bienvenido, " +$scope.user.nombre+"!";
@@ -47,10 +50,16 @@ angular.module('integracion')
 	    					"producto" : scope.item,
 	    					"subTotal": subTotal
     	    			});
-    	    			alert("Item agregado a carrito");
+    	    	    	$scope.infoMessage = "Item agregado a carrito";
+    	    	    	$timeout(function(){
+    	    	    		$scope.infoMessage = "";
+    	    	    	}, 3000)
     			}
     			else {
-    				alert("debe seleccionar la cantidad");
+	    	    	$scope.infoMessage = "Debe seleccionar cantidad";
+	    	    	$timeout(function(){
+	    	    		$scope.infoMessage = "";
+	    	    	}, 3000)
     			}
     		}
     		
@@ -64,15 +73,26 @@ angular.module('integracion')
 	                    }  
 	    			})
 	    	        .success(function (data) {
-	    	        	console.log(data);
+		    	    	$scope.successMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.successMessage = "";
+		    	    	}, 3000)
+	    	        	
 	    	        }).
 	    	        error(function (data, status) {
 	    	            console.log(data);
 	    	            console.log(status);
+		    	    	$scope.alertMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.alertMessage = "";
+		    	    	}, 3000)
 	    	        });
     			}
     			else{
-    				alert("El carrito esta vacio");
+	    	    	$scope.infoMessage = "El carrito esta vacio";
+	    	    	$timeout(function(){
+	    	    		$scope.infoMessage = "";
+	    	    	}, 3000)
     			}
     		}
     		

@@ -67,6 +67,7 @@
 	   	</button>
   </div>
   </div>
+<br>
   <div ng-if="successMessage" class="alert alert-success">
   <strong>Success!</strong> {{successMessage}}
 </div>
@@ -88,13 +89,13 @@
         <th>Descripcion</th>
         <th>Marca</th>
         <th>
-        	<span ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
+        	<span style="cursor: pointer;" ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
         	Precio</th>
         <th> 
-        	<span ng-click="sortBy('categoria')" class="glyphicon glyphicon-sort"></span>
+        	<span style="cursor: pointer;"  ng-click="sortBy('categoria')" class="glyphicon glyphicon-sort"></span>
         	Categoria</th>
         <th>
-        	<span ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
+        	<span style="cursor: pointer;"  ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
         	Fecha</th>
         <th>Cantidad</th>
         <th></th>
