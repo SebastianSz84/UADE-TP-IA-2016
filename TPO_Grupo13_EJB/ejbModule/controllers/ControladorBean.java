@@ -26,6 +26,7 @@ import entities.Venta;
 import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 
 @Stateless
@@ -170,8 +171,16 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public List<ProductoDTO> listadoBestSellers() {
-		return null;
+	public ResultadoOperacionListadoRankingDTO listadoBestSellers() {
+		try {
+			List<RankingDTO> lista = new ArrayList<RankingDTO>();
+			for (Ranking r : rankingDAOBean.listRanking()) {
+				lista.add(r.getDTO());
+			}
+			return new ResultadoOperacionListadoRankingDTO(true, "Exito", lista);
+		} catch (Exception ex) {
+			return new ResultadoOperacionListadoRankingDTO(false, "Error al listar productos" + ex.getMessage(), null);
+		}
 	}
 
 	public CarritoDTO crearCarrito(UsuarioDTO u) {

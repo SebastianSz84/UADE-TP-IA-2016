@@ -1,8 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 
-import dto.ProductoDTO;
-import dto.RankingDTO;
-import helpers.ParserJson;
+import controllers.BusinessDelegate;
+import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 
 /**
  * Servlet implementation class ListadoBestSellers
@@ -40,6 +37,20 @@ public class ListadoBestSellers extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ResultadoOperacionListadoRankingDTO res = BusinessDelegate.getInstancia().listadoBestSellers();
+		if (res.sosExitoso()) {
+			String listaGson = new Gson().toJson(res.getRanking());
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/json");
+			out.print(listaGson);
+		} else {
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/text");
+			out.print(res.getMessage());
+		}
+
 	}
 
 	/**
@@ -48,18 +59,19 @@ public class ListadoBestSellers extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		JsonObject jObj = ParserJson.parsearJsonObject(request);
-		JsonArray itemsBS = jObj.getAsJsonArray("items");
-
-		List<RankingDTO> listaBestSellers = new ArrayList<>();
-		for (int i = 0; i < itemsBS.size(); i++) {
-			RankingDTO itBS = new RankingDTO();
-			ProductoDTO p = new ProductoDTO();
-			p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
-			itBS.setProducto(p);
-			itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").getAsInt());
-			listaBestSellers.add(itBS);
-		}
+		/*
+		 * JsonObject jObj = ParserJson.parsearJsonObject(request); JsonArray
+		 * itemsBS = jObj.getAsJsonArray("items");
+		 * 
+		 * List<RankingDTO> listaBestSellers = new ArrayList<>(); for (int i =
+		 * 0; i < itemsBS.size(); i++) { RankingDTO itBS = new RankingDTO();
+		 * ProductoDTO p = new ProductoDTO();
+		 * p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt()
+		 * ); itBS.setProducto(p);
+		 * itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").
+		 * getAsInt()); listaBestSellers.add(itBS); }
+		 */
+		doGet(request, response);
 
 		/*
 		 * ResultadoOperacionDTO res =

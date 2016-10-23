@@ -10,6 +10,7 @@ import controllers.interfaces.Controlador;
 import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 
 public class BusinessDelegate {
@@ -59,5 +60,9 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionUsuarioDTO login(String userName, String password) {
 		return controlador.loginUsuario(userName, password);
+	}
+
+	public ResultadoOperacionListadoRankingDTO listadoBestSellers() {
+		return controlador.listadoBestSellers();
 	}
 }

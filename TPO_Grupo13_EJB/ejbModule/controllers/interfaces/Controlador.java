@@ -11,13 +11,14 @@ import dto.UsuarioDTO;
 import dto.VentaDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 
 @Remote
 public interface Controlador {
 	public ResultadoOperacionListadoProductosDTO listadoProductos();
 
-	public List<ProductoDTO> listadoBestSellers();
+	public ResultadoOperacionListadoRankingDTO listadoBestSellers();
 
 	public ResultadoOperacionDTO altaUsuario(String nombre, String apellido, String userName, String password);
 

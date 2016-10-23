@@ -5,6 +5,8 @@ angular.module('integracion')
     .controller('LoginCtrl', function($scope, $rootScope, $state, $http) {
     	$scope.show = false;
     	$scope.errorMessage = "";
+    	$scope.user = "veritoblack@gmail.com";
+    	$scope.password = 123;
     	$scope.checkNumber = function (){
     		if($scope.user &&  $scope.password){
     		$http({
