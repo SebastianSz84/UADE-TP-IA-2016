@@ -192,17 +192,17 @@ public class ControladorBean implements Controlador {
 
 	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO) {
 		try {
-			Carrito c = carritoDAOBean.get(carritoDTO.getIdUsuario());
+			Carrito carrito = carritoDAOBean.get(carritoDTO.getIdUsuario());
 			Boolean isNew = false;
-			if (c == null) {
-				c = new Carrito();
+			if (carrito == null) {
+				carrito = new Carrito();
 				isNew = true;
 			}
-			c = loadCarrito(carritoDTO);
+			loadCarrito(carrito, carritoDTO);
 			if (isNew)
-				carritoDAOBean.saveEntity(c);
+				carritoDAOBean.saveEntity(carrito);
 			else
-				carritoDAOBean.updateEntity(c);
+				carritoDAOBean.updateEntity(carrito);
 
 			return new ResultadoOperacionDTO(true, "Carrito guardado");
 		} catch (Exception ex) {
@@ -265,14 +265,36 @@ public class ControladorBean implements Controlador {
 		return admNotif.enviarNotificacion("Operacion dummy");
 	}
 
-	private Carrito loadCarrito(CarritoDTO carritoDTO) {
-		Carrito c = new Carrito();
-		List<ItemCarrito> items = new ArrayList<ItemCarrito>();
-		Usuario u = usuarioDAOBean.get(carritoDTO.getIdUsuario());
-		c.setIdUsuario(carritoDTO.getIdUsuario());
-		c.setUsuario(u);
+	private void loadCarrito(Carrito carrito, CarritoDTO carritoDTO) {
+		boolean itemEncontrado;
 
+		// borro los items que no estan mas.
+		for (ItemCarrito item : carrito.getItems()) {
+			itemEncontrado = false;
+			for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
+				if (item.getProducto().getCodigo() == itemDto.getProducto().getCodigo()) {
+					itemEncontrado = true;
+					break;
+				}
+			}
+			if (!itemEncontrado) {
+				carrito.getItems().remove(item);
+			}
+		}
+
+		// agrego los items nuevos y actualizo los que ya estan
 		for (ItemCarritoDTO ic : carritoDTO.getItems()) {
+			itemEncontrado = false;
+			for (ItemCarrito item : carrito.getItems()) {
+				if (item.getProducto().getCodigo() == ic.getProducto().getCodigo()) {
+					item.setCantidad(ic.getCantidad());
+					itemEncontrado = true;
+					break;
+				}
+			}
+			if (itemEncontrado)
+				continue;
+
 			Producto p = new Producto();
 			Categoria cate = new Categoria();
 			cate.setId(ic.getProducto().getCategoria().getId());
@@ -286,10 +308,8 @@ public class ControladorBean implements Controlador {
 			p.setOrigen(ic.getProducto().getOrigen());
 			p.setPrecio(ic.getProducto().getPrecio());
 			p.setUrlImagen(ic.getProducto().getUrlImagen());
-			items.add(new ItemCarrito(ic.getCantidad(), p));
+			carrito.getItems().add(new ItemCarrito(ic.getCantidad(), p));
 		}
-		c.setItems(items);
-		return c;
 	}
 
 	private Venta loadVenta(CarritoDTO c) {

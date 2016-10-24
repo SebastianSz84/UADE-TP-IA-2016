@@ -1,5 +1,3 @@
-/META-INF/
-/config.properties
 /controllers/
 /dao/
 /dto/
@@ -7,4 +5,3 @@
 /helpers/
 /integracion/
 /resultadoOperacionDTOs/
-/scripts/
