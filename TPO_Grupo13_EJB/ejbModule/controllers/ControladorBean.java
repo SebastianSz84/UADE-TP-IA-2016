@@ -216,29 +216,10 @@ public class ControladorBean implements Controlador {
 
 	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c) {
 		try {
-			Venta v = new Venta();
-			List<ItemVenta> items = new ArrayList<ItemVenta>();
-			Usuario u = usuarioDAOBean.get(c.getIdUsuario());
-			v.setIdUsuario(u.getId());
-			// v.setUsuario(u);
-			for (ItemCarritoDTO ic : c.getItems()) {
-				Producto p = new Producto();
-				Categoria cate = new Categoria();
-				cate.setId(ic.getProducto().getCategoria().getId());
-				cate.setNombre(ic.getProducto().getCategoria().getNombre());
-				p.setCategoria(cate);
-				p.setCodigo(ic.getProducto().getCodigo());
-				p.setDatosExtra(ic.getProducto().getDatosExtra());
-				p.setDescripcion(ic.getProducto().getDescripcion());
-				p.setMarca(ic.getProducto().getMarca());
-				p.setNombre(ic.getProducto().getNombre());
-				p.setOrigen(ic.getProducto().getOrigen());
-				p.setPrecio(ic.getProducto().getPrecio());
-				p.setUrlImagen(ic.getProducto().getUrlImagen());
-				items.add(new ItemVenta(ic.getCantidad(), p));
-			}
-			v.setItems(items);
+			Venta v = loadVenta(c);
 			ventaDAOBean.saveEntity(v);
+			// Carrito carrito = loadCarrito(c);
+			// carritoDAOBean.deleteEntity(carrito);
 			VentaDTO venDTO = v.getDTO();
 			admNotif.enviarInfoVenta(venDTO);
 			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
@@ -311,4 +292,28 @@ public class ControladorBean implements Controlador {
 		return c;
 	}
 
+	private Venta loadVenta(CarritoDTO c) {
+		Venta v = new Venta();
+		List<ItemVenta> items = new ArrayList<ItemVenta>();
+		Usuario u = usuarioDAOBean.get(c.getIdUsuario());
+		v.setIdUsuario(u.getId());
+		for (ItemCarritoDTO ic : c.getItems()) {
+			Producto p = new Producto();
+			Categoria cate = new Categoria();
+			cate.setId(ic.getProducto().getCategoria().getId());
+			cate.setNombre(ic.getProducto().getCategoria().getNombre());
+			p.setCategoria(cate);
+			p.setCodigo(ic.getProducto().getCodigo());
+			p.setDatosExtra(ic.getProducto().getDatosExtra());
+			p.setDescripcion(ic.getProducto().getDescripcion());
+			p.setMarca(ic.getProducto().getMarca());
+			p.setNombre(ic.getProducto().getNombre());
+			p.setOrigen(ic.getProducto().getOrigen());
+			p.setPrecio(ic.getProducto().getPrecio());
+			p.setUrlImagen(ic.getProducto().getUrlImagen());
+			items.add(new ItemVenta(ic.getCantidad(), p));
+		}
+		v.setItems(items);
+		return v;
+	}
 }
