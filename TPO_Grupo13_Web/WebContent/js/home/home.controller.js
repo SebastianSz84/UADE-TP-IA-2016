@@ -2,22 +2,14 @@
  * Created by gusta on 
  */
 angular.module('integracion')
-    .controller('HomeCtrl', function($scope, $http, $rootScope, $timeout) {
+    .controller('HomeCtrl', function($scope, $http, $rootScope, $timeout, LoginService) {
     	
     	$scope.successMessage = "";
     	$scope.infoMessage = "";
     	$scope.dangerMessage = "";
-    	$scope.user = $rootScope.user;
-    	if ($scope.user){
-    		$scope.title = "Bienvenido, " +$scope.user.nombre+"!";
-    	}
-    	else{
-    		$scope.title = "Bienvenido!"
-    		$scope.user = {
-    				id: 1
-    		};
-    	}
-    		
+    	$scope.user = LoginService.getUser();
+		$scope.title = "Bienvenido, " +$scope.user.nombre+"!";
+
     	$scope.carrito = {
     			"idUsuario": $scope.user.id,
     			"items": []
@@ -149,4 +141,8 @@ angular.module('integracion')
             });
 
     	}
+
+		$scope.logOut = function () {
+			LoginService.logOut();
+		};
     });
