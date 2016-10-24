@@ -7,11 +7,11 @@ import javax.ejb.Remote;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
 import dto.RankingDTO;
-import dto.VentaDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
+import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
 @Remote
 public interface Controlador {
@@ -27,7 +27,7 @@ public interface Controlador {
 
 	public void modificarCarrito(CarritoDTO c);
 
-	public VentaDTO confirmarCarrito(CarritoDTO c);
+	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c);
 
 	public ResultadoOperacionDTO actualizarBestSellers(List<RankingDTO> lista);
 

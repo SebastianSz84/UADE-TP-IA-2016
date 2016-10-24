@@ -13,6 +13,7 @@ import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
+import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
 public class BusinessDelegate {
 
@@ -69,5 +70,9 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionDTO saveCarrito(CarritoDTO carrito) {
 		return controlador.crearCarrito(carrito);
+	}
+
+	public ResultadoOperacionVentaDTO confirmCarrito(CarritoDTO carrito) {
+		return controlador.confirmarCarrito(carrito);
 	}
 }

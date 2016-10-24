@@ -97,7 +97,36 @@ angular.module('integracion')
     		}
     		
     		$scope.confirmCarrito = function(){
-    			
+    			if($scope.carrito.items.length>0){
+	    	    	$http({
+	    	            'method':'post',
+	    	            'url':'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
+	                    'params' : {
+	                    	'carrito': $scope.carrito
+	                    }  
+	    			})
+	    	        .success(function (data) {
+		    	    	$scope.successMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.successMessage = "";
+		    	    	}, 3000)
+	    	        	
+	    	        }).
+	    	        error(function (data, status) {
+	    	            console.log(data);
+	    	            console.log(status);
+		    	    	$scope.alertMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.alertMessage = "";
+		    	    	}, 3000)
+	    	        });
+    			}
+    			else{
+	    	    	$scope.infoMessage = "El carrito esta vacio";
+	    	    	$timeout(function(){
+	    	    		$scope.infoMessage = "";
+	    	    	}, 3000)
+    			}
     		}
     		
     		$scope.removeItem = function(key){
@@ -112,7 +141,7 @@ angular.module('integracion')
                 'url':'http://localhost:8080/TPO_Grupo13_Web/ListadoBestSellers'
     		})
             .success(function (data) {
-            	$scope.products = data;
+            	console.log(data);
             }).
             error(function (data, status) {
                 console.log(data);

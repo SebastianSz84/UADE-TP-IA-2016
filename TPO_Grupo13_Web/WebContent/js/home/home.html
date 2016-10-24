@@ -68,15 +68,15 @@
   </div>
   </div>
 <br>
-  <div ng-if="successMessage" class="alert alert-success">
+  <div ng-show="successMessage" class="alert alert-success">
   <strong>Success!</strong> {{successMessage}}
 </div>
 
-<div ng-if="infoMessage" class="alert alert-info">
+<div ng-show="infoMessage" class="alert alert-info">
   <strong>Info!</strong> {{infoMessage}}
 </div>
 
-<div ng-if="alertMessage" class="alert alert-danger">
+<div ng-show="alertMessage" class="alert alert-danger">
   <strong>Danger!</strong> {{alertMessage}}
 </div>
   

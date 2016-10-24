@@ -28,6 +28,18 @@ public class Venta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@Column(name = "idUsuario", nullable = false)
+	private Integer idUsuario;
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	@Column
 	private String estado;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

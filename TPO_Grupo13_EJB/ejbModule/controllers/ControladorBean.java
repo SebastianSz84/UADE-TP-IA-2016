@@ -22,6 +22,7 @@ import dto.VentaDTO;
 import entities.Carrito;
 import entities.Categoria;
 import entities.ItemCarrito;
+import entities.ItemVenta;
 import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
@@ -31,6 +32,7 @@ import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
+import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
 @Stateless
 public class ControladorBean implements Controlador {
@@ -234,10 +236,37 @@ public class ControladorBean implements Controlador {
 		admNotif.enviarNotificacion("Carrito modificado: " + c.toString());
 	}
 
-	public VentaDTO confirmarCarrito(CarritoDTO c) {
-		VentaDTO venDTO = new VentaDTO();
-		admNotif.enviarInfoVenta(venDTO);
-		return venDTO;
+	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c) {
+		try {
+			Venta v = new Venta();
+			List<ItemVenta> items = new ArrayList<ItemVenta>();
+			Usuario u = usuarioDAOBean.get(c.getIdUsuario());
+			v.setIdUsuario(u.getId());
+			// v.setUsuario(u);
+			for (ItemCarritoDTO ic : c.getItems()) {
+				Producto p = new Producto();
+				Categoria cate = new Categoria();
+				cate.setId(ic.getProducto().getCategoria().getId());
+				cate.setNombre(ic.getProducto().getCategoria().getNombre());
+				p.setCategoria(cate);
+				p.setCodigo(ic.getProducto().getCodigo());
+				p.setDatosExtra(ic.getProducto().getDatosExtra());
+				p.setDescripcion(ic.getProducto().getDescripcion());
+				p.setMarca(ic.getProducto().getMarca());
+				p.setNombre(ic.getProducto().getNombre());
+				p.setOrigen(ic.getProducto().getOrigen());
+				p.setPrecio(ic.getProducto().getPrecio());
+				p.setUrlImagen(ic.getProducto().getUrlImagen());
+				items.add(new ItemVenta(ic.getCantidad(), p));
+			}
+			v.setItems(items);
+			ventaDAOBean.saveEntity(v);
+			VentaDTO venDTO = v.getDTO();
+			admNotif.enviarInfoVenta(venDTO);
+			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
+		} catch (Exception ex) {
+			return new ResultadoOperacionVentaDTO(false, "Error al crear producto : " + ex.getMessage(), null);
+		}
 	}
 
 	private Usuario buscarUsuario(String userName) {
