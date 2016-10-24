@@ -192,35 +192,13 @@ public class ControladorBean implements Controlador {
 
 	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO) {
 		try {
-			Carrito c;
+			Carrito c = carritoDAOBean.get(carritoDTO.getIdUsuario());
 			Boolean isNew = false;
-			List<ItemCarrito> items = new ArrayList<ItemCarrito>();
-			Usuario u = usuarioDAOBean.get(carritoDTO.getIdUsuario());
-			c = carritoDAOBean.get(u.getId());
 			if (c == null) {
 				c = new Carrito();
 				isNew = true;
 			}
-			c.setIdUsuario(u.getId());
-			c.setUsuario(u);
-
-			for (ItemCarritoDTO ic : carritoDTO.getItems()) {
-				Producto p = new Producto();
-				Categoria cate = new Categoria();
-				cate.setId(ic.getProducto().getCategoria().getId());
-				cate.setNombre(ic.getProducto().getCategoria().getNombre());
-				p.setCategoria(cate);
-				p.setCodigo(ic.getProducto().getCodigo());
-				p.setDatosExtra(ic.getProducto().getDatosExtra());
-				p.setDescripcion(ic.getProducto().getDescripcion());
-				p.setMarca(ic.getProducto().getMarca());
-				p.setNombre(ic.getProducto().getNombre());
-				p.setOrigen(ic.getProducto().getOrigen());
-				p.setPrecio(ic.getProducto().getPrecio());
-				p.setUrlImagen(ic.getProducto().getUrlImagen());
-				items.add(new ItemCarrito(ic.getCantidad(), p));
-			}
-			c.setItems(items);
+			c = loadCarrito(carritoDTO);
 			if (isNew)
 				carritoDAOBean.saveEntity(c);
 			else
@@ -304,6 +282,33 @@ public class ControladorBean implements Controlador {
 	@Override
 	public ResultadoOperacionDTO testNotificacionLogMon() {
 		return admNotif.enviarNotificacion("Operacion dummy");
+	}
+
+	private Carrito loadCarrito(CarritoDTO carritoDTO) {
+		Carrito c = new Carrito();
+		List<ItemCarrito> items = new ArrayList<ItemCarrito>();
+		Usuario u = usuarioDAOBean.get(carritoDTO.getIdUsuario());
+		c.setIdUsuario(carritoDTO.getIdUsuario());
+		c.setUsuario(u);
+
+		for (ItemCarritoDTO ic : carritoDTO.getItems()) {
+			Producto p = new Producto();
+			Categoria cate = new Categoria();
+			cate.setId(ic.getProducto().getCategoria().getId());
+			cate.setNombre(ic.getProducto().getCategoria().getNombre());
+			p.setCategoria(cate);
+			p.setCodigo(ic.getProducto().getCodigo());
+			p.setDatosExtra(ic.getProducto().getDatosExtra());
+			p.setDescripcion(ic.getProducto().getDescripcion());
+			p.setMarca(ic.getProducto().getMarca());
+			p.setNombre(ic.getProducto().getNombre());
+			p.setOrigen(ic.getProducto().getOrigen());
+			p.setPrecio(ic.getProducto().getPrecio());
+			p.setUrlImagen(ic.getProducto().getUrlImagen());
+			items.add(new ItemCarrito(ic.getCantidad(), p));
+		}
+		c.setItems(items);
+		return c;
 	}
 
 }
