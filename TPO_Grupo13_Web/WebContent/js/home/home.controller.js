@@ -50,10 +50,28 @@ angular.module('integracion')
 	    					"producto" : scope.item,
 	    					"subTotal": subTotal
     	    			});
-    	    	    	$scope.infoMessage = "Item agregado a carrito";
-    	    	    	$timeout(function(){
-    	    	    		$scope.infoMessage = "";
-    	    	    	}, 3000)
+    	    			$http({
+    	    	            'method':'post',
+    	    	            'url':'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
+    	                    'params' : {
+    	                    	'carrito': $scope.carrito
+    	                    }  
+    	    			})
+    	    	        .success(function (data) {
+    		    	    	$scope.successMessage = data;
+    		    	    	$timeout(function(){
+    		    	    		$scope.successMessage = "";
+    		    	    	}, 3000)
+    	    	        	
+    	    	        }).
+    	    	        error(function (data, status) {
+    	    	            console.log(data);
+    	    	            console.log(status);
+    		    	    	$scope.alertMessage = data;
+    		    	    	$timeout(function(){
+    		    	    		$scope.alertMessage = "";
+    		    	    	}, 3000)
+    	    	        });
     			}
     			else {
 	    	    	$scope.infoMessage = "Debe seleccionar cantidad";
@@ -63,39 +81,7 @@ angular.module('integracion')
     			}
     		}
     		
-    		$scope.saveCarrito = function(){
-    			if($scope.carrito.items.length>0){
-	    	    	$http({
-	    	            'method':'post',
-	    	            'url':'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
-	                    'params' : {
-	                    	'carrito': $scope.carrito
-	                    }  
-	    			})
-	    	        .success(function (data) {
-		    	    	$scope.successMessage = data;
-		    	    	$timeout(function(){
-		    	    		$scope.successMessage = "";
-		    	    	}, 3000)
-	    	        	
-	    	        }).
-	    	        error(function (data, status) {
-	    	            console.log(data);
-	    	            console.log(status);
-		    	    	$scope.alertMessage = data;
-		    	    	$timeout(function(){
-		    	    		$scope.alertMessage = "";
-		    	    	}, 3000)
-	    	        });
-    			}
-    			else{
-	    	    	$scope.infoMessage = "El carrito esta vacio";
-	    	    	$timeout(function(){
-	    	    		$scope.infoMessage = "";
-	    	    	}, 3000)
-    			}
-    		}
-    		
+    	    		
     		$scope.confirmCarrito = function(){
     			if($scope.carrito.items.length>0){
 	    	    	$http({
@@ -131,6 +117,29 @@ angular.module('integracion')
     		
     		$scope.removeItem = function(key){
     			$scope.carrito.items.splice(key, 1);
+	    	    	$http({
+	    	            'method':'post',
+	    	            'url':'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
+	                    'params' : {
+	                    	'carrito': $scope.carrito
+	                    }  
+	    			})
+	    	        .success(function (data) {
+		    	    	$scope.successMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.successMessage = "";
+		    	    	}, 3000)
+	    	        	
+	    	        }).
+	    	        error(function (data, status) {
+	    	            console.log(data);
+	    	            console.log(status);
+		    	    	$scope.alertMessage = data;
+		    	    	$timeout(function(){
+		    	    		$scope.alertMessage = "";
+		    	    	}, 3000)
+	    	        });
+    			
     		}
     		
     		
