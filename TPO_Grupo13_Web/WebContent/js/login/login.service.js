@@ -1,3 +1,6 @@
+/**
+ * Created by gyauny on 24/10/16.
+ */
 angular.module('integracion')
     .service('LoginService', function ($http, $q, $state, $localStorage) {
 
