@@ -44,6 +44,11 @@ angular.module('integracion')
     
     		$scope.add = function(scope){
     			if(scope.quantity){
+    				angular.forEach($scope.carrito.items, function(item, key){
+    					if (angular.equals(item.producto,scope.item)){
+    						item.cantidad  = scope.quantity;
+    					}
+    				});   					
     				var subTotal = scope.item.precio * parseInt(scope.quantity);
     	    			$scope.carrito.items.push({
     	    				"cantidad" : scope.quantity,
