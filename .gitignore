@@ -2,4 +2,5 @@ TPO_Grupo13_EAR/.settings/org.eclipse.wst.common.project.facet.core.xml
 TPO_Grupo13_Web/.settings/org.eclipse.wst.common.project.facet.core.xml
 *.class
 /build
+/bin
 TPO_Grupo13_Web/WebContent/.idea
