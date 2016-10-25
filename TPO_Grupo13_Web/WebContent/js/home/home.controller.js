@@ -27,46 +27,18 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
-            if (scope.quantity) {
-                angular.forEach($scope.carrito.items, function (item, key) {
-                    if (angular.equals(item.producto, scope.item)) {
-                        item.cantidad = scope.quantity;
-                    }
-                });
-                var subTotal = scope.item.precio * parseInt(scope.quantity);
-                $scope.carrito.items.push({
-                    "cantidad": scope.quantity,
-                    "producto": scope.item,
-                    "subTotal": subTotal
-                });
-                $http({
-                    'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
-                    'params': {
-                        'carrito': $scope.carrito
-                    }
-                })
-                    .success(function (data) {
-                        $scope.successMessage = data;
-                        $timeout(function () {
-                            $scope.successMessage = "";
-                        }, 3000)
-
-                    }).error(function (data, status) {
-                    console.log(data);
-                    console.log(status);
-                    $scope.alertMessage = data;
-                    $timeout(function () {
-                        $scope.alertMessage = "";
-                    }, 3000)
-                });
-            }
-            else {
-                $scope.infoMessage = "Debe seleccionar cantidad";
-                $timeout(function () {
-                    $scope.infoMessage = "";
-                }, 3000)
-            }
+            angular.forEach($scope.carrito.items, function (item, key) {
+                if (angular.equals(item.producto, scope.item)) {
+                    item.cantidad = scope.quantity;
+                }
+            });
+            var subTotal = scope.item.precio * parseInt(scope.quantity);
+            $scope.carrito.items.push({
+                "cantidad": scope.quantity,
+                "producto": scope.item,
+                "subTotal": subTotal
+            });
+            updateCarritoInServer();
         };
 
         $scope.confirmCarrito = function () {
@@ -103,29 +75,26 @@ angular.module('integracion')
 
         $scope.removeItem = function (key) {
             $scope.carrito.items.splice(key, 1);
-            $http({
-                'method': 'post',
-                'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
-                'params': {
-                    'carrito': $scope.carrito
-                }
-            })
-                .success(function (data) {
+            updateCarritoInServer();
+        };
+
+        function updateCarritoInServer() {
+            HomeService.sendCarrito()
+                .then(function (data) {
                     $scope.successMessage = data;
                     $timeout(function () {
                         $scope.successMessage = "";
-                    }, 3000)
-
-                }).error(function (data, status) {
-                console.log(data);
-                console.log(status);
-                $scope.alertMessage = data;
-                $timeout(function () {
-                    $scope.alertMessage = "";
-                }, 3000)
-            });
-
-        };
+                    }, 3000);
+                })
+                .catch(function (data) {
+                    console.log(data);
+                    console.log(status);
+                    $scope.alertMessage = data;
+                    $timeout(function () {
+                        $scope.alertMessage = "";
+                    }, 3000);
+                });
+        }
 
         $scope.logOut = function () {
             LoginService.logOut();
