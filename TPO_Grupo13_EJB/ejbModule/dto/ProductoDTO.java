@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ProductoDTO implements Serializable {
 
@@ -13,6 +14,8 @@ public class ProductoDTO implements Serializable {
 	private String urlImagen;
 	private String origen;
 	private String datosExtra;
+	private int ranking;
+	private Date fechaAlta;
 	private CategoriaDTO categoria;
 
 	public Integer getCodigo() {
@@ -89,6 +92,22 @@ public class ProductoDTO implements Serializable {
 
 	public boolean sosProducto(int codigo) {
 		return this.codigo == codigo;
+	}
+
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
 	}
 
 }

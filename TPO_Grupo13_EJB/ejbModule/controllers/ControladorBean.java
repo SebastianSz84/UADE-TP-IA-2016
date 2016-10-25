@@ -30,7 +30,6 @@ import entities.Venta;
 import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
-import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
@@ -175,18 +174,6 @@ public class ControladorBean implements Controlador {
 			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
-		}
-	}
-
-	public ResultadoOperacionListadoRankingDTO listadoBestSellers() {
-		try {
-			List<RankingDTO> lista = new ArrayList<RankingDTO>();
-			for (Ranking r : rankingDAOBean.listRanking()) {
-				lista.add(r.getDTO());
-			}
-			return new ResultadoOperacionListadoRankingDTO(true, "Exito", lista);
-		} catch (Exception ex) {
-			return new ResultadoOperacionListadoRankingDTO(false, "Error al listar productos" + ex.getMessage(), null);
 		}
 	}
 

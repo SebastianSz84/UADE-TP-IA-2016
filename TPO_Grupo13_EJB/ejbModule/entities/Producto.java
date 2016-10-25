@@ -1,10 +1,12 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,8 +39,10 @@ public class Producto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
+	@Column
+	private Date fechaAlta;
 
-	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Ranking Ranking;
 
 	public Producto() {
@@ -132,7 +136,20 @@ public class Producto implements Serializable {
 		dto.setOrigen(origen);
 		dto.setPrecio(precio);
 		dto.setUrlImagen(urlImagen);
+		if (this.Ranking != null)
+			dto.setRanking(this.Ranking.getPosicion());
+		else
+			dto.setRanking(0);
+		dto.setFechaAlta(fechaAlta);
 		return dto;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechAlta) {
+		this.fechaAlta = fechAlta;
 	}
 
 }
