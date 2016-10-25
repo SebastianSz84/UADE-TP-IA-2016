@@ -8,4 +8,6 @@ import entities.Carrito;
 public interface CarritoDAO extends BaseDAO {
 
 	public Carrito get(int idUsuario);
+
+	public Carrito borrarListaItems(Carrito carrito);
 }

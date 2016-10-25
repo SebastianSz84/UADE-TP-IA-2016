@@ -174,6 +174,8 @@ public class ControladorBean implements Controlador {
 				carrito = new Carrito();
 				carrito.setIdUsuario(carritoDTO.getIdUsuario());
 				isNew = true;
+			} else {
+				carritoDAOBean.borrarListaItems(carrito);
 			}
 
 			loadCarrito(carrito, carritoDTO);
@@ -244,34 +246,8 @@ public class ControladorBean implements Controlador {
 	}
 
 	private void loadCarrito(Carrito carrito, CarritoDTO carritoDTO) {
-		boolean itemEncontrado;
 
-		// borro los items que no estan mas.
-		for (ItemCarrito item : carrito.getItems()) {
-			itemEncontrado = false;
-			for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
-				if (item.getProducto().getCodigo().compareTo(itemDto.getProducto().getCodigo()) == 0) {
-					itemEncontrado = true;
-					break;
-				}
-			}
-			if (!itemEncontrado) {
-				carrito.getItems().remove(item);
-			}
-		}
-
-		// agrego los items nuevos y actualizo los que ya estan
 		for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
-			itemEncontrado = false;
-			for (ItemCarrito item : carrito.getItems()) {
-				if (item.getProducto().getCodigo().compareTo(itemDto.getProducto().getCodigo()) == 0) {
-					item.setCantidad(itemDto.getCantidad());
-					itemEncontrado = true;
-					break;
-				}
-			}
-			if (itemEncontrado)
-				continue;
 
 			Producto p = new Producto();
 
