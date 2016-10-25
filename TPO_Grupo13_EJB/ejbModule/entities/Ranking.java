@@ -52,9 +52,8 @@ public class Ranking implements Serializable {
 
 	public RankingDTO getDTO() {
 		RankingDTO dto = new RankingDTO();
-		dto.setProducto(producto.getDTO());
+		dto.setProducto(this.producto.getDTO());
 		dto.setPosicion(posicion);
 		return dto;
 	}
-
 }

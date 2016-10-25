@@ -11,7 +11,6 @@ import dto.CarritoDTO;
 import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
-import resultadoOperacionDTOs.ResultadoOperacionListadoRankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
@@ -62,10 +61,6 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionUsuarioDTO login(String userName, String password) {
 		return controlador.loginUsuario(userName, password);
-	}
-
-	public ResultadoOperacionListadoRankingDTO listadoBestSellers() {
-		return controlador.listadoBestSellers();
 	}
 
 	public ResultadoOperacionDTO saveCarrito(CarritoDTO carrito) {

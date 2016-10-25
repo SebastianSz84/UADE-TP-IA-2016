@@ -1,13 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,16 +29,17 @@ public class Producto implements Serializable {
 	@Column
 	private double precio;
 	@Column
-	private String urlImagen;
+	private String foto;
 	@Column
 	private String origen;
 	@Column
 	private String datosExtra;
-	@ManyToOne
-	@JoinColumn(name = "idCategoria")
-	private Categoria categoria;
+	@Column
+	private String tipo;
+	@Column
+	private Date fechaAlta;
 
-	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Ranking Ranking;
 
 	public Producto() {
@@ -85,12 +86,12 @@ public class Producto implements Serializable {
 		this.precio = d;
 	}
 
-	public String getUrlImagen() {
-		return urlImagen;
+	public String getFoto() {
+		return foto;
 	}
 
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getOrigen() {
@@ -109,12 +110,12 @@ public class Producto implements Serializable {
 		this.datosExtra = datosExtra;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public boolean sosProducto(int codigo) {
@@ -123,7 +124,7 @@ public class Producto implements Serializable {
 
 	public ProductoDTO getDTO() {
 		ProductoDTO dto = new ProductoDTO();
-		dto.setCategoria(categoria.getDTO());
+		dto.setTipo(tipo);
 		dto.setCodigo(codigo);
 		dto.setDatosExtra(datosExtra);
 		dto.setDescripcion(descripcion);
@@ -131,8 +132,21 @@ public class Producto implements Serializable {
 		dto.setNombre(nombre);
 		dto.setOrigen(origen);
 		dto.setPrecio(precio);
-		dto.setUrlImagen(urlImagen);
+		dto.setFoto(foto);
+		if (this.Ranking != null)
+			dto.setRanking(this.Ranking.getPosicion());
+		else
+			dto.setRanking(0);
+		dto.setFechaAlta(fechaAlta);
 		return dto;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechAlta) {
+		this.fechaAlta = fechAlta;
 	}
 
 }

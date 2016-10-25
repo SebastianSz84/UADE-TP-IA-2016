@@ -8,20 +8,20 @@ public class RankingDTO implements Serializable {
 	private ProductoDTO producto;
 	private Integer posicion;
 
-	public ProductoDTO getProducto() {
-		return producto;
-	}
-
-	public void setProducto(ProductoDTO producto) {
-		this.producto = producto;
-	}
-
 	public Integer getPosicion() {
 		return posicion;
 	}
 
 	public void setPosicion(Integer posicion) {
 		this.posicion = posicion;
+	}
+
+	public ProductoDTO getProducto() {
+		return producto;
+	}
+
+	public void setProducto(ProductoDTO producto) {
+		this.producto = producto;
 	}
 
 }
