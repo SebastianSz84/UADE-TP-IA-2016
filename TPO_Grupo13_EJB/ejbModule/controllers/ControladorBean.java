@@ -282,9 +282,9 @@ public class ControladorBean implements Controlador {
 			p.setNombre(itemDto.getProducto().getNombre());
 			p.setOrigen(itemDto.getProducto().getOrigen());
 			p.setPrecio(itemDto.getProducto().getPrecio());
-			p.setFoto(ic.getProducto().getFoto());
-			p.setTipo(ic.getProducto().getTipo());
-			
+			p.setFoto(itemDto.getProducto().getFoto());
+			p.setTipo(itemDto.getProducto().getTipo());
+
 			carrito.getItems().add(new ItemCarrito(itemDto.getCantidad(), p));
 
 		}
