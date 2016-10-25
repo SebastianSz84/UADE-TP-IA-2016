@@ -56,8 +56,27 @@ angular.module('integracion')
             });
         }
 
+        function sendCarrito() {
+            return $q(function (resolve, reject) {
+                $http({
+                    'method': 'post',
+                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
+                    'params': {
+                        'carrito': carritoData
+                    }
+                })
+                    .success(function (data) {
+                        resolve(data);
+                    })
+                    .error(function (data, status) {
+                        reject(data);
+                    });
+            });
+        }
+
         return {
             getCarrito: getCarrito,
-            getProducts: getProducts
+            getProducts: getProducts,
+            sendCarrito: sendCarrito
         }
     });
