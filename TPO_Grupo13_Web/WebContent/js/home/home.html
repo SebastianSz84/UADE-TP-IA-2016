@@ -92,8 +92,8 @@
         	<span style="cursor: pointer;" ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
         	Precio</th>
         <th> 
-        	<span style="cursor: pointer;"  ng-click="sortBy('categoria')" class="glyphicon glyphicon-sort"></span>
-        	Categoria</th>
+        	<span style="cursor: pointer;"  ng-click="sortBy('tipo')" class="glyphicon glyphicon-sort"></span>
+        	Tipo</th>
         <th>
         	<span style="cursor: pointer;"  ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
         	Fecha</th>
@@ -107,7 +107,7 @@
         <td>{{item.descripcion}}</td>
         <td>{{item.marca}}</td>
         <td>{{item.precio}}</td>
-        <td>{{item.categoria.nombre}}</td>
+        <td>{{item.tipo}}</td>
         <td>NO TENGO FECHAS</td>
         <td>
 			<select ng-model="quantity">
