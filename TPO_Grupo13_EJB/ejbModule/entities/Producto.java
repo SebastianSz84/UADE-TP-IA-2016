@@ -90,8 +90,8 @@ public class Producto implements Serializable {
 		return foto;
 	}
 
-	public void setFoto(String urlImagen) {
-		this.foto = urlImagen;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getOrigen() {
