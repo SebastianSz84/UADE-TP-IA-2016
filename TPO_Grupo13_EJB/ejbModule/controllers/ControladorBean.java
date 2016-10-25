@@ -196,8 +196,10 @@ public class ControladorBean implements Controlador {
 			Boolean isNew = false;
 			if (carrito == null) {
 				carrito = new Carrito();
+				carrito.setIdUsuario(carritoDTO.getIdUsuario());
 				isNew = true;
 			}
+
 			loadCarrito(carrito, carritoDTO);
 			if (isNew)
 				carritoDAOBean.saveEntity(carrito);
@@ -272,7 +274,7 @@ public class ControladorBean implements Controlador {
 		for (ItemCarrito item : carrito.getItems()) {
 			itemEncontrado = false;
 			for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
-				if (item.getProducto().getCodigo() == itemDto.getProducto().getCodigo()) {
+				if (item.getProducto().getCodigo().compareTo(itemDto.getProducto().getCodigo()) == 0) {
 					itemEncontrado = true;
 					break;
 				}
@@ -283,11 +285,11 @@ public class ControladorBean implements Controlador {
 		}
 
 		// agrego los items nuevos y actualizo los que ya estan
-		for (ItemCarritoDTO ic : carritoDTO.getItems()) {
+		for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
 			itemEncontrado = false;
 			for (ItemCarrito item : carrito.getItems()) {
-				if (item.getProducto().getCodigo() == ic.getProducto().getCodigo()) {
-					item.setCantidad(ic.getCantidad());
+				if (item.getProducto().getCodigo().compareTo(itemDto.getProducto().getCodigo()) == 0) {
+					item.setCantidad(itemDto.getCantidad());
 					itemEncontrado = true;
 					break;
 				}
@@ -297,18 +299,18 @@ public class ControladorBean implements Controlador {
 
 			Producto p = new Producto();
 			Categoria cate = new Categoria();
-			cate.setId(ic.getProducto().getCategoria().getId());
-			cate.setNombre(ic.getProducto().getCategoria().getNombre());
+			cate.setId(itemDto.getProducto().getCategoria().getId());
+			cate.setNombre(itemDto.getProducto().getCategoria().getNombre());
 			p.setCategoria(cate);
-			p.setCodigo(ic.getProducto().getCodigo());
-			p.setDatosExtra(ic.getProducto().getDatosExtra());
-			p.setDescripcion(ic.getProducto().getDescripcion());
-			p.setMarca(ic.getProducto().getMarca());
-			p.setNombre(ic.getProducto().getNombre());
-			p.setOrigen(ic.getProducto().getOrigen());
-			p.setPrecio(ic.getProducto().getPrecio());
-			p.setUrlImagen(ic.getProducto().getUrlImagen());
-			carrito.getItems().add(new ItemCarrito(ic.getCantidad(), p));
+			p.setCodigo(itemDto.getProducto().getCodigo());
+			p.setDatosExtra(itemDto.getProducto().getDatosExtra());
+			p.setDescripcion(itemDto.getProducto().getDescripcion());
+			p.setMarca(itemDto.getProducto().getMarca());
+			p.setNombre(itemDto.getProducto().getNombre());
+			p.setOrigen(itemDto.getProducto().getOrigen());
+			p.setPrecio(itemDto.getProducto().getPrecio());
+			p.setUrlImagen(itemDto.getProducto().getUrlImagen());
+			carrito.getItems().add(new ItemCarrito(itemDto.getCantidad(), p));
 		}
 	}
 
