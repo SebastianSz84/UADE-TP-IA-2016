@@ -16,7 +16,6 @@ import com.google.gson.JsonObject;
 
 import controllers.BusinessDelegate;
 import dto.CarritoDTO;
-import dto.CategoriaDTO;
 import dto.ItemCarritoDTO;
 import dto.ProductoDTO;
 import helpers.ParserJson;
@@ -70,12 +69,8 @@ public class ServletVenta extends HttpServlet {
 			p.setNombre(jb1.get("nombre").getAsString());
 			p.setOrigen(jb1.get("origen").getAsString());
 			p.setPrecio(jb1.get("precio").getAsDouble());
-			p.setUrlImagen(jb1.get("urlImagen").getAsString());
-			JsonObject jb2 = jb1.get("categoria").getAsJsonObject();
-			CategoriaDTO cat = new CategoriaDTO();
-			cat.setId(jb2.get("id").getAsInt());
-			cat.setNombre(jb2.get("nombre").getAsString());
-			p.setCategoria(cat);
+			p.setFoto(jb1.get("urlImagen").getAsString());
+			p.setTipo(jb1.get("tipo").getAsString());
 			item.setProducto(p);
 			item.setCantidad(jb.get("cantidad").getAsInt());
 			items.add(item);

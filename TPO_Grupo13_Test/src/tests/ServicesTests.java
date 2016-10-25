@@ -14,7 +14,6 @@ import javax.naming.NamingException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import dto.CategoriaDTO;
 import dto.ProductoDTO;
 import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
@@ -54,9 +53,7 @@ public class ServicesTests {
 
 		// Armo el dto que voy a enviar
 		ProductoDTO prodDTO = new ProductoDTO();
-		CategoriaDTO catDTO = new CategoriaDTO("Categoria1");
-		catDTO.setId(111);
-		prodDTO.setCategoria(catDTO);
+		prodDTO.setTipo("Tipo");
 		prodDTO.setCodigo(11);
 		prodDTO.setDatosExtra("algunos datos extra");
 		prodDTO.setDescripcion("alguna descripcion");
@@ -64,7 +61,7 @@ public class ServicesTests {
 		prodDTO.setNombre("algun nombre");
 		prodDTO.setOrigen("algun origen");
 		prodDTO.setPrecio(123.45678);
-		prodDTO.setUrlImagen("alguna url de imagen");
+		prodDTO.setFoto("alguna url de imagen");
 
 		String MESSAGE = ParserJson.toString(prodDTO);
 		String CONNECTION_FACTORY = "jms/RemoteConnectionFactory";

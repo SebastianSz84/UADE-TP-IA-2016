@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import dto.CategoriaDTO;
 import dto.ItemVentaDTO;
 import dto.ProductoDTO;
 import dto.VentaDTO;
@@ -27,7 +26,7 @@ public class TestJSON {
 		producto.setNombre("Mesa TV");
 		producto.setOrigen("China");
 		producto.setPrecio(65.45);
-		producto.setUrlImagen(
+		producto.setFoto(
 				"http://novogar.com.ar/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/m/u/muebles-desarmable-mesa-lcd-tv8000-r08_02-melamina-hasta-42-pulgadas-novogar.png");
 
 		ItemVentaDTO itemDTO = new ItemVentaDTO(12, producto);
@@ -45,9 +44,6 @@ public class TestJSON {
 
 	@Test
 	public void getJSONfromAProducto() {
-		CategoriaDTO categoria = new CategoriaDTO();
-		categoria.setNombre("Mueble");
-
 		ProductoDTO producto = new ProductoDTO();
 		producto.setCodigo(1857363);
 		producto.setDatosExtra("Datos extra");
@@ -56,9 +52,9 @@ public class TestJSON {
 		producto.setNombre("Mesa TV");
 		producto.setOrigen("China");
 		producto.setPrecio(65.45);
-		producto.setUrlImagen(
+		producto.setFoto(
 				"http://novogar.com.ar/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/m/u/muebles-desarmable-mesa-lcd-tv8000-r08_02-melamina-hasta-42-pulgadas-novogar.png");
-		producto.setCategoria(categoria);
+		producto.setTipo("Mueble");
 
 		String mensajeJSON = new Gson().toJson(producto);
 		System.out.println(mensajeJSON);

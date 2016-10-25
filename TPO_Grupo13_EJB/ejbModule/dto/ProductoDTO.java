@@ -11,12 +11,13 @@ public class ProductoDTO implements Serializable {
 	private String descripcion;
 	private String marca;
 	private double precio;
-	private String urlImagen;
+	private String foto;
 	private String origen;
 	private String datosExtra;
 	private int ranking;
 	private Date fechaAlta;
-	private CategoriaDTO categoria;
+	private String tipo;
+	private String idDeposito;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -58,12 +59,12 @@ public class ProductoDTO implements Serializable {
 		this.precio = d;
 	}
 
-	public String getUrlImagen() {
-		return urlImagen;
+	public String getFoto() {
+		return foto;
 	}
 
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getOrigen() {
@@ -82,12 +83,12 @@ public class ProductoDTO implements Serializable {
 		this.datosExtra = datosExtra;
 	}
 
-	public CategoriaDTO getCategoria() {
-		return categoria;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setCategoria(CategoriaDTO categoria) {
-		this.categoria = categoria;
+	public void setTipo(String categoria) {
+		this.tipo = categoria;
 	}
 
 	public boolean sosProducto(int codigo) {
@@ -108,6 +109,14 @@ public class ProductoDTO implements Serializable {
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+
+	public String getIdDeposito() {
+		return idDeposito;
+	}
+
+	public void setIdDeposito(String idDeposito) {
+		this.idDeposito = idDeposito;
 	}
 
 }

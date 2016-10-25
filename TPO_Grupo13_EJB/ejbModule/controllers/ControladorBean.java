@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CarritoDAO;
-import dao.interfaces.CategoriaDAO;
 import dao.interfaces.ProductoDAO;
 import dao.interfaces.RankingDAO;
 import dao.interfaces.UsuarioDAO;
@@ -20,7 +19,6 @@ import dto.ProductoDTO;
 import dto.RankingDTO;
 import dto.VentaDTO;
 import entities.Carrito;
-import entities.Categoria;
 import entities.ItemCarrito;
 import entities.ItemVenta;
 import entities.Producto;
@@ -40,8 +38,6 @@ public class ControladorBean implements Controlador {
 	private UsuarioDAO usuarioDAOBean;
 	@EJB
 	private ProductoDAO productoDAOBean;
-	@EJB
-	private CategoriaDAO categoriaDAOBean;
 	@EJB
 	private VentaDAO ventaDAOBean;
 	@EJB
@@ -152,15 +148,7 @@ public class ControladorBean implements Controlador {
 
 		try {
 			Producto p = new Producto();
-			Categoria c = categoriaDAOBean.get(prodDTO.getCategoria().getId());
 
-			if (c == null) {
-				c = new Categoria();
-				c.setNombre(prodDTO.getCategoria().getNombre());
-				categoriaDAOBean.saveEntity(c);
-			}
-
-			p.setCategoria(c);
 			p.setCodigo(prodDTO.getCodigo());
 			p.setDatosExtra(prodDTO.getDatosExtra());
 			p.setDescripcion(prodDTO.getDescripcion());
@@ -168,7 +156,8 @@ public class ControladorBean implements Controlador {
 			p.setNombre(prodDTO.getNombre());
 			p.setOrigen(prodDTO.getOrigen());
 			p.setPrecio(prodDTO.getPrecio());
-			p.setUrlImagen(prodDTO.getUrlImagen());
+			p.setFoto(prodDTO.getFoto());
+			p.setTipo(prodDTO.getTipo());
 			productoDAOBean.saveEntity(p);
 
 			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
@@ -283,10 +272,7 @@ public class ControladorBean implements Controlador {
 				continue;
 
 			Producto p = new Producto();
-			Categoria cate = new Categoria();
-			cate.setId(ic.getProducto().getCategoria().getId());
-			cate.setNombre(ic.getProducto().getCategoria().getNombre());
-			p.setCategoria(cate);
+
 			p.setCodigo(ic.getProducto().getCodigo());
 			p.setDatosExtra(ic.getProducto().getDatosExtra());
 			p.setDescripcion(ic.getProducto().getDescripcion());
@@ -294,7 +280,9 @@ public class ControladorBean implements Controlador {
 			p.setNombre(ic.getProducto().getNombre());
 			p.setOrigen(ic.getProducto().getOrigen());
 			p.setPrecio(ic.getProducto().getPrecio());
-			p.setUrlImagen(ic.getProducto().getUrlImagen());
+			p.setFoto(ic.getProducto().getFoto());
+			p.setTipo(ic.getProducto().getTipo());
+
 			carrito.getItems().add(new ItemCarrito(ic.getCantidad(), p));
 		}
 	}
@@ -306,10 +294,7 @@ public class ControladorBean implements Controlador {
 		v.setIdUsuario(u.getId());
 		for (ItemCarritoDTO ic : c.getItems()) {
 			Producto p = new Producto();
-			Categoria cate = new Categoria();
-			cate.setId(ic.getProducto().getCategoria().getId());
-			cate.setNombre(ic.getProducto().getCategoria().getNombre());
-			p.setCategoria(cate);
+
 			p.setCodigo(ic.getProducto().getCodigo());
 			p.setDatosExtra(ic.getProducto().getDatosExtra());
 			p.setDescripcion(ic.getProducto().getDescripcion());
@@ -317,7 +302,8 @@ public class ControladorBean implements Controlador {
 			p.setNombre(ic.getProducto().getNombre());
 			p.setOrigen(ic.getProducto().getOrigen());
 			p.setPrecio(ic.getProducto().getPrecio());
-			p.setUrlImagen(ic.getProducto().getUrlImagen());
+			p.setFoto(ic.getProducto().getFoto());
+			p.setTipo(ic.getProducto().getTipo());
 			items.add(new ItemVenta(ic.getCantidad(), p));
 		}
 		v.setItems(items);
