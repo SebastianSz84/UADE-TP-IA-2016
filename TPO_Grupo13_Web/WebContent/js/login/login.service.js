@@ -42,10 +42,15 @@ angular.module('integracion')
         function getUser() {
             return userData;
         }
+        
+        function getUserId(){
+        	return userData.id;
+        }
 
         return {
             login: login,
             logOut: logOut,
-            getUser: getUser
+            getUser: getUser,
+            getUserId: getUserId
         }
     });

@@ -15,7 +15,7 @@ angular.module('integracion')
                     'method': 'get',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
                     'params': {
-                        'user': LoginService.getUser().user
+                        'user': LoginService.getUserId()
                     }
                 })
                     .success(function (data) {
