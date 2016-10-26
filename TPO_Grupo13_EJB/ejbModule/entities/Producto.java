@@ -28,7 +28,7 @@ public class Producto implements Serializable {
 	private String marca;
 	@Column
 	private double precio;
-	@Column(name = "urlImagen")
+	@Column
 	private String foto;
 	@Column
 	private String origen;
