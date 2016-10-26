@@ -97,6 +97,9 @@
         <th>
         	<span style="cursor: pointer;"  ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
         	Fecha</th>
+        <th>
+        	<span style="cursor: pointer;"  ng-click="sortBy('ranking')" class="glyphicon glyphicon-sort"></span>
+        	Ranking</th>
         <th>Cantidad</th>
         <th></th>
       </tr>
@@ -108,7 +111,9 @@
         <td>{{item.marca}}</td>
         <td>{{item.precio}}</td>
         <td>{{item.tipo}}</td>
-        <td>NO TENGO FECHAS</td>
+        <td>{{item.fechaAlta}}</td>
+        <td ng-if="item.ranking!=0">{{item.ranking}}</td>
+        <td ng-if="item.ranking==0">-</td>
         <td>
 			<select ng-model="quantity">
 			  <option value="1">1</option>

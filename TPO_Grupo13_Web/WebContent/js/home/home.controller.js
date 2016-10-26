@@ -38,6 +38,7 @@ angular.module('integracion')
                 "producto": scope.item,
                 "subTotal": subTotal
             });
+            scope.quantity = 0;
             updateCarritoInServer();
         };
 
