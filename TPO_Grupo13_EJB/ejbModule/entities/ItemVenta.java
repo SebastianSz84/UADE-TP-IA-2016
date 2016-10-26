@@ -37,6 +37,7 @@ public class ItemVenta implements Serializable {
 		super();
 		this.cantidad = cantidad;
 		this.producto = producto;
+		this.setPrecio();
 	}
 
 	public Integer getId() {
@@ -53,14 +54,15 @@ public class ItemVenta implements Serializable {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+		this.setPrecio();
 	}
 
 	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
+	private void setPrecio() {
+		this.precio = this.cantidad * this.producto.getPrecio();
 	}
 
 	public Producto getProducto() {
@@ -69,6 +71,7 @@ public class ItemVenta implements Serializable {
 
 	public void setProducto(Producto producto) {
 		this.producto = producto;
+		this.setPrecio();
 	}
 
 	public String toString() {

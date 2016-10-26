@@ -69,7 +69,7 @@ public class ServletVenta extends HttpServlet {
 			p.setNombre(jb1.get("nombre").getAsString());
 			p.setOrigen(jb1.get("origen").getAsString());
 			p.setPrecio(jb1.get("precio").getAsDouble());
-			p.setFoto(jb1.get("urlImagen").getAsString());
+			p.setFoto(jb1.get("foto").getAsString());
 			p.setTipo(jb1.get("tipo").getAsString());
 			item.setProducto(p);
 			item.setCantidad(jb.get("cantidad").getAsInt());

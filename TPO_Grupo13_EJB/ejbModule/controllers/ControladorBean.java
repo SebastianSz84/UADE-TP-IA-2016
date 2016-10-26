@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -198,8 +199,9 @@ public class ControladorBean implements Controlador {
 		try {
 			Venta v = loadVenta(c);
 			ventaDAOBean.saveEntity(v);
-			// Carrito carrito = loadCarrito(c);
-			// carritoDAOBean.deleteEntity(carrito);
+			Carrito carrito = new Carrito();
+			loadCarrito(carrito, c);
+			carritoDAOBean.borrarListaItems(carrito);
 			VentaDTO venDTO = v.getDTO();
 			admNotif.enviarInfoVenta(venDTO);
 			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
@@ -268,6 +270,7 @@ public class ControladorBean implements Controlador {
 
 	private Venta loadVenta(CarritoDTO c) {
 		Venta v = new Venta();
+		v.setFecha(new Date());
 		List<ItemVenta> items = new ArrayList<ItemVenta>();
 		Usuario u = usuarioDAOBean.get(c.getIdUsuario());
 		v.setIdUsuario(u.getId());
