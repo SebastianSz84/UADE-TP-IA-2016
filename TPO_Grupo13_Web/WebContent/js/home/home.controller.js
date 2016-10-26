@@ -2,7 +2,7 @@
  * Created by gusta on
  */
 angular.module('integracion')
-    .controller('HomeCtrl', function ($scope, $http, $timeout, LoginService, HomeService) {
+    .controller('HomeCtrl', function ($scope, $http, $timeout, $filter, LoginService, HomeService) {
 
         $scope.successMessage = "";
         $scope.infoMessage = "";
@@ -16,6 +16,7 @@ angular.module('integracion')
         HomeService.getProducts()
             .then(function (products) {
                 $scope.products = products;
+                $scope.allProducts = angular.copy($scope.products);
             })
             .catch(function (data) {
                 console.log(data);
@@ -102,8 +103,19 @@ angular.module('integracion')
                     }, 3000);
                 });
         }
+        
+        $scope.getBestSellers = function(){
+        	$scope.allProducts = angular.copy($scope.products);
+        	$scope.products = $filter('filter')( $scope.products, {ranking: "!0"});
+        }
+        
+        $scope.getAll = function(){
+        	$scope.products = angular.copy($scope.allProducts);
+        }
 
         $scope.logOut = function () {
             LoginService.logOut();
         };
+        
+        
     });

@@ -39,7 +39,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button ng-if="carrito.items.length > 0" type="button" class="btn btn-danger" ng-click="confirmCarrito()">
+          <button ng-if="carrito.items.length > 0" type="button" class="btn btn-info" ng-click="confirmCarrito()">
 	  		Confirmar Carrito
 	   	</button>
         </div>
@@ -56,6 +56,9 @@
   <label>Search: <input ng-model="searchProduct"></label>
   <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
   		Ver Best Sellers
+        </button>
+            <button type="button" class="btn btn-warning" ng-click="getAll()">
+  		Ver todos los productos
         </button>
   </div>
   <div class="col-xs-12 col-sm-6 col-lg-6"> 
