@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -19,6 +20,7 @@ import dto.CarritoDTO;
 import dto.ItemCarritoDTO;
 import dto.ProductoDTO;
 import helpers.ParserJson;
+import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
 /**
@@ -43,7 +45,21 @@ public class ServletCarrito extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int carritoId = Integer.parseInt(request.getParameter("user"));
+		ResultadoOperacionCarritoDTO res = BusinessDelegate.getInstancia().getCarrito(carritoId);
+		if (res.sosExitoso()) {
+			String listaGson = new Gson().toJson(res.getCarritoDTO());
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/json");
+			out.print(listaGson);
+		} else {
+			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/text");
+			out.print(res.getMessage());
+		}
+
 	}
 
 	/**

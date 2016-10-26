@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import controllers.interfaces.Controlador;
 import dto.CarritoDTO;
 import dto.RankingDTO;
+import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
@@ -69,5 +70,9 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionVentaDTO confirmCarrito(CarritoDTO carrito) {
 		return controlador.confirmarCarrito(carrito);
+	}
+
+	public ResultadoOperacionCarritoDTO getCarrito(int carritoId) {
+		return controlador.getCarrito(carritoId);
 	}
 }

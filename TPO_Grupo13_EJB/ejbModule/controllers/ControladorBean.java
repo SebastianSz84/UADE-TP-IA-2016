@@ -27,6 +27,7 @@ import entities.Ranking;
 import entities.Usuario;
 import entities.Venta;
 import integracion.interfaces.AdminNotificaciones;
+import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
@@ -291,5 +292,15 @@ public class ControladorBean implements Controlador {
 		}
 		v.setItems(items);
 		return v;
+	}
+
+	@Override
+	public ResultadoOperacionCarritoDTO getCarrito(int carritoId) {
+		try {
+			CarritoDTO carritoDto = carritoDAOBean.get(carritoId).getDTO();
+			return new ResultadoOperacionCarritoDTO(true, "Exito", carritoDto);
+		} catch (Exception ex) {
+			return new ResultadoOperacionCarritoDTO(false, "Error al traer el carrito. " + ex.getMessage(), null);
+		}
 	}
 }
