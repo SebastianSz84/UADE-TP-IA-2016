@@ -159,6 +159,7 @@ public class ControladorBean implements Controlador {
 			p.setPrecio(prodDTO.getPrecio());
 			p.setFoto(prodDTO.getFoto());
 			p.setTipo(prodDTO.getTipo());
+			p.setIdDeposito(prodDTO.getIdDeposito());
 			productoDAOBean.saveEntity(p);
 
 			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");

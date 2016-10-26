@@ -62,6 +62,7 @@ public class ServicesTests {
 		prodDTO.setOrigen("algun origen");
 		prodDTO.setPrecio(123.45678);
 		prodDTO.setFoto("alguna url de imagen");
+		prodDTO.setIdDeposito("G01");
 
 		String MESSAGE = ParserJson.toString(prodDTO);
 		String CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
@@ -75,7 +76,7 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://192.168.0.4:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "grupo13");
 			env.put(Context.SECURITY_CREDENTIALS, "grupo13");
 			namingContext = new InitialContext(env);
@@ -129,7 +130,7 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://sebalaptop:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "grupo2");
 			env.put(Context.SECURITY_CREDENTIALS, "grupo2");
 			namingContext = new InitialContext(env);

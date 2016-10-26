@@ -36,8 +36,10 @@ public class Producto implements Serializable {
 	private String datosExtra;
 	@Column
 	private String tipo;
-	@Column
+	@Column(nullable = true, insertable = false)
 	private Date fechaAlta;
+	@Column
+	private String idDeposito;
 
 	@OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Ranking Ranking;
@@ -147,6 +149,14 @@ public class Producto implements Serializable {
 
 	public void setFechaAlta(Date fechAlta) {
 		this.fechaAlta = fechAlta;
+	}
+
+	public String getIdDeposito() {
+		return idDeposito;
+	}
+
+	public void setIdDeposito(String idDeposito) {
+		this.idDeposito = idDeposito;
 	}
 
 }
