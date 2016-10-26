@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import dto.CarritoDTO;
 import dto.ProductoDTO;
 import dto.RankingDTO;
+import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
@@ -33,4 +34,6 @@ public interface Controlador {
 	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado);
 
 	public ResultadoOperacionDTO testNotificacionLogMon();
+
+	public ResultadoOperacionCarritoDTO getCarrito(int carritoId);
 }

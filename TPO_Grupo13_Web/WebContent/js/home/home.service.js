@@ -12,7 +12,7 @@ angular.module('integracion')
         function cargarCarrito() {
             return $q(function (resolve, reject) {
                 $http({
-                    'method': 'get',
+                    'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
                     'params': {
                         'user': LoginService.getUserId()
