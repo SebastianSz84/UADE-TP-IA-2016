@@ -27,17 +27,22 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
+        	var exists = false;
             angular.forEach($scope.carrito.items, function (item, key) {
                 if (angular.equals(item.producto, scope.item)) {
                     item.cantidad = scope.quantity;
+                    item.subTotal = item.producto.precio * parseInt(scope.quantity);
+                    exists = true;
                 }
             });
-            var subTotal = scope.item.precio * parseInt(scope.quantity);
-            $scope.carrito.items.push({
-                "cantidad": scope.quantity,
-                "producto": scope.item,
-                "subTotal": subTotal
-            });
+            if(!exists){
+	            var subTotal = scope.item.precio * parseInt(scope.quantity);
+	            $scope.carrito.items.push({
+	                "cantidad": scope.quantity,
+	                "producto": scope.item,
+	                "subTotal": subTotal
+	            });
+            }
             scope.quantity = 0;
             updateCarritoInServer();
         };
@@ -53,6 +58,7 @@ angular.module('integracion')
                 })
                     .success(function (data) {
                         $scope.successMessage = data;
+                        $scope.carrito.items = [];
                         $timeout(function () {
                             $scope.successMessage = "";
                         }, 3000)
