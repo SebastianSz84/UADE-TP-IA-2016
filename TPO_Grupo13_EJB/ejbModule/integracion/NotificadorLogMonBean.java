@@ -1,5 +1,6 @@
 package integracion;
 
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 
@@ -13,6 +14,7 @@ import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import dto.VentaDTO;
@@ -30,22 +32,25 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	public ResultadoOperacionDTO sincronica(String notif, Configuracion conf) {
 		try {
 			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setDoOutput(true);
+			urlConnection.setRequestMethod("POST");
+			urlConnection.setRequestProperty("Content-Type", "application/json");
 
 			String mensajeJSON = ParserJson.toString(notif);
 
 			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
 			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
 
-			// TODO: nos tienen que pasar el WSDL para generar la interfaz
-			// contra LogMon.
-			// LogisticaMonitoreoWS port = new
-			// LogisticaMonitoreoBeanService(url).getLogisticaMonitoreoWSPort();
-			// String respuesta = port.infLog(mensajeJSON);
+			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
+			if (urlConnection.getResponseCode() != 200) {
+				String respuesta = "++ERROR: " + urlConnection.getResponseCode();
+				logger.error(respuesta);
+				return new ResultadoOperacionDTO(false, respuesta);
+			}
 
-			String respuesta = "";
-
+			String respuesta = IOUtils.toString(urlConnection.getInputStream());
 			logger.info("++Info respuesta de informar venta sincronico: " + respuesta);
-
 			return new ResultadoOperacionDTO(true, "Respuesta de Informar Venta: " + respuesta);
 		} catch (Exception e) {
 			e.printStackTrace();
