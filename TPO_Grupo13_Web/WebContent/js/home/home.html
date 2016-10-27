@@ -11,7 +11,7 @@
           <h4 class="modal-title">Carrito</h4>
         </div>
         <div class="modal-body">
-            <div class="table-responsive" ng-if="carrito.items.length > 0">
+            <div class="table-responsive" ng-if="carrito.items.length > 0 && !isDetail">
 			  <table class="table">
 			    <thead>
 			      <tr>
@@ -33,8 +33,11 @@
 			    </tbody>
 			  </table>
 			</div>
-			<div ng-if="carrito.items.length == 0" >
+			<div ng-if="carrito.items.length == 0 && !isDetail" >
 				No tiene elementos en el carrito.
+			</div>
+			<div ng-if="isDetail">
+			<img src="http://novogar.com.ar/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/m/u/muebles-desarmable-mesa-lcd-tv8000-r08_02-melamina-hasta-42-pulgadas-novogar.png">
 			</div>
         </div>
         <div class="modal-footer">
@@ -115,7 +118,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | filter: searchProduct" >
-        <td>{{item.nombre}}</td>
+        <td style="cursor: pointer;"  ng-click="openDetail()">{{item.nombre}}</td>
         <td>{{item.descripcion}}</td>
         <td>{{item.marca}}</td>
         <td>${{item.precio}}</td>

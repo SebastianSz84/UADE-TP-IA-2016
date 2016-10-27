@@ -126,6 +126,11 @@ angular.module('integracion')
 
         }
 
+        $scope.openDetail = function(){
+        	$scope.isDetail = true;
+        	$("#myModal").modal();
+        }
+        
         $scope.logOut = function () {
             LoginService.logOut();
         };
