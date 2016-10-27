@@ -27,8 +27,15 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
-        	if(scope.quantity>0){
-        	var exists = false;
+            if (scope.quantity === 0) {
+                $scope.infoMessage = "Debe seleccionar cantidad";
+                $timeout(function () {
+                    $scope.infoMessage = "";
+                }, 3000);
+                return;
+            }
+
+            var exists = false;
             angular.forEach($scope.carrito.items, function (item, key) {
                 if (angular.equals(item.producto, scope.item)) {
                     item.cantidad = scope.quantity;
@@ -36,42 +43,36 @@ angular.module('integracion')
                     exists = true;
                 }
             });
-            if(!exists){
-	            var subTotal = scope.item.precio * parseInt(scope.quantity);
-	            $scope.carrito.items.push({
-	                "cantidad": scope.quantity,
-	                "producto": scope.item,
-	                "subTotal": subTotal
-	            });
+            if (!exists) {
+                var subTotal = scope.item.precio * parseInt(scope.quantity);
+                $scope.carrito.items.push({
+                    "cantidad": scope.quantity,
+                    "producto": scope.item,
+                    "subTotal": subTotal
+                });
             }
             scope.quantity = null;
             updateCarritoInServer();
-        	}
-        	else{
-                $scope.infoMessage = "Debe seleccionar cantidad";
-                $timeout(function () {
-                    $scope.infoMessage = "";
-                }, 3000)
-        	}
         };
 
         $scope.confirmCarrito = function () {
-            if ($scope.carrito.items.length > 0) {
-                $http({
-                    'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
-                    'params': {
-                        'carrito': $scope.carrito
-                    }
-                })
-                    .success(function (data) {
-                        $scope.successMessage = data;
-                        $scope.carrito.items = [];
-                        $timeout(function () {
-                            $scope.successMessage = "";
-                        }, 3000)
+            if ($scope.carrito.items.length === 0) {
+                $scope.infoMessage = "El carrito esta vacio";
+                $timeout(function () {
+                    $scope.infoMessage = "";
+                }, 3000);
+                return;
+            }
 
-                    }).error(function (data, status) {
+            HomeService.confirmCarrito()
+                .then(function (data) {
+                    $scope.successMessage = data;
+                    $scope.carrito.items = [];
+                    $timeout(function () {
+                        $scope.successMessage = "";
+                    }, 3000)
+                })
+                .catch(function (data) {
                     console.log(data);
                     console.log(status);
                     $scope.alertMessage = data;
@@ -79,13 +80,6 @@ angular.module('integracion')
                         $scope.alertMessage = "";
                     }, 3000)
                 });
-            }
-            else {
-                $scope.infoMessage = "El carrito esta vacio";
-                $timeout(function () {
-                    $scope.infoMessage = "";
-                }, 3000)
-            }
         };
 
         $scope.removeItem = function (key) {
@@ -110,34 +104,34 @@ angular.module('integracion')
                     }, 3000);
                 });
         }
-        
-        $scope.getBestSellers = function(){
-        	$scope.products = $filter('filter')( $scope.products, {ranking: ""});
+
+        $scope.getBestSellers = function () {
+            $scope.products = $filter('filter')($scope.products, {ranking: ""});
         }
-        
-        $scope.getAll = function(){
-        	HomeService.getProducts()
-            .then(function (products) {
-                $scope.products = products;
-            })
-            .catch(function (data) {
-                console.log(data);
-            });
+
+        $scope.getAll = function () {
+            HomeService.getProducts()
+                .then(function (products) {
+                    $scope.products = products;
+                })
+                .catch(function (data) {
+                    console.log(data);
+                });
 
         }
 
-        $scope.openDetail = function(){
-        	$scope.isDetail = true;
-        	$("#myModal").modal();
+        $scope.openDetail = function () {
+            $scope.isDetail = true;
+            $("#myModal").modal();
         }
-        $scope.close= function(){
-        	$scope.isDetail = false;
-        	$("#myModal").modal("hide");
+        $scope.close = function () {
+            $scope.isDetail = false;
+            $("#myModal").modal("hide");
         };
-        
+
         $scope.logOut = function () {
             LoginService.logOut();
         };
-        
-        
+
+
     });

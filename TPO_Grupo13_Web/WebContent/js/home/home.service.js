@@ -48,10 +48,10 @@ angular.module('integracion')
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ListadoProductos'
                 })
                     .success(function (data) {
-                    	angular.forEach(data, function(item, key){
-                    		if(item.ranking=== 0)
-                    			item.ranking = null;
-                    	});
+                        angular.forEach(data, function (item, key) {
+                            if (item.ranking === 0)
+                                item.ranking = null;
+                        });
                         resolve(data);
                     })
                     .error(function (data, status) {
@@ -78,9 +78,29 @@ angular.module('integracion')
             });
         }
 
+        function confirmCarrito() {
+            return $q(function (resolve, reject) {
+                $http({
+                    'method': 'post',
+                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
+                    'params': {
+                        'carrito': carritoData
+                    }
+                })
+                    .success(function (data) {
+                        resolve(data);
+
+                    })
+                    .error(function (data, status) {
+                        reject(data);
+                    });
+            });
+        }
+
         return {
             getCarrito: getCarrito,
             getProducts: getProducts,
-            sendCarrito: sendCarrito
+            sendCarrito: sendCarrito,
+            confirmCarrito: confirmCarrito
         }
     });
