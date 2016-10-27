@@ -44,7 +44,7 @@ angular.module('integracion')
 	                "subTotal": subTotal
 	            });
             }
-            scope.quantity = 0;
+            scope.quantity = null;
             updateCarritoInServer();
         	}
         	else{

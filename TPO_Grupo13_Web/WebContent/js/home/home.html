@@ -123,14 +123,7 @@
         <td>{{item.fechaAlta}}</td>
         <td ng-if="item.ranking">{{item.ranking}}</td>
         <td ng-if="!item.ranking">-</td>
-        <td>
-			<select ng-model="quantity">
-			  <option value="1">1</option>
-			  <option value="2">2</option>
-			  <option value="3">3</option>
-			  <option value="4">4</option>
-			  <option value="5">5</option>
-			</select>
+        <td><input style="width: 40px" type="number" min="1" ng-model="quantity"></input>
         </td>
         <td>
             <button type="button" class="btn btn-success" ng-click="add(this)" ng-disable="!this.quantity">
