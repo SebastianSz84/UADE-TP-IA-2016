@@ -28,10 +28,7 @@ angular.module('integracion')
 
         $scope.add = function (scope) {
             if (scope.quantity === 0) {
-                $scope.infoMessage = "Debe seleccionar cantidad";
-                $timeout(function () {
-                    $scope.infoMessage = "";
-                }, 3000);
+                errorMessage("Debe seleccionar cantidad");
                 return;
             }
 
@@ -57,28 +54,17 @@ angular.module('integracion')
 
         $scope.confirmCarrito = function () {
             if ($scope.carrito.items.length === 0) {
-                $scope.infoMessage = "El carrito esta vacio";
-                $timeout(function () {
-                    $scope.infoMessage = "";
-                }, 3000);
+                errorMessage("El carrito esta vacio");
                 return;
             }
 
             HomeService.confirmCarrito()
                 .then(function (data) {
-                    $scope.successMessage = data;
-                    $scope.carrito.items = [];
-                    $timeout(function () {
-                        $scope.successMessage = "";
-                    }, 3000)
+                    $scope.close();
+                    sendMessage(data);
                 })
                 .catch(function (data) {
-                    console.log(data);
-                    console.log(status);
-                    $scope.alertMessage = data;
-                    $timeout(function () {
-                        $scope.alertMessage = "";
-                    }, 3000)
+                    errorMessage(data);
                 });
         };
 
@@ -90,24 +76,16 @@ angular.module('integracion')
         function updateCarritoInServer() {
             HomeService.sendCarrito()
                 .then(function (data) {
-                    $scope.successMessage = data;
-                    $timeout(function () {
-                        $scope.successMessage = "";
-                    }, 3000);
+                    sendMessage(data);
                 })
                 .catch(function (data) {
-                    console.log(data);
-                    console.log(status);
-                    $scope.alertMessage = data;
-                    $timeout(function () {
-                        $scope.alertMessage = "";
-                    }, 3000);
+                    errorMessage(data);
                 });
         }
 
         $scope.getBestSellers = function () {
             $scope.products = $filter('filter')($scope.products, {ranking: ""});
-        }
+        };
 
         $scope.getAll = function () {
             HomeService.getProducts()
@@ -118,12 +96,13 @@ angular.module('integracion')
                     console.log(data);
                 });
 
-        }
+        };
 
         $scope.openDetail = function () {
             $scope.isDetail = true;
             $("#myModal").modal();
-        }
+        };
+
         $scope.close = function () {
             $scope.isDetail = false;
             $("#myModal").modal("hide");
@@ -133,5 +112,18 @@ angular.module('integracion')
             LoginService.logOut();
         };
 
+        function errorMessage(msg) {
+            $scope.alertMessage = msg;
+            $timeout(function () {
+                $scope.alertMessage = "";
+            }, 3000);
+        }
+
+        function sendMessage(msg) {
+            $scope.successMessage = msg;
+            $timeout(function () {
+                $scope.successMessage = "";
+            }, 3000);
+        }
 
     });
