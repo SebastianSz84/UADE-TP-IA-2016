@@ -49,6 +49,7 @@ public class NuevoProductoMDB implements MessageListener {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("++ Error en nuevo producto: " + e.getMessage());
 		}
 	}
 }
