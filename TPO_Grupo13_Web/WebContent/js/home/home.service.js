@@ -59,6 +59,21 @@ angular.module('integracion')
                     });
             });
         }
+        
+        function getVentas() {
+            return $q(function (resolve, reject) {
+                $http({
+                    'method': 'get',
+                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta'
+                })
+                    .success(function (data) {
+                        
+                    })
+                    .error(function (data, status) {
+                        reject(data);
+                    });
+            });
+        }
 
         function sendCarrito() {
             return $q(function (resolve, reject) {
@@ -100,6 +115,7 @@ angular.module('integracion')
         return {
             getCarrito: getCarrito,
             getProducts: getProducts,
+            getVentas: getVentas,
             sendCarrito: sendCarrito,
             confirmCarrito: confirmCarrito
         }

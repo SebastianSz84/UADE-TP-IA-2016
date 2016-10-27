@@ -10,6 +10,7 @@ import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoVentasDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
@@ -36,4 +37,6 @@ public interface Controlador {
 	public ResultadoOperacionDTO testNotificacionLogMon();
 
 	public ResultadoOperacionCarritoDTO getCarrito(int carritoId);
+
+	public ResultadoOperacionListadoVentasDTO listadoVentas();
 }

@@ -12,6 +12,7 @@ import dto.RankingDTO;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoVentasDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
@@ -74,5 +75,9 @@ public class BusinessDelegate {
 
 	public ResultadoOperacionCarritoDTO getCarrito(int carritoId) {
 		return controlador.getCarrito(carritoId);
+	}
+
+	public ResultadoOperacionListadoVentasDTO listadoVentas() {
+		return controlador.listadoVentas();
 	}
 }

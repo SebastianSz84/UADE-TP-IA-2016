@@ -30,6 +30,7 @@ import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 import resultadoOperacionDTOs.ResultadoOperacionListadoProductosDTO;
+import resultadoOperacionDTOs.ResultadoOperacionListadoVentasDTO;
 import resultadoOperacionDTOs.ResultadoOperacionUsuarioDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
 
@@ -302,5 +303,18 @@ public class ControladorBean implements Controlador {
 		} catch (Exception ex) {
 			return new ResultadoOperacionCarritoDTO(false, "Error al traer el carrito. " + ex.getMessage(), null);
 		}
+	}
+
+	public ResultadoOperacionListadoVentasDTO listadoVentas() {
+		try {
+			List<VentaDTO> lista = new ArrayList<VentaDTO>();
+			for (Venta v : ventaDAOBean.listVentas()) {
+				lista.add(v.getDTO());
+			}
+			return new ResultadoOperacionListadoVentasDTO(true, "Exito", lista);
+		} catch (Exception ex) {
+			return new ResultadoOperacionListadoVentasDTO(false, "Error al listar ventas" + ex.getMessage(), null);
+		}
+
 	}
 }
