@@ -130,6 +130,10 @@ angular.module('integracion')
         	$scope.isDetail = true;
         	$("#myModal").modal();
         }
+        $scope.close= function(){
+        	$scope.isDetail = false;
+        	$("#myModal").modal("hide");
+        };
         
         $scope.logOut = function () {
             LoginService.logOut();
