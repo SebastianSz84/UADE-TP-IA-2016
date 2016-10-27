@@ -27,6 +27,7 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
+        	if(scope.quantity>0){
         	var exists = false;
             angular.forEach($scope.carrito.items, function (item, key) {
                 if (angular.equals(item.producto, scope.item)) {
@@ -45,6 +46,13 @@ angular.module('integracion')
             }
             scope.quantity = 0;
             updateCarritoInServer();
+        	}
+        	else{
+                $scope.infoMessage = "Debe seleccionar cantidad";
+                $timeout(function () {
+                    $scope.infoMessage = "";
+                }, 3000)
+        	}
         };
 
         $scope.confirmCarrito = function () {
