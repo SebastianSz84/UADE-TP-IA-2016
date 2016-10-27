@@ -48,6 +48,10 @@ angular.module('integracion')
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ListadoProductos'
                 })
                     .success(function (data) {
+                    	angular.forEach(data, function(item, key){
+                    		if(item.ranking=== 0)
+                    			item.ranking = null;
+                    	});
                         resolve(data);
                     })
                     .error(function (data, status) {

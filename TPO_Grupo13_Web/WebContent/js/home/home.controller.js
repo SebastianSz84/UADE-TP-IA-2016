@@ -16,7 +16,6 @@ angular.module('integracion')
         HomeService.getProducts()
             .then(function (products) {
                 $scope.products = products;
-                $scope.allProducts = angular.copy($scope.products);
             })
             .catch(function (data) {
                 console.log(data);
@@ -105,12 +104,18 @@ angular.module('integracion')
         }
         
         $scope.getBestSellers = function(){
-        	$scope.allProducts = angular.copy($scope.products);
-        	$scope.products = $filter('filter')( $scope.products, {ranking: "!0"});
+        	$scope.products = $filter('filter')( $scope.products, {ranking: ""});
         }
         
         $scope.getAll = function(){
-        	$scope.products = angular.copy($scope.allProducts);
+        	HomeService.getProducts()
+            .then(function (products) {
+                $scope.products = products;
+            })
+            .catch(function (data) {
+                console.log(data);
+            });
+
         }
 
         $scope.logOut = function () {

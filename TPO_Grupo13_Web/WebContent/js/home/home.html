@@ -54,12 +54,7 @@
   <div class="row">
   <div class="col-xs-12 col-sm-6 col-lg-6">
   <label>Search: <input ng-model="searchProduct"></label>
-  <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
-  		Ver Best Sellers
-        </button>
-            <button type="button" class="btn btn-warning" ng-click="getAll()">
-  		Ver todos los productos
-        </button>
+
   </div>
   <div class="col-xs-12 col-sm-6 col-lg-6"> 
   	  	<button type="button" class="btn btn-primary" data-target="#myModal" data-toggle="modal">
@@ -68,6 +63,17 @@
           <button type="button" class="btn btn-danger" ng-click="logOut()">
             Salir
           </button>
+  </div>
+  </div>
+  
+  <div class="row">
+  <div class="col-xs-12 col-sm-6 col-lg-6">
+    <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
+  		Ver Best Sellers
+        </button>
+            <button type="button" class="btn btn-warning" ng-click="getAll()">
+  		Ver todos los productos
+        </button>
   </div>
   </div>
 <br>
@@ -115,8 +121,8 @@
         <td>{{item.precio}}</td>
         <td>{{item.tipo}}</td>
         <td>{{item.fechaAlta}}</td>
-        <td ng-if="item.ranking!=0">{{item.ranking}}</td>
-        <td ng-if="item.ranking==0">-</td>
+        <td ng-if="item.ranking">{{item.ranking}}</td>
+        <td ng-if="!item.ranking">-</td>
         <td>
 			<select ng-model="quantity">
 			  <option value="1">1</option>
