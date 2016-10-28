@@ -5,6 +5,7 @@ angular.module('integracion')
     .service('LoginService', function ($http, $q, $state, $localStorage) {
 
         var userData = $localStorage.getObject('user') || {};
+        console.log(userData);
 
         function login(username, password) {
             return $q(function (resolve, reject) {
@@ -27,8 +28,8 @@ angular.module('integracion')
                         }
                     })
                     .error(function (data, status) {
-                        console.log(data);
-                        console.log(status);
+                        //console.log(data);
+                        //console.log(status);
                     });
             });
         }
@@ -42,6 +43,10 @@ angular.module('integracion')
         function getUser() {
             return userData;
         }
+
+        function getUserName() {
+            return userData && userData.nombre;
+        }
         
         function getUserId(){
         	return userData.id;
@@ -51,6 +56,7 @@ angular.module('integracion')
             login: login,
             logOut: logOut,
             getUser: getUser,
-            getUserId: getUserId
+            getUserId: getUserId,
+            getUserName: getUserName
         }
     });

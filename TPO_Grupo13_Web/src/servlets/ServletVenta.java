@@ -19,9 +19,9 @@ import controllers.BusinessDelegate;
 import dto.CarritoDTO;
 import dto.ItemCarritoDTO;
 import dto.ProductoDTO;
-import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionListadoVentasDTO;
 import resultadoOperacionDTOs.ResultadoOperacionVentaDTO;
+import utils.ParserJsonServlet;
 
 /**
  * Servlet implementation class ServletVenta
@@ -67,7 +67,7 @@ public class ServletVenta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JsonObject jObj = ParserJson.parsearJsonObject(request.getParameter("carrito"));
+		JsonObject jObj = ParserJsonServlet.parsearJsonObject(request);
 		JsonArray itemsBS = jObj.getAsJsonArray("items");
 
 		List<ItemCarritoDTO> items = new ArrayList<>();
