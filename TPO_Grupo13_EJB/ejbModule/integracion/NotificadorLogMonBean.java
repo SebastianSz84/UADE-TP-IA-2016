@@ -121,7 +121,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 		try {
 			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
 
-			String mensajeJSON = ParserJson.toString(venta);
+			String mensajeJSON = ParserJson.toString(venta.convertirLMDTO());
 
 			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
 			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);

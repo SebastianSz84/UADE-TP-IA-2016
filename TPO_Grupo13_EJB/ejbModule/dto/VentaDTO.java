@@ -1,8 +1,12 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import integracion.dto.ItemVentaLMDTO;
+import integracion.dto.VentaLMDTO;
 
 public class VentaDTO implements Serializable {
 
@@ -11,9 +15,18 @@ public class VentaDTO implements Serializable {
 	private String estado;
 	private List<ItemVentaDTO> items;
 	private Date fecha; // Es un getdate default en la base de datos
+	private UsuarioDTO usuario;
 
 	public VentaDTO() {
 		super();
+	}
+
+	public UsuarioDTO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
 	}
 
 	public Date getFecha() {
@@ -50,5 +63,28 @@ public class VentaDTO implements Serializable {
 
 	public void setItems(List<ItemVentaDTO> items) {
 		this.items = items;
+	}
+
+	public VentaLMDTO convertirLMDTO() {
+		VentaLMDTO v = new VentaLMDTO();
+
+		v.setFechaHoraVenta(fecha);
+		v.setId(id);
+		// TODO
+		v.setLatitud("QUE VA ACA???");
+		v.setLongitud("Y ACA???");
+
+		double monto = 0;
+		List<ItemVentaLMDTO> lista = new ArrayList<>();
+
+		for (ItemVentaDTO it : items) {
+			lista.add(it.convertirLMDTO());
+			monto = monto + it.getPrecio() * it.getCantidad();
+		}
+
+		v.setMonto(monto);
+		v.setCliente(usuario.convertirLMDTO());
+
+		return v;
 	}
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import integracion.dto.ClienteLMDTO;
+
 public class UsuarioDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -12,6 +14,7 @@ public class UsuarioDTO implements Serializable {
 	private String apellido;
 	private String userName;
 	private String password;
+	private String dni;
 	private List<VentaDTO> ventas;
 	private CarritoDTO carrito;
 	private String coordenadasX;
@@ -60,6 +63,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public List<VentaDTO> getVentas() {
@@ -112,6 +123,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setCoordenadasY(String coordenadasY) {
 		this.coordenadasY = coordenadasY;
+	}
+
+	public ClienteLMDTO convertirLMDTO() {
+		ClienteLMDTO c = new ClienteLMDTO();
+		c.setApellido(apellido);
+		c.setDni(dni);
+		c.setNombre(nombre);
+		return c;
 	}
 
 }

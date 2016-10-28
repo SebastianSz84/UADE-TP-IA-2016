@@ -276,7 +276,7 @@ public class ControladorBean implements Controlador {
 		v.setFecha(new Date());
 		List<ItemVenta> items = new ArrayList<ItemVenta>();
 		Usuario u = usuarioDAOBean.get(c.getIdUsuario());
-		v.setIdUsuario(u.getId());
+		v.setUsuario(u);
 		for (ItemCarritoDTO ic : c.getItems()) {
 			Producto p = new Producto();
 
