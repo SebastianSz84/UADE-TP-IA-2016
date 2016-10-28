@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import controllers.BusinessDelegate;
+import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 
 /**
@@ -46,7 +48,8 @@ public class ServletGetCarrito extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int carritoId = Integer.parseInt(request.getParameter("user"));
+		JsonObject jObj = ParserJson.parsearJsonObject(request);
+		int carritoId = jObj.get("userId").getAsInt();
 		ResultadoOperacionCarritoDTO res = BusinessDelegate.getInstancia().getCarrito(carritoId);
 		if (res.sosExitoso()) {
 			String listaGson = new Gson().toJson(res.getCarritoDTO());

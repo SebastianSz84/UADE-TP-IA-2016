@@ -18,8 +18,8 @@ import controllers.BusinessDelegate;
 import dto.CarritoDTO;
 import dto.ItemCarritoDTO;
 import dto.ProductoDTO;
+import helpers.ParserJson;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
-import utils.ParserJsonServlet;
 
 /**
  * Servlet implementation class ServletCarrito
@@ -53,7 +53,7 @@ public class ServletCarrito extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JsonObject jObj = ParserJsonServlet.parsearJsonObject(request);
+		JsonObject jObj = ParserJson.parsearJsonObject(request);
 		JsonArray itemsBS = jObj.getAsJsonArray("items");
 
 		List<ItemCarritoDTO> items = new ArrayList<>();
