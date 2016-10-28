@@ -7,6 +7,7 @@ angular.module('integracion')
         $scope.successMessage = "";
         $scope.infoMessage = "";
         $scope.dangerMessage = "";
+        $scope.productoDetalle = null;
 
         $scope.title = "Bienvenido, " + LoginService.getUser().nombre + "!";
 
@@ -98,13 +99,13 @@ angular.module('integracion')
 
         };
 
-        $scope.openDetail = function () {
-            $scope.isDetail = true;
+        $scope.openDetail = function (item) {
+        	$scope.productoDetalle = item;
             $("#myModal").modal();
         };
 
         $scope.close = function () {
-            $scope.isDetail = false;
+            $scope.productoDetalle = null;
             $("#myModal").modal("hide");
         };
 

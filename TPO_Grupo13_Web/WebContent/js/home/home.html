@@ -6,12 +6,12 @@
     
       <!-- Modal content-->
       <div class="modal-content" >
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Carrito</h4>
+        <div class="modal-header" style="border-bottom: 0;">
+          <h4 ng-if="!productoDetalle" class="modal-title">Carrito</h4>
+          <h4 ng-if="productoDetalle" class="modal-title">Detalle Producto</h4>
         </div>
         <div class="modal-body">
-            <div class="table-responsive" ng-if="carrito.items.length > 0 && !isDetail">
+            <div class="table-responsive" ng-if="carrito.items.length > 0 && !productoDetalle">
 			  <table class="table">
 			    <thead>
 			      <tr>
@@ -33,19 +33,22 @@
 			    </tbody>
 			  </table>
 			</div>
-			<div ng-if="carrito.items.length == 0 && !isDetail" >
+			<div ng-if="carrito.items.length == 0 && !productoDetalle" >
 				No tiene elementos en el carrito.
 			</div>
-			<div ng-if="isDetail">
-			<img src="http://novogar.com.ar/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/m/u/muebles-desarmable-mesa-lcd-tv8000-r08_02-melamina-hasta-42-pulgadas-novogar.png">
+			<div ng-if="productoDetalle">
+			<img style="height:400px; width:500px" src="{{productoDetalle.foto}}">
+			<div>
+				{{productoDetalle.datosExtra}}
+			</div>
 			</div>
         </div>
         <div class="modal-footer">
-          <button ng-if="!isDetail" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button ng-if="carrito.items.length > 0 && !isDetail" type="button" class="btn btn-info" ng-click="confirmCarrito()">
+          <button ng-if="!productoDetalle" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button ng-if="carrito.items.length > 0 && !productoDetalle" type="button" class="btn btn-info" ng-click="confirmCarrito()">
 	  		Confirmar Carrito
 	   	</button>
-	   	<button  ng-if="isDetail" ng-click="close()">Close</button>
+	   	<button  ng-if="productoDetalle" ng-click="close()">Close</button>
         </div>
       </div>
       
@@ -61,7 +64,7 @@
 
   </div>
   <div class="col-xs-12 col-sm-6 col-lg-6"> 
-  	  	<button type="button" class="btn btn-primary" data-target="#myModal" data-toggle="modal">
+  	  	<button type="button" class="btn btn-primary" ng-click="productoDetalle=null" data-target="#myModal" data-toggle="modal">
   			Ver Carrito
         </button>
           <button type="button" class="btn btn-danger" ng-click="logOut()">
@@ -119,7 +122,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | filter: searchProduct" >
-        <td style="cursor: pointer;"  ng-click="openDetail()">{{item.nombre}}</td>
+        <td style="cursor: pointer;"  ng-click="openDetail(item)">{{item.nombre}}</td>
         <td>{{item.descripcion}}</td>
         <td>{{item.marca}}</td>
         <td>${{item.precio}}</td>
