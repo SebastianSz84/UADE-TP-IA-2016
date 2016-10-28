@@ -20,7 +20,8 @@ angular.module('integracion')
                 })
                     .success(function (data) {
                         if (angular.isObject(data)) {
-                            carritoData = data;
+                            carritoData.length = 0;
+                            angular.copy(data.items, carritoData.items);
                             resolve();
                         }
                         else if (angular.isString(data)) {
