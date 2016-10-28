@@ -85,10 +85,12 @@ angular.module('integracion')
         }
 
         $scope.getBestSellers = function () {
+        	$scope.searchProduct = "";
             $scope.products = $filter('filter')($scope.products, {ranking: ""});
         };
 
         $scope.getAll = function () {
+        	$scope.searchProduct = "";
             HomeService.getProducts()
                 .then(function (products) {
                     $scope.products = products;
