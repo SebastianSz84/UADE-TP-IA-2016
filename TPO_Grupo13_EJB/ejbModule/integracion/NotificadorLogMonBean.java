@@ -50,7 +50,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			}
 
 			String respuesta = IOUtils.toString(urlConnection.getInputStream());
-			logger.info("++Info respuesta de informar venta sincronico: " + respuesta);
+			logger.info("++Info respuesta de notificación sincrónica: " + respuesta);
 			return new ResultadoOperacionDTO(true, "Respuesta de Informar Venta: " + respuesta);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,16 +68,6 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			String pass = conf.getPass();
 
 			final Properties env = new Properties();
-			// env.put(Context.INITIAL_CONTEXT_FACTORY,
-			// "org.jboss.naming.remote.client.InitialContextFactory");
-			// env.put(Context.PROVIDER_URL,
-			// System.getProperty(Context.PROVIDER_URL, "http-remoting://" + ip
-			// + ":" + port));
-			// env.put(Context.SECURITY_PRINCIPAL,
-			// System.getProperty("username", user));
-			// env.put(Context.SECURITY_CREDENTIALS,
-			// System.getProperty("password", pass));
-
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
 			env.put(Context.PROVIDER_URL, "http-remoting://" + ip + ":" + port);
 			env.put(Context.SECURITY_PRINCIPAL, user);
@@ -121,23 +111,26 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 		try {
 			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
 
-			String mensajeJSON = ParserJson.toString(venta);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setDoOutput(true);
+			urlConnection.setRequestMethod("POST");
+			urlConnection.setRequestProperty("Content-Type", "application/json");
+
+			String mensajeJSON = ParserJson.toString(venta.convertirLMDTO());
 
 			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
 			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
 
-			// TODO: nos tienen que pasar el WSDL para generar la interfaz
-			// contra LogMon.
-			// LogisticaMonitoreoWS port = new
-			// LogisticaMonitoreoBeanService(url).getLogisticaMonitoreoWSPort();
-			// String respuesta = port.infVenta(mensajeJSON);
+			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
+			if (urlConnection.getResponseCode() != 200) {
+				String respuesta = "++ERROR: " + urlConnection.getResponseCode();
+				logger.error(respuesta);
+				return new ResultadoOperacionDTO(false, respuesta);
+			}
 
-			String respuesta = "";
-
-			logger.info("++Info respuesta de informar venta sincronico: " + respuesta);
-
+			String respuesta = IOUtils.toString(urlConnection.getInputStream());
+			logger.info("++Info respuesta de informar venta sincrónico: " + respuesta);
 			return new ResultadoOperacionDTO(true, "Respuesta de Informar Venta: " + respuesta);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error al intentar mandar info venta sincronico: " + e.getStackTrace().toString());

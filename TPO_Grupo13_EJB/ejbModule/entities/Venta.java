@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,15 +30,16 @@ public class Venta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "idUsuario", nullable = false)
-	private Integer idUsuario;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Column
@@ -102,6 +104,7 @@ public class Venta implements Serializable {
 			lista.add(iv.getDTO());
 		}
 		dto.setItems(lista);
+		dto.setUsuario(usuario.getDTO());
 		return dto;
 	}
 

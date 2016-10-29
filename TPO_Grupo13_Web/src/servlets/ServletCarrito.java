@@ -53,7 +53,7 @@ public class ServletCarrito extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JsonObject jObj = ParserJson.parsearJsonObject(request.getParameter("carrito"));
+		JsonObject jObj = ParserJson.parsearJsonObject(request);
 		JsonArray itemsBS = jObj.getAsJsonArray("items");
 
 		List<ItemCarritoDTO> items = new ArrayList<>();

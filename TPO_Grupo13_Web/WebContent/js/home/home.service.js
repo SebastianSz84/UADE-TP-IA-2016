@@ -4,24 +4,24 @@
 angular.module('integracion')
     .service('HomeService', function ($http, $q, $state, $localStorage, LoginService) {
 
-        var carritoData = $localStorage.getObject('carrito') || {
-                "idUsuario": LoginService.getUser().id,
-                "items": []
-            };
+        var carritoData = {
+            "idUsuario": LoginService.getUser().id,
+            "items": []
+        };
 
         function cargarCarrito() {
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletGetCarrito',
-                    'params': {
-                        'user': LoginService.getUserId()
+                    'data': {
+                        'userId': LoginService.getUserId()
                     }
                 })
                     .success(function (data) {
                         if (angular.isObject(data)) {
-                            carritoData = data;
-                            $localStorage.setObject('user', carritoData);
+                            carritoData.length = 0;
+                            angular.copy(data.items, carritoData.items);
                             resolve();
                         }
                         else if (angular.isString(data)) {
@@ -29,8 +29,8 @@ angular.module('integracion')
                         }
                     })
                     .error(function (data, status) {
-                        console.log(data);
-                        console.log(status);
+                        //console.log(data);
+                        //console.log(status);
                     });
             });
         }
@@ -59,7 +59,7 @@ angular.module('integracion')
                     });
             });
         }
-        
+
         function getVentas() {
             return $q(function (resolve, reject) {
                 $http({
@@ -67,7 +67,7 @@ angular.module('integracion')
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta'
                 })
                     .success(function (data) {
-                        
+
                     })
                     .error(function (data, status) {
                         reject(data);
@@ -80,9 +80,7 @@ angular.module('integracion')
                 $http({
                     'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
-                    'params': {
-                        'carrito': carritoData
-                    }
+                    'data': carritoData
                 })
                     .success(function (data) {
                         resolve(data);
@@ -98,9 +96,7 @@ angular.module('integracion')
                 $http({
                     'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
-                    'params': {
-                        'carrito': carritoData
-                    }
+                    'data': carritoData
                 })
                     .success(function (data) {
                         resolve(data);

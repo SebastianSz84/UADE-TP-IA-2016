@@ -9,7 +9,7 @@ angular.module('integracion')
         $scope.dangerMessage = "";
         $scope.productoDetalle = null;
 
-        $scope.title = "Bienvenido, " + LoginService.getUser().nombre + "!";
+        $scope.title = "Bienvenido, " + LoginService.getUserName() + "!";
 
         $scope.carrito = HomeService.getCarrito();
 
@@ -19,7 +19,7 @@ angular.module('integracion')
                 $scope.products = products;
             })
             .catch(function (data) {
-                console.log(data);
+                //console.log(data);
             });
 
         $scope.sortBy = function (propertyName) {

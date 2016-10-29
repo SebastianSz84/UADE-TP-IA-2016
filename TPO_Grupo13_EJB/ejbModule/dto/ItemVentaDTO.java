@@ -2,6 +2,8 @@ package dto;
 
 import java.io.Serializable;
 
+import integracion.dto.ItemVentaLMDTO;
+
 public class ItemVentaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -54,5 +56,17 @@ public class ItemVentaDTO implements Serializable {
 
 	public String toString() {
 		return this.getProducto().getNombre() + " x " + this.getCantidad();
+	}
+
+	public ItemVentaLMDTO convertirLMDTO() {
+		ItemVentaLMDTO itLM = new ItemVentaLMDTO();
+
+		itLM.setCantidad(cantidad);
+		itLM.setDescripcion(producto.getDescripcion());
+		itLM.setIdProducto(producto.getCodigo());
+		itLM.setMarca(producto.getMarca());
+		itLM.setPrecio(producto.getPrecio());
+
+		return itLM;
 	}
 }
