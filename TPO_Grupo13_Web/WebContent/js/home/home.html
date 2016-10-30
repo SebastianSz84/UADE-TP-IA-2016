@@ -79,6 +79,9 @@
             <button type="button" class="btn btn-warning" ng-click="getAll()">
                 Ver todos los productos
             </button>
+            <button type="button" class="btn btn-warning" ng-click="showFilters()">
+                {{ filters.show ? 'Ocultar' : 'Ver'}} Filtros
+            </button>
         </div>
     </div>
 
@@ -97,6 +100,26 @@
     </div>
 
     <br>
+
+    <div class="table-responsive" ng-show="filters.show">
+        <table>
+            <tr>
+                <td>
+                    <span>Precio</span>
+                    <span>Min</span><input type="number" min="0" ng-model="filters.price.min"/>
+                    <span>Max</span><input type="number" min="1" ng-model="filters.price.max"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Fecha</span>
+                    <span>Desde</span><input type="date" ng-model="filters.date.from"/>
+                    <span>Hasta</span><input type="date" ng-model="filters.date.to"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -125,7 +148,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | filter: searchProduct">
+            <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | productsFilter:searchProduct">
                 <td style="cursor: pointer;" ng-click="openDetail(item)">{{item.nombre}}</td>
                 <td>{{item.descripcion}}</td>
                 <td>{{item.marca}}</td>

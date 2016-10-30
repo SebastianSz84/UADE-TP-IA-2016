@@ -9,6 +9,18 @@ angular.module('integracion')
             "items": []
         };
 
+        var filters = {
+            show: true,
+            price: {
+                min: 0,
+                max: null
+            },
+            date: {
+                from: null,
+                to: null
+            }
+        };
+
         function cargarCarrito() {
             return $q(function (resolve, reject) {
                 $http({
@@ -67,7 +79,7 @@ angular.module('integracion')
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta'
                 })
                     .success(function (data) {
-                    	resolve(data);
+                        resolve(data);
                     })
                     .error(function (data, status) {
                         reject(data);
@@ -108,11 +120,16 @@ angular.module('integracion')
             });
         }
 
+        function getFilters() {
+            return filters;
+        }
+
         return {
             getCarrito: getCarrito,
             getProducts: getProducts,
             getVentas: getVentas,
             sendCarrito: sendCarrito,
-            confirmCarrito: confirmCarrito
+            confirmCarrito: confirmCarrito,
+            getFilters: getFilters
         }
     });
