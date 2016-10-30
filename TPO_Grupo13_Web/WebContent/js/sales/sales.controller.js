@@ -2,7 +2,8 @@ angular.module('integracion')
     .controller('SalesCtrl', function ($scope, $http, $timeout, $filter, $state, HomeService) {
     	
     	$scope.ventas = [];
-    	$scope.title = "Ventas";
+    	loadSales();
+    	
     	HomeService.getVentas()
     	.then(function (ventas) {
     		if(ventas.length > 0)
@@ -19,6 +20,25 @@ angular.module('integracion')
             $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
             $scope.propertyName = propertyName;
         };
-
+        
+        $scope.openDetail = function(item){
+        	$scope.isSaleView = false;
+        	$scope.details = item.items;
+        	$scope.title = "Detalle compra";
+        };
+        
+        $scope.backToSales = function(){
+        	loadSales();
+        }
+        
+        $scope.backHome = function(){
+        	$state.go('home');
+        } 
+        
+        function loadSales(){
+        	$scope.isSaleView = true;
+        	$scope.details = [] ;
+        	$scope.title = "Compras";
+        }
     	
     });

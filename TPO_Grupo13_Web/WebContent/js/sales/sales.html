@@ -2,7 +2,20 @@
 <div class="container">
 
   <h2> {{ title }}</h2>
-  <div ng-show="ventas.length>0" class="table-responsive">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-lg-6">
+  	  	<button type="button" class="btn btn-primary"  ng-if="!isSaleView" ng-click="backToSales()">
+  			Volver a ventas
+        </button>
+       <button type="button" class="btn btn-primary"  ng-if="isSaleView" ng-click="backHome()">
+  			Volver a Home
+        </button>
+  </div>
+  </div>
+ 	<div ng-show="ventas.length===0" class="alert alert-danger">
+  	{{message}}
+  </div>  
+  <div ng-show="ventas.length>0 && isSaleView" class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -16,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="(key, item) in ventas| orderBy:propertyName:reverse"  data-toggle="collapse" data-target="#demo">
+      <tr ng-repeat="(key, item) in ventas| orderBy:propertyName:reverse">
         <td style="cursor: pointer;"  ng-click="openDetail(item)">{{item.id}}</td>
         <td>{{item.fecha}}</td>
         <td>{{item.estado}}</td>
@@ -24,8 +37,24 @@
     </tbody>
   </table>
   </div>
-  <div ng-show="ventas.length===0" class="alert alert-danger">
-  	{{message}}
+  
+    <div ng-show="ventas.length>0 && !isSaleView" class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(key, item) in details">
+        <td style="cursor: pointer;"  ng-click="openDetailProd(item)">{{item.producto.nombre}}</td>
+        <td>{{item.cantidad}}</td>
+        <td>{{item.precio}}</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
 
 </div>
