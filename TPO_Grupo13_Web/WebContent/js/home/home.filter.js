@@ -13,7 +13,6 @@ angular.module('integracion')
 
         return function (items, search, filter) {
             var filtered = [];
-            console.log(filters);
 
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
