@@ -28,7 +28,7 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
-            if (scope.quantity === 0) {
+            if (!scope.quantity) {
                 errorMessage("Debe seleccionar cantidad");
                 return;
             }
