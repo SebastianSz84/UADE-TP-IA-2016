@@ -1,0 +1,31 @@
+
+<div class="container">
+
+  <h2> {{ title }}</h2>
+  <div ng-show="ventas.length>0" class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>
+        	<span style="cursor: pointer;"  ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
+        	Fecha</th>
+        <th>
+        	<span style="cursor: pointer;"  ng-click="sortBy('estado')" class="glyphicon glyphicon-sort"></span>
+        	Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(key, item) in ventas| orderBy:propertyName:reverse"  data-toggle="collapse" data-target="#demo">
+        <td style="cursor: pointer;"  ng-click="openDetail(item)">{{item.id}}</td>
+        <td>{{item.fecha}}</td>
+        <td>{{item.estado}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div ng-show="ventas.length===0" class="alert alert-danger">
+  	{{message}}
+  </div>
+
+</div>

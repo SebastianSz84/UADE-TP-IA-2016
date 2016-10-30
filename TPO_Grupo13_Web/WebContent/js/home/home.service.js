@@ -67,7 +67,7 @@ angular.module('integracion')
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta'
                 })
                     .success(function (data) {
-
+                    	resolve(data);
                     })
                     .error(function (data, status) {
                         reject(data);

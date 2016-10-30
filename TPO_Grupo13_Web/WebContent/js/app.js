@@ -15,6 +15,12 @@ angular.module('integracion', [
                 url: '/home',
                 templateUrl: 'js/home/home.html',
                 controller: 'HomeCtrl'
-            });
+            })
+            .state('sales', {
+            	url: '/sales',
+            	templateUrl: 'js/sales/sales.html',
+            	controller: 'SalesCtrl'
+            })
+            ;
         $urlRouterProvider.otherwise('/login');
     });

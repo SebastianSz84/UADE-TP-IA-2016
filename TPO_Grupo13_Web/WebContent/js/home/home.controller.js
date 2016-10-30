@@ -2,7 +2,7 @@
  * Created by gusta on
  */
 angular.module('integracion')
-    .controller('HomeCtrl', function ($scope, $http, $timeout, $filter, LoginService, HomeService) {
+    .controller('HomeCtrl', function ($scope, $http, $timeout, $filter, $state, LoginService, HomeService) {
 
         $scope.successMessage = "";
         $scope.infoMessage = "";
@@ -127,6 +127,10 @@ angular.module('integracion')
             $timeout(function () {
                 $scope.successMessage = "";
             }, 3000);
+        }
+        
+        $scope.goSales = function(){
+        	$state.go('sales');
         }
 
     });
