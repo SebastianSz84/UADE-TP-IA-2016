@@ -18,8 +18,10 @@ public class VentaDAOBean extends BaseDAOBean implements VentaDAO {
 		return getEntity(Venta.class, idVenta);
 	}
 
-	public List<Venta> listVentas() {
-		return getAll(Venta.class, "Venta");
+	@SuppressWarnings("unchecked")
+	public List<Venta> listVentas(int idUsuario) {
+		return getEntityManager().createQuery("FROM Venta V WHERE V.idUsuario =:idUsuario")
+				.setParameter("idUsuario", idUsuario).getResultList();
 	}
 
 }

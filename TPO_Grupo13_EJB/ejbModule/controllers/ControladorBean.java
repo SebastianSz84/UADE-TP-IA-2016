@@ -1,12 +1,15 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
+
+import com.google.gson.Gson;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CarritoDAO;
@@ -26,6 +29,7 @@ import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
 import entities.Venta;
+import integracion.dto.NotificacionLMDTO;
 import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
@@ -49,6 +53,8 @@ public class ControladorBean implements Controlador {
 	private AdminNotificaciones admNotif;
 	@EJB
 	private CarritoDAO carritoDAOBean;
+
+	private static String modulo = "Portal Web - Grupo 13";
 
 	private List<Usuario> usuarios;
 
@@ -170,7 +176,7 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO) {
+	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO, String accion) {
 		try {
 			Carrito carrito = carritoDAOBean.get(carritoDTO.getIdUsuario());
 			Boolean isNew = false;
@@ -188,14 +194,20 @@ public class ControladorBean implements Controlador {
 			else
 				carritoDAOBean.updateEntity(carrito);
 
+			NotificacionLMDTO n = new NotificacionLMDTO();
+			if (accion.equals("add")) {
+				n.setDescripcion("Se agrego un producto al carrito");
+			} else {
+				n.setDescripcion("Se quito un producto del carrito");
+			}
+			n.setModulo(modulo);
+			n.setFecha(Calendar.getInstance().getTime().toString());
+			admNotif.enviarNotificacion(new Gson().toJson(n));
+
 			return new ResultadoOperacionDTO(true, "Carrito guardado");
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
 		}
-	}
-
-	public void modificarCarrito(CarritoDTO c) {
-		admNotif.enviarNotificacion("Carrito modificado: " + c.toString());
 	}
 
 	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c) {
@@ -305,10 +317,10 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas() {
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario) {
 		try {
 			List<VentaDTO> lista = new ArrayList<VentaDTO>();
-			for (Venta v : ventaDAOBean.listVentas()) {
+			for (Venta v : ventaDAOBean.listVentas(idUsuario)) {
 				lista.add(v.getDTO());
 			}
 			return new ResultadoOperacionListadoVentasDTO(true, "Exito", lista);

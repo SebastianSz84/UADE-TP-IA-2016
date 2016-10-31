@@ -65,8 +65,8 @@ public class BusinessDelegate {
 		return controlador.loginUsuario(userName, password);
 	}
 
-	public ResultadoOperacionDTO saveCarrito(CarritoDTO carrito) {
-		return controlador.crearCarrito(carrito);
+	public ResultadoOperacionDTO saveCarrito(CarritoDTO carrito, String accion) {
+		return controlador.crearCarrito(carrito, accion);
 	}
 
 	public ResultadoOperacionVentaDTO confirmCarrito(CarritoDTO carrito) {
@@ -77,7 +77,7 @@ public class BusinessDelegate {
 		return controlador.getCarrito(carritoId);
 	}
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas() {
-		return controlador.listadoVentas();
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario) {
+		return controlador.listadoVentas(idUsuario);
 	}
 }

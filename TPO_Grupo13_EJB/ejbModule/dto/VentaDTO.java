@@ -70,9 +70,8 @@ public class VentaDTO implements Serializable {
 
 		v.setFechaHoraVenta(fecha);
 		v.setId(id);
-		// TODO
-		v.setLatitud("QUE VA ACA???");
-		v.setLongitud("Y ACA???");
+		v.setLatitud(getUsuario().getCoordenadasX());
+		v.setLongitud(getUsuario().getCoordenadasY());
 
 		double monto = 0;
 		List<ItemVentaLMDTO> lista = new ArrayList<>();

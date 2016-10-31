@@ -8,6 +8,7 @@ angular.module('integracion')
         $scope.infoMessage = "";
         $scope.dangerMessage = "";
         $scope.productoDetalle = null;
+        $scope.filters = HomeService.getFilters();
 
         $scope.title = "Bienvenido, " + LoginService.getUserName() + "!";
 
@@ -28,7 +29,7 @@ angular.module('integracion')
         };
 
         $scope.add = function (scope) {
-            if (scope.quantity === 0) {
+            if (!scope.quantity) {
                 errorMessage("Debe seleccionar cantidad");
                 return;
             }
@@ -50,7 +51,7 @@ angular.module('integracion')
                 });
             }
             scope.quantity = null;
-            updateCarritoInServer();
+            updateCarritoInServer('add');
         };
 
         $scope.confirmCarrito = function () {
@@ -71,11 +72,11 @@ angular.module('integracion')
 
         $scope.removeItem = function (key) {
             $scope.carrito.items.splice(key, 1);
-            updateCarritoInServer();
+            updateCarritoInServer('delete');
         };
 
-        function updateCarritoInServer() {
-            HomeService.sendCarrito()
+        function updateCarritoInServer(accion) {
+            HomeService.sendCarrito(accion)
                 .then(function (data) {
                     sendMessage(data);
                 })
@@ -85,12 +86,12 @@ angular.module('integracion')
         }
 
         $scope.getBestSellers = function () {
-        	$scope.searchProduct = "";
+            $scope.searchProduct = "";
             $scope.products = $filter('filter')($scope.products, {ranking: ""});
         };
 
         $scope.getAll = function () {
-        	$scope.searchProduct = "";
+            $scope.searchProduct = "";
             HomeService.getProducts()
                 .then(function (products) {
                     $scope.products = products;
@@ -98,11 +99,14 @@ angular.module('integracion')
                 .catch(function (data) {
                     console.log(data);
                 });
+        };
 
+        $scope.showFilters = function () {
+            $scope.filters.show = !$scope.filters.show;
         };
 
         $scope.openDetail = function (item) {
-        	$scope.productoDetalle = item;
+            $scope.productoDetalle = item;
             $("#myModal").modal();
         };
 
@@ -128,9 +132,9 @@ angular.module('integracion')
                 $scope.successMessage = "";
             }, 3000);
         }
-        
-        $scope.goSales = function(){
-        	$state.go('sales');
+
+        $scope.goSales = function () {
+            $state.go('sales');
         }
 
     });

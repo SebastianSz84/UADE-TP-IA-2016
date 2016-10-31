@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ClienteLMDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String dni;
+	private int dni;
 	private String nombre;
 	private String apellido;
 
@@ -13,7 +13,7 @@ public class ClienteLMDTO implements Serializable {
 		super();
 	}
 
-	public ClienteLMDTO(String dni, String nombre, String apellido) {
+	public ClienteLMDTO(int dni, String nombre, String apellido) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -36,11 +36,11 @@ public class ClienteLMDTO implements Serializable {
 		this.apellido = apellido;
 	}
 
-	public String getDni() {
+	public int getDNI() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDNI(int dni) {
 		this.dni = dni;
 	}
 

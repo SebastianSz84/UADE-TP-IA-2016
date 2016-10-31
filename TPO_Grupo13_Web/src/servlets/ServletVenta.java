@@ -44,8 +44,10 @@ public class ServletVenta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ResultadoOperacionListadoVentasDTO res = BusinessDelegate.getInstancia().listadoVentas();
+
+		int idUsuario = 3; // TODO : Traer del web
+
+		ResultadoOperacionListadoVentasDTO res = BusinessDelegate.getInstancia().listadoVentas(idUsuario);
 		if (res.sosExitoso()) {
 			String listaGson = new Gson().toJson(res.getVentas());
 			PrintWriter out = response.getWriter();
@@ -66,7 +68,7 @@ public class ServletVenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		JsonObject jObj = ParserJson.parsearJsonObject(request);
 		JsonArray itemsBS = jObj.getAsJsonArray("items");
 

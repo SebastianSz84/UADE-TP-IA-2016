@@ -1,150 +1,172 @@
-
 <div class="container">
-   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content" >
-        <div class="modal-header" style="border-bottom: 0;">
-          <h4 ng-if="!productoDetalle" class="modal-title">Carrito</h4>
-          <h4 ng-if="productoDetalle" class="modal-title">Detalle Producto: {{productoDetalle.nombre}}</h4>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 0;">
+                    <h4 ng-if="!productoDetalle" class="modal-title">Carrito</h4>
+                    <h4 ng-if="productoDetalle" class="modal-title">Detalle Producto: {{productoDetalle.nombre}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" ng-if="carrito.items.length > 0 && !productoDetalle">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>SubTotal</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, item) in carrito.items">
+                                <td>{{item.producto.nombre}}</td>
+                                <td>{{item.cantidad}}</td>
+                                <td>${{item.producto.precio}}</td>
+                                <td>${{item.subTotal}}</td>
+                                <td><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="carrito.items.length == 0 && !productoDetalle">
+                        No tiene elementos en el carrito.
+                    </div>
+                    <div ng-if="productoDetalle">
+                        <img style="height:400px; width:500px" src="{{productoDetalle.foto}}">
+                        <div>
+                            {{productoDetalle.datosExtra}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-if="!productoDetalle" type="button" class="btn btn-default" data-dismiss="modal">Close
+                    </button>
+                    <button ng-if="carrito.items.length > 0 && !productoDetalle" type="button" class="btn btn-info" ng-click="confirmCarrito()">
+                        Confirmar Carrito
+                    </button>
+                    <button ng-if="productoDetalle" ng-click="close()">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <div class="table-responsive" ng-if="carrito.items.length > 0 && !productoDetalle">
-			  <table class="table">
-			    <thead>
-			      <tr>
-			        <th>Nombre</th>
-			        <th>Cantidad</th>
-			        <th>Precio</th>
-			        <th>SubTotal</th>
-			        <th></th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      <tr  ng-repeat="(key, item) in carrito.items" >
-			        <td>{{item.producto.nombre}}</td>
-			        <td>{{item.cantidad}}</td>
-			        <td>${{item.producto.precio}}</td>
-			        <td>${{item.subTotal}}</td>
-			        <td><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
-			      </tr>
-			    </tbody>
-			  </table>
-			</div>
-			<div ng-if="carrito.items.length == 0 && !productoDetalle" >
-				No tiene elementos en el carrito.
-			</div>
-			<div ng-if="productoDetalle">
-			<img style="height:400px; width:500px" src="{{productoDetalle.foto}}">
-			<div>
-				{{productoDetalle.datosExtra}}
-			</div>
-			</div>
-        </div>
-        <div class="modal-footer">
-          <button ng-if="!productoDetalle" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button ng-if="carrito.items.length > 0 && !productoDetalle" type="button" class="btn btn-info" ng-click="confirmCarrito()">
-	  		Confirmar Carrito
-	   	</button>
-	   	<button  ng-if="productoDetalle" ng-click="close()">Close</button>
-        </div>
-      </div>
-      
     </div>
-  </div>
+    <h2> {{ title }}</h2>
 
-  <h2> {{ title }}</h2>
-
-  
-  <div class="row">
-  <div class="col-xs-12 col-sm-6 col-lg-6">
-  <label>Search: <input ng-model="searchProduct"></label>
-
-  </div>
-  <div class="col-xs-12 col-sm-6 col-lg-6"> 
-  	  	<button type="button" class="btn btn-primary" ng-click="productoDetalle=null" data-target="#myModal" data-toggle="modal">
-  			Ver Carrito
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="goSales()">
-  			Ver mis compras
-        </button>
-          <button type="button" class="btn btn-danger" ng-click="logOut()">
-            Salir
-          </button>
-  </div>
-  </div>
-  
-  <div class="row">
-  <div class="col-xs-12 col-sm-6 col-lg-6">
-    <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
-  		Ver Best Sellers
-        </button>
-            <button type="button" class="btn btn-warning" ng-click="getAll()">
-  		Ver todos los productos
-        </button>
-  </div>
-  </div>
-  
-  
-<br>
-  <div ng-show="successMessage" class="alert alert-success">
-  <strong>Success!</strong> {{successMessage}}
-</div>
-
-<div ng-show="infoMessage" class="alert alert-info">
-  <strong>Info!</strong> {{infoMessage}}
-</div>
-
-<div ng-show="alertMessage" class="alert alert-danger">
-  <strong>Danger!</strong> {{alertMessage}}
-</div>
-  
-  <br>
-  <div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Marca</th>
-        <th>
-        	<span style="cursor: pointer;" ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
-        	Precio</th>
-        <th> 
-        	<span style="cursor: pointer;"  ng-click="sortBy('tipo')" class="glyphicon glyphicon-sort"></span>
-        	Tipo</th>
-        <th>
-        	<span style="cursor: pointer;"  ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
-        	Fecha</th>
-        <th>
-        	<span style="cursor: pointer;"  ng-click="sortBy('ranking')" class="glyphicon glyphicon-sort"></span>
-        	Ranking</th>
-        <th>Cantidad</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | filter: searchProduct" >
-        <td style="cursor: pointer;"  ng-click="openDetail(item)">{{item.nombre}}</td>
-        <td>{{item.descripcion}}</td>
-        <td>{{item.marca}}</td>
-        <td>${{item.precio}}</td>
-        <td>{{item.tipo}}</td>
-        <td>{{item.fechaAlta}}</td>
-        <td ng-if="item.ranking">{{item.ranking}}</td>
-        <td ng-if="!item.ranking">-</td>
-        <td><input style="width: 40px" type="number" min="1" ng-model="quantity"></input>
-        </td>
-        <td>
-            <button type="button" class="btn btn-success" ng-click="add(this)" ng-disable="!this.quantity">
-                Agregar
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+            <label>Search: <input ng-model="searchProduct"></label>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+            <button type="button" class="btn btn-primary" ng-click="productoDetalle=null" data-target="#myModal"
+                    data-toggle="modal">
+                Ver Carrito
             </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+            <button type="button" class="btn btn-primary" ng-click="goSales()">
+                Ver mis compras
+            </button>
+            <button type="button" class="btn btn-danger" ng-click="logOut()">
+                Salir
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+            <button type="button" class="btn btn-warning" ng-click="getBestSellers()">
+                Ver Best Sellers
+            </button>
+            <button type="button" class="btn btn-warning" ng-click="getAll()">
+                Ver todos los productos
+            </button>
+            <button type="button" class="btn btn-warning" ng-click="showFilters()">
+                {{ filters.show ? 'Ocultar' : 'Ver'}} Filtros
+            </button>
+        </div>
+    </div>
+
+
+    <br>
+    <div ng-show="successMessage" class="alert alert-success">
+        <strong>Success!</strong> {{successMessage}}
+    </div>
+
+    <div ng-show="infoMessage" class="alert alert-info">
+        <strong>Info!</strong> {{infoMessage}}
+    </div>
+
+    <div ng-show="alertMessage" class="alert alert-danger">
+        <strong>Danger!</strong> {{alertMessage}}
+    </div>
+
+    <br>
+
+    <div class="table-responsive" ng-show="filters.show">
+        <table>
+            <tr>
+                <td>
+                    <span>Precio</span>
+                    <span>Min</span><input type="number" min="0" ng-model="filters.price.min"/>
+                    <span>Max</span><input type="number" min="1" ng-model="filters.price.max"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Fecha</span>
+                    <span>Desde</span><input type="date" ng-model="filters.date.from"/>
+                    <span>Hasta</span><input type="date" ng-model="filters.date.to"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Marca</th>
+                <th>
+                    <span style="cursor: pointer;" ng-click="sortBy('precio')" class="glyphicon glyphicon-sort"></span>
+                    Precio
+                </th>
+                <th>
+                    <span style="cursor: pointer;" ng-click="sortBy('tipo')" class="glyphicon glyphicon-sort"></span>
+                    Tipo
+                </th>
+                <th>
+                    <span style="cursor: pointer;" ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort"></span>
+                    Fecha
+                </th>
+                <th>
+                    <span style="cursor: pointer;" ng-click="sortBy('ranking')" class="glyphicon glyphicon-sort"></span>
+                    Ranking
+                </th>
+                <th>Cantidad</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(key, item) in products| orderBy:propertyName:reverse | productsFilter:searchProduct">
+                <td style="cursor: pointer;" ng-click="openDetail(item)">{{item.nombre}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>{{item.marca}}</td>
+                <td>${{item.precio}}</td>
+                <td>{{item.tipo}}</td>
+                <td>{{item.fechaAlta}}</td>
+                <td ng-if="item.ranking">{{item.ranking}}</td>
+                <td ng-if="!item.ranking">-</td>
+                <td><input style="width: 40px" type="number" min="1" ng-model="quantity"></input>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" ng-click="add(this)" ng-disable="!this.quantity">
+                        Agregar
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 

@@ -22,9 +22,7 @@ public interface Controlador {
 
 	public ResultadoOperacionUsuarioDTO loginUsuario(String userName, String password);
 
-	public ResultadoOperacionDTO crearCarrito(CarritoDTO u);
-
-	public void modificarCarrito(CarritoDTO c);
+	public ResultadoOperacionDTO crearCarrito(CarritoDTO u, String accion);
 
 	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c);
 
@@ -38,5 +36,5 @@ public interface Controlador {
 
 	public ResultadoOperacionCarritoDTO getCarrito(int carritoId);
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas();
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario);
 }
