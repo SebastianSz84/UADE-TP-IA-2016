@@ -6,3 +6,17 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.product-list .header div{
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 10px !important;
+    font-weight: bold;
+}
+
+.product-list .header span{
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

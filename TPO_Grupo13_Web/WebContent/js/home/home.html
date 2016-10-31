@@ -120,6 +120,35 @@
         </table>
     </div>
 
+    <!--<div class="product-list">-->
+        <!--<div class="row header">-->
+            <!--<div class="col-sm-2 col-xs-12"><span>Nombre</span></div>-->
+            <!--<div class="col-sm-2 col-xs-12"><span>Descripcion</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span>Marca</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span style="cursor: pointer;" ng-click="sortBy('precio')" class="glyphicon glyphicon-sort">Precio</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span style="cursor: pointer;" ng-click="sortBy('tipo')" class="glyphicon glyphicon-sort">Tipo</span></div>-->
+            <!--<div class="col-sm-2 col-xs-12"><span style="cursor: pointer;" ng-click="sortBy('fecha')" class="glyphicon glyphicon-sort">Fecha</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span style="cursor: pointer;" ng-click="sortBy('ranking')" class="glyphicon glyphicon-sort">Ranking</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span>Cantidad</span></div>-->
+            <!--<div class="col-sm-1 col-xs-12"><span></span></div>-->
+        <!--</div>-->
+        <!--<div class="row product" ng-repeat="(key, item) in products| orderBy:propertyName:reverse | productsFilter:searchProduct">-->
+            <!--<div class="col-sm-2 col-xs-12" ng-click="openDetail(item)">{{item.nombre}}</div>-->
+            <!--<div class="col-sm-2 col-xs-12">{{item.descripcion}}</div>-->
+            <!--<div class="col-sm-1 col-xs-12">{{item.marca}}</div>-->
+            <!--<div class="col-sm-1 col-xs-12">${{item.precio}}</div>-->
+            <!--<div class="col-sm-1 col-xs-12">{{item.tipo}}</div>-->
+            <!--<div class="col-sm-2 col-xs-12">{{item.fechaAlta}}</div>-->
+            <!--<div class="col-sm-1 col-xs-12">{{item.ranking ? item.ranking : '-'}}</div>-->
+            <!--<div class="col-sm-1 col-xs-12"><input style="width: 40px" type="number" min="1" ng-model="quantity"/></div>-->
+            <!--<div class="col-sm-1 col-xs-12">-->
+                <!--<button type="button" class="btn btn-success" ng-click="add(this)" ng-disable="!this.quantity">-->
+                    <!--Agregar-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
     <div class="table-responsive">
         <table class="table">
             <thead>
