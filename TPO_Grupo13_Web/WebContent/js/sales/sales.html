@@ -56,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="(key, item) in ventas| orderBy:propertyName:reverse">
+      <tr ng-repeat="(key, item) in ventas | orderBy:propertyName:reverse">
         <td style="cursor: pointer;"  ng-click="openDetail(item)" >{{item.id}}</td>
         <td>{{item.fecha}}</td>
         <td>{{item.estado}}</td>

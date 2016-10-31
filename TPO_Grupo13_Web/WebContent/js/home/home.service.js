@@ -76,7 +76,10 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'get',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta'
+                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
+                    'data': {
+                        'idUsuario': LoginService.getUserId()
+                    }
                 })
                     .success(function (data) {
                         resolve(data);
