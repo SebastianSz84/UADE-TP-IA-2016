@@ -1,9 +1,11 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -201,7 +203,17 @@ public class ControladorBean implements Controlador {
 				n.setDescripcion("Se quito un producto del carrito");
 			}
 			n.setModulo(modulo);
-			n.setFecha(Calendar.getInstance().getTime().toString());
+			TimeZone tz = TimeZone.getTimeZone("UTC");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted
+																			// "Z"
+																			// to
+																			// indicate
+																			// UTC,
+																			// no
+																			// timezone
+																			// offset
+			df.setTimeZone(tz);
+			n.setFecha(df.format(new Date()));
 			admNotif.enviarNotificacion(new Gson().toJson(n));
 
 			return new ResultadoOperacionDTO(true, "Carrito guardado");
