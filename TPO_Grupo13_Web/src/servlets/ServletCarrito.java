@@ -54,7 +54,9 @@ public class ServletCarrito extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JsonObject jObj = ParserJson.parsearJsonObject(request);
-		JsonArray itemsBS = jObj.getAsJsonArray("items");
+		JsonObject carrito = jObj.getAsJsonObject("carrito");
+
+		JsonArray itemsBS = carrito.getAsJsonArray("items");
 
 		List<ItemCarritoDTO> items = new ArrayList<>();
 		for (int i = 0; i < itemsBS.size(); i++) {
@@ -77,9 +79,9 @@ public class ServletCarrito extends HttpServlet {
 			items.add(item);
 		}
 		CarritoDTO dtoC = new CarritoDTO();
-		dtoC.setIdUsuario(jObj.get("idUsuario").getAsInt());
+		dtoC.setIdUsuario(carrito.get("idUsuario").getAsInt());
 		dtoC.setItems(items);
-		ResultadoOperacionDTO res = BusinessDelegate.getInstancia().saveCarrito(dtoC);
+		ResultadoOperacionDTO res = BusinessDelegate.getInstancia().saveCarrito(dtoC, jObj.get("accion").getAsString());
 		PrintWriter out = response.getWriter();
 		response.setCharacterEncoding("utf8");
 		response.setContentType("application/text");
