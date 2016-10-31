@@ -15,7 +15,6 @@ angular.module('integracion')
             //console.log(data);
         });
     	
-    	
         $scope.sortBy = function (propertyName) {
             $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
             $scope.propertyName = propertyName;
@@ -35,10 +34,19 @@ angular.module('integracion')
         	$state.go('home');
         } 
         
+        $scope.openDetailProd  = function(item){
+        	$scope.producto = item.producto;
+        }
+        
         function loadSales(){
         	$scope.isSaleView = true;
         	$scope.details = [] ;
+        	$scope.producto = {};
         	$scope.title = "Compras";
         }
     	
+        $scope.close = function () {
+            $scope.producto = {};
+            $("#myModal").modal("hide");
+        };
     });
