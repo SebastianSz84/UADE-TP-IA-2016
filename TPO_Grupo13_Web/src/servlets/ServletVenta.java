@@ -45,7 +45,7 @@ public class ServletVenta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idUsuario = 3; // TODO : Traer del web
+		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 
 		ResultadoOperacionListadoVentasDTO res = BusinessDelegate.getInstancia().listadoVentas(idUsuario);
 		if (res.sosExitoso()) {

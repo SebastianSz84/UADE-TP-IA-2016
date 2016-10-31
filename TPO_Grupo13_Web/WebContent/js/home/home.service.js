@@ -26,7 +26,7 @@ angular.module('integracion')
                 $http({
                     'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletGetCarrito',
-                    'data': {
+                    'params': {
                         'userId': LoginService.getUserId()
                     }
                 })
