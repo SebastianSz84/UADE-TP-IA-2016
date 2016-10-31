@@ -70,7 +70,7 @@ public class VentaDTO implements Serializable {
 
 		v.setFechaHoraVenta(fecha);
 		v.setId(id);
-		// TODO
+		// TODO : Supongo que del cliente, pero hay que preguntar
 		v.setLatitud("QUE VA ACA???");
 		v.setLongitud("Y ACA???");
 

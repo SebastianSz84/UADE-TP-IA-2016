@@ -42,6 +42,8 @@ public class Usuario implements Serializable {
 	private String coordenadasX;
 	@Column
 	private String coordenadasY;
+	@Column(unique = true)
+	private int dni;
 
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Carrito carrito;
@@ -52,7 +54,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(String nombre, String apellido, String userName, String password, String coordenadasX,
-			String coordenadasY) {
+			String coordenadasY, int dni) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -60,6 +62,7 @@ public class Usuario implements Serializable {
 		this.password = password;
 		this.coordenadasX = coordenadasX;
 		this.coordenadasY = coordenadasY;
+		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -153,10 +156,20 @@ public class Usuario implements Serializable {
 		dto.setVentas(lista);
 		dto.setCoordenadasX(coordenadasX);
 		dto.setCoordenadasY(coordenadasY);
+		dto.setDNI(dni);
 		return dto;
 	}
 
 	public boolean tenesPassword(String password) {
 		return this.password.equals(password);
 	}
+
+	public Integer getDNI() {
+		return dni;
+	}
+
+	public void setDNI(Integer dni) {
+		this.dni = dni;
+	}
+
 }

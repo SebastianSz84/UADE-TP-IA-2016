@@ -14,7 +14,7 @@ public class UsuarioDTO implements Serializable {
 	private String apellido;
 	private String userName;
 	private String password;
-	private String dni;
+	private int dni;
 	private List<VentaDTO> ventas;
 	private CarritoDTO carrito;
 	private String coordenadasX;
@@ -65,11 +65,11 @@ public class UsuarioDTO implements Serializable {
 		this.password = password;
 	}
 
-	public String getDni() {
+	public int getDNI() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDNI(int dni) {
 		this.dni = dni;
 	}
 
@@ -128,7 +128,7 @@ public class UsuarioDTO implements Serializable {
 	public ClienteLMDTO convertirLMDTO() {
 		ClienteLMDTO c = new ClienteLMDTO();
 		c.setApellido(apellido);
-		c.setDni(dni);
+		c.setDNI(dni);
 		c.setNombre(nombre);
 		return c;
 	}
