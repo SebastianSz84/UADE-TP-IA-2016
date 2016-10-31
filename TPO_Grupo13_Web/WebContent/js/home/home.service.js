@@ -87,12 +87,15 @@ angular.module('integracion')
             });
         }
 
-        function sendCarrito() {
+        function sendCarrito(accion) {
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
                     'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
-                    'data': carritoData
+                    'data': {
+                        'accion': accion,
+                        'carrito': carritoData
+                    }
                 })
                     .success(function (data) {
                         resolve(data);

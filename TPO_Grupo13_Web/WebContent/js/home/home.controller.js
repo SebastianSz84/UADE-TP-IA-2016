@@ -51,7 +51,7 @@ angular.module('integracion')
                 });
             }
             scope.quantity = null;
-            updateCarritoInServer();
+            updateCarritoInServer('add');
         };
 
         $scope.confirmCarrito = function () {
@@ -72,11 +72,11 @@ angular.module('integracion')
 
         $scope.removeItem = function (key) {
             $scope.carrito.items.splice(key, 1);
-            updateCarritoInServer();
+            updateCarritoInServer('delete');
         };
 
-        function updateCarritoInServer() {
-            HomeService.sendCarrito()
+        function updateCarritoInServer(accion) {
+            HomeService.sendCarrito(accion)
                 .then(function (data) {
                     sendMessage(data);
                 })
