@@ -12,6 +12,7 @@ public class ItemVentaLMDTO implements Serializable {
 	private String marca;
 	private double precio;
 	private Integer cantidad;
+	private String idDeposito;
 
 	public Integer getIdProducto() {
 		return idProducto;
@@ -55,6 +56,14 @@ public class ItemVentaLMDTO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getIdDeposito() {
+		return idDeposito;
+	}
+
+	public void setIdDeposito(String idDeposito) {
+		this.idDeposito = idDeposito;
 	}
 
 }
