@@ -3,11 +3,14 @@ angular.module('integracion')
     	
     	$scope.ventas = [];
     	loadSales();
+    	$scope.message = "";
     	
     	HomeService.getVentas()
     	.then(function (ventas) {
-    		if(ventas.length > 0)
+    		if(ventas.length > 0) {
     			$scope.ventas = ventas;
+    			$scope.message = "";
+    		}
     		else
     			$scope.message = "Usted no posee ninguna venta aun";
         })

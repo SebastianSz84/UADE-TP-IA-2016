@@ -20,7 +20,7 @@ public class VentaDAOBean extends BaseDAOBean implements VentaDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Venta> listVentas(int idUsuario) {
-		return getEntityManager().createQuery("FROM Venta V WHERE V.idUsuario =:idUsuario")
+		return getEntityManager().createQuery("FROM Venta V WHERE V.usuario.id =:idUsuario")
 				.setParameter("idUsuario", idUsuario).getResultList();
 	}
 
