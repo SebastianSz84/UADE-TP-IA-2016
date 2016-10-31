@@ -5,7 +5,6 @@ angular.module('integracion')
     .service('LoginService', function ($http, $q, $state, $localStorage) {
 
         var userData = $localStorage.getObject('user') || {};
-        console.log(userData);
 
         function login(username, password) {
             return $q(function (resolve, reject) {
