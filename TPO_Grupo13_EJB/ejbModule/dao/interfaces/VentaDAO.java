@@ -10,5 +10,5 @@ import entities.Venta;
 public interface VentaDAO extends BaseDAO {
 	public Venta get(int idVenta);
 
-	public List<Venta> listVentas();
+	public List<Venta> listVentas(int idUsuario);
 }

@@ -305,10 +305,10 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas() {
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario) {
 		try {
 			List<VentaDTO> lista = new ArrayList<VentaDTO>();
-			for (Venta v : ventaDAOBean.listVentas()) {
+			for (Venta v : ventaDAOBean.listVentas(idUsuario)) {
 				lista.add(v.getDTO());
 			}
 			return new ResultadoOperacionListadoVentasDTO(true, "Exito", lista);

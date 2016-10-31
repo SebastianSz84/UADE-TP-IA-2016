@@ -38,5 +38,5 @@ public interface Controlador {
 
 	public ResultadoOperacionCarritoDTO getCarrito(int carritoId);
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas();
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario);
 }

@@ -77,7 +77,7 @@ public class BusinessDelegate {
 		return controlador.getCarrito(carritoId);
 	}
 
-	public ResultadoOperacionListadoVentasDTO listadoVentas() {
-		return controlador.listadoVentas();
+	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario) {
+		return controlador.listadoVentas(idUsuario);
 	}
 }
