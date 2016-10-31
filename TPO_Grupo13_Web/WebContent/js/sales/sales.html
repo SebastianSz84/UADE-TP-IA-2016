@@ -1,6 +1,33 @@
 
 <div class="container">
 
+   <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header" style="border-bottom: 0;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Producto: {{producto.nombre}}</h4>
+        </div>
+        <div class="modal-body">
+			<div>
+				<img style="height:400px; width:500px" src="{{producto.foto}}">
+			</div>
+			<ul>
+			  <li ng-show="producto.marca">Marca: {{producto.marca}}</li>
+			  <li ng-show="producto.descripcion" >Descripcion: {{producto.descripcion}}</li>
+			  <li ng-show="producto.origen">Origen: {{producto.origen}}</li>
+			  <li ng-show="producto.datosExtra">Datos extra: {{producto.datosExtra}}</li>
+			</ul>
+			</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
   <h2> {{ title }}</h2>
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-lg-6">
@@ -30,7 +57,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="(key, item) in ventas| orderBy:propertyName:reverse">
-        <td style="cursor: pointer;"  ng-click="openDetail(item)">{{item.id}}</td>
+        <td style="cursor: pointer;"  ng-click="openDetail(item)" >{{item.id}}</td>
         <td>{{item.fecha}}</td>
         <td>{{item.estado}}</td>
       </tr>
@@ -49,7 +76,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="(key, item) in details">
-        <td style="cursor: pointer;"  ng-click="openDetailProd(item)">{{item.producto.nombre}}</td>
+        <td style="cursor: pointer;"  ng-click="openDetailProd(item)" data-target="#myModal" data-toggle="modal">{{item.producto.nombre}}</td>
         <td>{{item.cantidad}}</td>
         <td>{{item.precio}}</td>
       </tr>
