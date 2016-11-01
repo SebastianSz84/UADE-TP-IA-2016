@@ -76,9 +76,9 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			env.put(Context.SECURITY_PRINCIPAL, "grupo13");
-			env.put(Context.SECURITY_CREDENTIALS, "grupo13");
+			env.put(Context.PROVIDER_URL, "http-remoting://192.168.0.12:8080");
+			env.put(Context.SECURITY_PRINCIPAL, "guest");
+			env.put(Context.SECURITY_CREDENTIALS, "guest");
 			namingContext = new InitialContext(env);
 
 			ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(CONNECTION_FACTORY);
@@ -89,7 +89,7 @@ public class ServicesTests {
 
 			// ACT
 			// Create the JMS context
-			context = connectionFactory.createContext("grupo13", "grupo13");
+			context = connectionFactory.createContext("guest", "guest");
 			context.createProducer().send(destination, MESSAGE);
 
 			// ASSERT
@@ -130,9 +130,9 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			env.put(Context.SECURITY_PRINCIPAL, "grupo2");
-			env.put(Context.SECURITY_CREDENTIALS, "grupo2");
+			env.put(Context.PROVIDER_URL, "http-remoting://sebalaptop:8080");
+			env.put(Context.SECURITY_PRINCIPAL, "guest");
+			env.put(Context.SECURITY_CREDENTIALS, "guest");
 			namingContext = new InitialContext(env);
 
 			ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(CONNECTION_FACTORY);

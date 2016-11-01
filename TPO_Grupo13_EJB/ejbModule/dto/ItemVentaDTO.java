@@ -66,6 +66,7 @@ public class ItemVentaDTO implements Serializable {
 		itLM.setIdProducto(producto.getCodigo());
 		itLM.setMarca(producto.getMarca());
 		itLM.setPrecio(producto.getPrecio());
+		itLM.setIdDeposito(producto.getIdDeposito());
 
 		return itLM;
 	}
