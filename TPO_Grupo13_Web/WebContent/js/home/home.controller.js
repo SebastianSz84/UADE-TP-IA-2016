@@ -10,6 +10,11 @@ angular.module('integracion')
         $scope.productoDetalle = null;
         $scope.filters = HomeService.getFilters();
 
+        $scope.sorting = {
+            'sortBy': 'precio',
+            'reverse': false
+        };
+
         $scope.title = "Bienvenido, " + LoginService.getUserName() + "!";
 
         $scope.carrito = HomeService.getCarrito();
@@ -18,40 +23,28 @@ angular.module('integracion')
         HomeService.getProducts()
             .then(function (products) {
                 $scope.products = products;
+                sortProducts();
             })
             .catch(function (data) {
                 //console.log(data);
             });
 
+        function sortProducts() {
+            $scope.sortedProducts = $filter('orderBy')($scope.products, $scope.sorting.sortBy, $scope.sorting.reverse);
+        }
+
+        $scope.$watch('sorting.sortBy', function () {
+            $scope.sorting.reverse = false;
+            sortProducts();
+        });
+
+        $scope.$watch('sorting.reverse', function () {
+            sortProducts();
+        });
+
         $scope.sortBy = function (propertyName) {
-            $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-        $scope.add = function (scope) {
-            if (!scope.quantity) {
-                errorMessage("Debe seleccionar cantidad");
-                return;
-            }
-
-            var exists = false;
-            angular.forEach($scope.carrito.items, function (item, key) {
-                if (angular.equals(item.producto, scope.item)) {
-                    item.cantidad = scope.quantity;
-                    item.subTotal = item.producto.precio * parseInt(scope.quantity);
-                    exists = true;
-                }
-            });
-            if (!exists) {
-                var subTotal = scope.item.precio * parseInt(scope.quantity);
-                $scope.carrito.items.push({
-                    "cantidad": scope.quantity,
-                    "producto": scope.item,
-                    "subTotal": subTotal
-                });
-            }
-            scope.quantity = null;
-            updateCarritoInServer('add');
+            $scope.sorting.reverse = ($scope.propertyName === propertyName) ? !$scope.sorting.reverse : false;
+            $scope.sorting.sortBy = propertyName;
         };
 
         $scope.confirmCarrito = function () {
@@ -135,6 +128,6 @@ angular.module('integracion')
 
         $scope.goSales = function () {
             $state.go('sales');
-        }
+        };
 
     });

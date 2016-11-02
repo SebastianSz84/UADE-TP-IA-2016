@@ -10,7 +10,7 @@ angular.module('integracion')
         };
 
         var filters = {
-            show: true,
+            show: false,
             price: {
                 min: 0,
                 max: null
@@ -126,6 +126,28 @@ angular.module('integracion')
             });
         }
 
+        function addToCarrito(product) {
+            console.log(product);
+            var exists = false;
+            angular.forEach(carritoData.items, function (item, key) {
+                if (angular.equals(item.producto, product)) {
+                    item.cantidad++;
+                    item.subTotal = item.producto.precio * parseInt(item.cantidad);
+                    exists = true;
+                }
+            });
+
+            if (!exists) {
+                var subTotal = product.precio * 1;
+                carritoData.items.push({
+                    "cantidad": 1,
+                    "producto": product,
+                    "subTotal": subTotal
+                });
+            }
+            sendCarrito('add');
+        }
+
         function getFilters() {
             return filters;
         }
@@ -134,6 +156,7 @@ angular.module('integracion')
             getCarrito: getCarrito,
             getProducts: getProducts,
             getVentas: getVentas,
+            addToCarrito: addToCarrito,
             sendCarrito: sendCarrito,
             confirmCarrito: confirmCarrito,
             getFilters: getFilters

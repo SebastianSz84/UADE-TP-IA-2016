@@ -7,16 +7,30 @@
     margin-bottom: 10px;
 }
 
-.product-list .header div{
-    vertical-align: bottom;
-    border-bottom: 2px solid #ddd;
-    padding: 10px 10px !important;
-    font-weight: bold;
+.product {
+    height: 340px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #CCC;
 }
 
-.product-list .header span{
-    font-weight: bold;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+.product .image-container {
+    height: 240px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.product .product-name{
+    height: 30px;
+    font-size: 18px;
+}
+
+.product .product-price {
+    height: 30px;
+    font-size: 20px;
+    color: darkslateblue;
+}
+
+.product .product-action {
+    height: 40px;
 }
