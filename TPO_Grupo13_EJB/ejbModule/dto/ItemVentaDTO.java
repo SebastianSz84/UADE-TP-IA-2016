@@ -2,6 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
+import integracion.dto.ArticuloLMDTO;
 import integracion.dto.ItemVentaLMDTO;
 
 public class ItemVentaDTO implements Serializable {
@@ -60,13 +61,16 @@ public class ItemVentaDTO implements Serializable {
 
 	public ItemVentaLMDTO convertirLMDTO() {
 		ItemVentaLMDTO itLM = new ItemVentaLMDTO();
+		ArticuloLMDTO artLM = new ArticuloLMDTO();
+
+		artLM.setDescripcion(producto.getDescripcion());
+		artLM.setIdProducto(producto.getCodigo());
+		artLM.setMarca(producto.getMarca());
+		artLM.setPrecio(producto.getPrecio());
+		artLM.setNombreDeposito(producto.getIdDeposito());
 
 		itLM.setCantidad(cantidad);
-		itLM.setDescripcion(producto.getDescripcion());
-		itLM.setIdProducto(producto.getCodigo());
-		itLM.setMarca(producto.getMarca());
-		itLM.setPrecio(producto.getPrecio());
-		itLM.setIdDeposito(producto.getIdDeposito());
+		itLM.setArticulo(artLM);
 
 		return itLM;
 	}

@@ -32,8 +32,6 @@ public interface Controlador {
 
 	public ResultadoOperacionDTO actualizarEstadoVenta(int numeroVenta, String estado);
 
-	public ResultadoOperacionDTO testNotificacionLogMon();
-
 	public ResultadoOperacionCarritoDTO getCarrito(int carritoId);
 
 	public ResultadoOperacionListadoVentasDTO listadoVentas(int idUsuario);

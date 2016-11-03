@@ -57,10 +57,6 @@ public class BusinessDelegate {
 		return controlador.actualizarEstadoVenta(numeroVenta, estado);
 	}
 
-	public ResultadoOperacionDTO testNotificacionLogMon() {
-		return controlador.testNotificacionLogMon();
-	}
-
 	public ResultadoOperacionUsuarioDTO login(String userName, String password) {
 		return controlador.loginUsuario(userName, password);
 	}

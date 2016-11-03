@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.BusinessDelegate;
 import helpers.ParserJson;
+import integracion.dto.NotificacionLMDTO;
 
 /**
  * Servlet implementation class TestNotificacionLogMon
@@ -43,6 +43,8 @@ public class TestNotificacionLogMon extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append(ParserJson.toString(BusinessDelegate.getInstancia().testNotificacionLogMon()));
+		NotificacionLMDTO notLM = new NotificacionLMDTO("Test notificacion");
+
+		response.getWriter().append(ParserJson.toString(notLM));
 	}
 }

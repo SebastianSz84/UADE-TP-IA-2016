@@ -7,44 +7,8 @@ public class ItemVentaLMDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer idProducto;
-	private String descripcion;
-	private String marca;
-	private double precio;
+	private ArticuloLMDTO articulo;
 	private Integer cantidad;
-	private String idDeposito;
-
-	public Integer getIdProducto() {
-		return idProducto;
-	}
-
-	public void setIdProducto(Integer idProducto) {
-		this.idProducto = idProducto;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double d) {
-		this.precio = d;
-	}
 
 	public Integer getCantidad() {
 		return cantidad;
@@ -58,12 +22,12 @@ public class ItemVentaLMDTO implements Serializable {
 		return serialVersionUID;
 	}
 
-	public String getIdDeposito() {
-		return idDeposito;
+	public ArticuloLMDTO getArticulo() {
+		return articulo;
 	}
 
-	public void setIdDeposito(String idDeposito) {
-		this.idDeposito = idDeposito;
+	public void setArticulo(ArticuloLMDTO articulo) {
+		this.articulo = articulo;
 	}
 
 }

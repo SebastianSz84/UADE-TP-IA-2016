@@ -1,7 +1,6 @@
 package integracion.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class VentaLMDTO implements Serializable {
@@ -9,9 +8,9 @@ public class VentaLMDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private ClienteLMDTO cliente;
-	private String latitud;
-	private String longitud;
-	private Date fechaHoraVenta; // Es un getdate default en la base de datos
+	private double latitud;
+	private double longitud;
+	private String fechaHoraVenta; // Es un getdate default en la base de datos
 	private double monto;
 	private String nombrePortal = "Portal Web Grupo 13";
 	private List<ItemVentaLMDTO> itemsVenta;
@@ -36,28 +35,20 @@ public class VentaLMDTO implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public String getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(String latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
-	public String getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(String longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
-	}
-
-	public Date getFechaHoraVenta() {
-		return fechaHoraVenta;
-	}
-
-	public void setFechaHoraVenta(Date fechaHoraVenta) {
-		this.fechaHoraVenta = fechaHoraVenta;
 	}
 
 	public double getMonto() {
@@ -86,6 +77,14 @@ public class VentaLMDTO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getFechaHoraVenta() {
+		return fechaHoraVenta;
+	}
+
+	public void setFechaHoraVenta(String fechaHoraVenta) {
+		this.fechaHoraVenta = fechaHoraVenta;
 	}
 
 }

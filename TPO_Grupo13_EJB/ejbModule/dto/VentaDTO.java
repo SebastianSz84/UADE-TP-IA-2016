@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,10 +69,10 @@ public class VentaDTO implements Serializable {
 	public VentaLMDTO convertirLMDTO() {
 		VentaLMDTO v = new VentaLMDTO();
 
-		v.setFechaHoraVenta(fecha);
+		v.setFechaHoraVenta(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(fecha));
 		v.setId(id);
-		v.setLatitud(getUsuario().getCoordenadasX());
-		v.setLongitud(getUsuario().getCoordenadasY());
+		v.setLatitud(Double.parseDouble(getUsuario().getCoordenadasX()));
+		v.setLongitud(Double.parseDouble(getUsuario().getCoordenadasY()));
 
 		double monto = 0;
 		List<ItemVentaLMDTO> lista = new ArrayList<>();
@@ -80,7 +81,7 @@ public class VentaDTO implements Serializable {
 			lista.add(it.convertirLMDTO());
 			monto = monto + it.getPrecio() * it.getCantidad();
 		}
-
+		v.setItemsVenta(lista);
 		v.setMonto(monto);
 		v.setCliente(usuario.convertirLMDTO());
 

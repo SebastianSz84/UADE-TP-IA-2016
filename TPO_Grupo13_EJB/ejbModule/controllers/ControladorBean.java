@@ -1,17 +1,12 @@
 package controllers;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
-
-import com.google.gson.Gson;
 
 import controllers.interfaces.Controlador;
 import dao.interfaces.CarritoDAO;
@@ -31,6 +26,7 @@ import entities.Producto;
 import entities.Ranking;
 import entities.Usuario;
 import entities.Venta;
+import helpers.ParserJson;
 import integracion.dto.NotificacionLMDTO;
 import integracion.interfaces.AdminNotificaciones;
 import resultadoOperacionDTOs.ResultadoOperacionCarritoDTO;
@@ -55,8 +51,6 @@ public class ControladorBean implements Controlador {
 	private AdminNotificaciones admNotif;
 	@EJB
 	private CarritoDAO carritoDAOBean;
-
-	private static String modulo = "Portal Web - Grupo 13";
 
 	private List<Usuario> usuarios;
 
@@ -196,25 +190,14 @@ public class ControladorBean implements Controlador {
 			else
 				carritoDAOBean.updateEntity(carrito);
 
-			NotificacionLMDTO n = new NotificacionLMDTO();
+			NotificacionLMDTO n = null;
 			if (accion.equals("add")) {
-				n.setDescripcion("Se agrego un producto al carrito");
+				n = new NotificacionLMDTO("Se agrego un producto al carrito");
 			} else {
-				n.setDescripcion("Se quito un producto del carrito");
+				n = new NotificacionLMDTO("Se quito un producto del carrito");
 			}
-			n.setModulo(modulo);
-			TimeZone tz = TimeZone.getTimeZone("UTC");
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted
-																			// "Z"
-																			// to
-																			// indicate
-																			// UTC,
-																			// no
-																			// timezone
-																			// offset
-			df.setTimeZone(tz);
-			n.setFecha(df.format(new Date()));
-			admNotif.enviarNotificacion(new Gson().toJson(n));
+
+			admNotif.enviarNotificacion(ParserJson.toString(n));
 
 			return new ResultadoOperacionDTO(true, "Carrito guardado");
 		} catch (Exception ex) {
@@ -267,13 +250,6 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	// PARA TESTS!!!!!!!!!!!!!!!
-
-	@Override
-	public ResultadoOperacionDTO testNotificacionLogMon() {
-		return admNotif.enviarNotificacion("Operacion dummy");
-	}
-
 	private void loadCarrito(Carrito carrito, CarritoDTO carritoDTO) {
 
 		for (ItemCarritoDTO itemDto : carritoDTO.getItems()) {
@@ -289,6 +265,7 @@ public class ControladorBean implements Controlador {
 			p.setPrecio(itemDto.getProducto().getPrecio());
 			p.setFoto(itemDto.getProducto().getFoto());
 			p.setTipo(itemDto.getProducto().getTipo());
+			p.setIdDeposito(itemDto.getProducto().getIdDeposito());
 
 			carrito.getItems().add(new ItemCarrito(itemDto.getCantidad(), p));
 
@@ -313,6 +290,7 @@ public class ControladorBean implements Controlador {
 			p.setPrecio(ic.getProducto().getPrecio());
 			p.setFoto(ic.getProducto().getFoto());
 			p.setTipo(ic.getProducto().getTipo());
+			p.setIdDeposito(ic.getProducto().getIdDeposito());
 			items.add(new ItemVenta(ic.getCantidad(), p));
 		}
 		v.setItems(items);

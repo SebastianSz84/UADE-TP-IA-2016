@@ -172,4 +172,32 @@ public class Usuario implements Serializable {
 		this.dni = dni;
 	}
 
+	public String getCoordenadasX() {
+		return coordenadasX;
+	}
+
+	public void setCoordenadasX(String coordenadasX) {
+		this.coordenadasX = coordenadasX;
+	}
+
+	public String getCoordenadasY() {
+		return coordenadasY;
+	}
+
+	public void setCoordenadasY(String coordenadasY) {
+		this.coordenadasY = coordenadasY;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

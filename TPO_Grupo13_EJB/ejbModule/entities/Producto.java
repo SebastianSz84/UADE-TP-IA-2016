@@ -135,6 +135,7 @@ public class Producto implements Serializable {
 		dto.setOrigen(origen);
 		dto.setPrecio(precio);
 		dto.setFoto(foto);
+		dto.setIdDeposito(idDeposito);
 		if (this.Ranking != null)
 			dto.setRanking(this.Ranking.getPosicion());
 		else
