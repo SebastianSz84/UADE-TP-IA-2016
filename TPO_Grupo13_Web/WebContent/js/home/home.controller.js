@@ -15,7 +15,7 @@ angular.module('integracion')
             'reverse': false
         };
 
-        $scope.title = "Bienvenido, " + LoginService.getUserName() + "!";
+        $scope.title = "Bienvenidx, " + LoginService.getUserName() + "!";
 
         $scope.carrito = HomeService.getCarrito();
 
