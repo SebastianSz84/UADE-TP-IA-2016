@@ -101,38 +101,32 @@
 
     <br>
 
-    <div class="table-responsive" ng-show="filters.show">
-        <table>
-            <tr>
-                <td>
-                    <span>Precio</span>
-                    <span>Min</span><input type="number" min="0" ng-model="filters.price.min"/>
-                    <span>Max</span><input type="number" min="1" ng-model="filters.price.max"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Fecha</span>
-                    <span>Desde</span><input type="date" ng-model="filters.date.from"/>
-                    <span>Hasta</span><input type="date" ng-model="filters.date.to"/>
-                </td>
-            </tr>
-        </table>
+    <div class="row" style="font-family: calibri;font-size:initial;font-weight: bold;" ng-show="filters.show">
+            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6" style="color:#0ed80e">
+                <div>Precio</div> 
+                <span>Min</span><input type="number" min="0" ng-model="filters.price.min"/>
+                <span>Max</span><input type="number" min="1" ng-model="filters.price.max"/>
+            </div>
+            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6" style="color:#d8209e">
+                <div>Fecha</div>
+                <span>Desde</span><input type="date" ng-model="filters.date.from"/>
+                <span>Hasta</span><input type="date" ng-model="filters.date.to"/>
+            </div>
     </div>
-
-    <div class="row">
+<br>
+    <div class="row" style="font-family: calibri;font-size:initial;font-weight: bold;">
         <div class="col-xs-12">
             <span>Ordenar por</span>
-            <select ng-model="sorting.sortBy">
+            <select style="background:#dcdcdc" ng-model="sorting.sortBy">
                 <option value="precio">Precio</option>
                 <option value="tipo">Tipo</option>
                 <option value="fecha">Fecha</option>
                 <option value="ranking">Ranking</option>
             </select>
-            <span ng-click="sorting.reverse = !sorting.reverse">Invertir orden</span>
+            <span style="cursor: pointer" ng-click="sorting.reverse = !sorting.reverse">Invertir orden</span>
         </div>
     </div>
-
+<br>
     <div class="products-list">
 
         <div ng-repeat="item in sortedProducts| orderBy:sorting.sortBy:sorting.reverse | productsFilter:searchProduct" ng-if="$index % 3 == 0" class="row">
@@ -143,7 +137,7 @@
 
     </div>
 
-    <div class="table-responsive">
+    <div ng-show=false class="table-responsive">
         <table class="table">
             <thead>
             <tr>
