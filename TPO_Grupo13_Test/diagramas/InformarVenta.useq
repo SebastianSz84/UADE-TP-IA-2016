@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="integracion.AdminNotificacionesBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/AdminNotificacionesBean.java" binary="false" 
+    label="adminNotificacionesBean" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="2">      
+      <position height="251" width="169" x="5" y="99"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="integracion.NotificadorLogMonBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/NotificadorLogMonBean.java" binary="false" 
+    label="notificadorLogMonBean" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="209" width="159" x="178" y="120"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="helpers.ParserJson" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/helpers/ParserJson.java" binary="false" label="parserJson" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="853" y="0"/>    
+    <execution id="7">      
+      <position height="21" width="90" x="341" y="141"/>    
+    </execution>  
+  </object>  
+  <object id="15" language="java" name="java.net.URL" project="TPO_Grupo13_EJB" 
+    file="C:/Program Files/Java/jre1.8.0_111/lib/rt.jar" binary="true" label="url" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="937" y="0"/>    
+    <execution id="9">      
+      <position height="21" width="46" x="435" y="185"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="46" x="435" y="232"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="org.apache.commons.io.IOUtils" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EAR/EarContent/lib/commons-io-2.4.jar" binary="true" label="ioUtils" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="642" y="0"/>    
+    <execution id="13">      
+      <position height="21" width="107" x="485" y="287"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="infVenta(dto.VentaDTO,integracion.interfaces.Configuracion):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="toString(T):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="8" operation="URL(java.lang.String)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="openConnection():java.net.URLConnection" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="12" operation="write(java.lang.CharSequence,java.io.OutputStream):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>
+</sequence-diagram>

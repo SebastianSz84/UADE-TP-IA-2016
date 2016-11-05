@@ -118,8 +118,8 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 
 			String mensajeJSON = ParserJson.toString(venta.convertirLMDTO());
 
-			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
-			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
+			logger.info("SALIDA INFVENTA JSON: \n" + mensajeJSON);
+			System.out.print("SALIDA INFVENTA JSON: \n" + mensajeJSON);
 
 			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
