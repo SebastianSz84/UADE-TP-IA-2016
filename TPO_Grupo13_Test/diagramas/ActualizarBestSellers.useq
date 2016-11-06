@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="integracion.ServicioRestBestSellers" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/integracion/ServicioRestBestSellers.java" binary="false" label="servicioRestBestSellers" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="100" y="0"/>    
+    <execution id="2">      
+      <position height="222" width="161" x="5" y="116"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="controllers.BusinessDelegate" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/controllers/BusinessDelegate.java" binary="false" label="businessDelegate" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="298" y="0"/>    
+    <execution id="4">      
+      <position height="180" width="126" x="170" y="137"/>    
+    </execution>  
+  </object>  
+  <object id="8" language="java" name="controllers.ControladorBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/controllers/ControladorBean.java" binary="false" label="controladorBean" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="357" y="0"/>    
+    <execution id="7">      
+      <position height="138" width="119" x="300" y="158"/>    
+    </execution>  
+  </object>  
+  <object id="15" language="java" name="dao.RankingDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/RankingDAOBean.java" binary="false" label="rankingDAOBean" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="458" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="123" x="423" y="179"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="21" width="123" x="423" y="254"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="dao.ProductoDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/ProductoDAOBean.java" binary="false" label="productoDAOBean" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="590" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="129" x="550" y="217"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="actualizarBestSellers(java.util.List&lt;dto.RankingDTO&gt;):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" 
+    operation="actualizarBestSellers(java.util.List&lt;dto.RankingDTO&gt;):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="9" operation="deleteAll(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="get(int):entities.Producto" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="saveEntity(T)" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>
+</sequence-diagram>
