@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="servlets.ServletCarrito" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/servlets/ServletCarrito.java" binary="false" label="servletCarrito" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="90" y="0"/>    
+    <execution id="2">      
+      <position height="63" width="0" x="0" y="103"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="controllers.BusinessDelegate" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/controllers/BusinessDelegate.java" binary="false" label="businessDelegate1" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="21" width="0" x="0" y="124"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="63" width="0" x="0" y="146"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="controllers.ControladorBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/controllers/ControladorBean.java" binary="false" label="controladorBean1" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="167"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="63" width="119" x="241" y="191"/>    
+    </execution>  
+  </object>  
+  <object id="13" language="java" name="dao.CarritoDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/CarritoDAOBean.java" binary="false" label="carritoDAOBean" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="457" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="116" x="364" y="212"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="63" width="116" x="364" y="234"/>    
+    </execution>  
+  </object>  
+  <object id="17" language="java" name="integracion.AdminNotificacionesBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/AdminNotificacionesBean.java" binary="false" 
+    label="adminNotificacionesBean" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="16">      
+      <position height="21" width="169" x="484" y="255"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="saveCarrito(dto.CarritoDTO,java.lang.String):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="crearCarrito(dto.CarritoDTO,java.lang.String):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false" x="186" y="150">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="11" operation="saveEntity(T)" asynchronous="false" x="326" y="194">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="15" operation="enviarNotificacion(java.lang.String):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>
+</sequence-diagram>
