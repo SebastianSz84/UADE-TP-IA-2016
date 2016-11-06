@@ -2,7 +2,7 @@
  * Created by gyauny on 24/10/16.
  */
 angular.module('integracion')
-    .service('HomeService', function ($http, $q, $state, $localStorage, LoginService) {
+    .service('HomeService', function ($http, $q, $state, $localStorage, $timeout, LoginService) {
 
         var carritoData = {
             "idUsuario": LoginService.getUser().id,
@@ -11,6 +11,7 @@ angular.module('integracion')
 
         var filters = {
             show: false,
+            bestSellers: false,
             price: {
                 min: 0,
                 max: null
@@ -18,6 +19,15 @@ angular.module('integracion')
             date: {
                 from: null,
                 to: null
+            },
+            sorting: {
+                sortBy: 'precio',
+                reverse: false
+            },
+            messages: {
+                success: '',
+                info: '',
+                danger: ''
             }
         };
 
@@ -117,8 +127,8 @@ angular.module('integracion')
                     'data': carritoData
                 })
                     .success(function (data) {
+                        carritoData.length = 0;
                         resolve(data);
-
                     })
                     .error(function (data, status) {
                         reject(data);
@@ -126,30 +136,49 @@ angular.module('integracion')
             });
         }
 
-        function addToCarrito(product) {
-            console.log(product);
+        function addToCarrito(product, quantity) {
+            if (!quantity || quantity <= 0) {
+                errorMessage("Debe seleccionar cantidad");
+                return;
+            }
+
             var exists = false;
             angular.forEach(carritoData.items, function (item, key) {
                 if (angular.equals(item.producto, product)) {
-                    item.cantidad++;
+                    item.cantidad += quantity;
                     item.subTotal = item.producto.precio * parseInt(item.cantidad);
                     exists = true;
                 }
             });
 
             if (!exists) {
-                var subTotal = product.precio * 1;
+                var subTotal = product.precio * quantity;
                 carritoData.items.push({
-                    "cantidad": 1,
+                    "cantidad": quantity,
                     "producto": product,
                     "subTotal": subTotal
                 });
             }
             sendCarrito('add');
+            sendMessage('Producto agregado al carrito');
         }
 
         function getFilters() {
             return filters;
+        }
+
+        function errorMessage(msg) {
+            filters.messages.alert = msg;
+            $timeout(function () {
+                filters.messages.alert = "";
+            }, 3000);
+        }
+
+        function sendMessage(msg) {
+            filters.messages.success = msg;
+            $timeout(function () {
+                filters.messages.success = "";
+            }, 3000);
         }
 
         return {
@@ -159,6 +188,8 @@ angular.module('integracion')
             addToCarrito: addToCarrito,
             sendCarrito: sendCarrito,
             confirmCarrito: confirmCarrito,
-            getFilters: getFilters
+            getFilters: getFilters,
+            errorMessage: errorMessage,
+            sendMessage: sendMessage
         }
     });

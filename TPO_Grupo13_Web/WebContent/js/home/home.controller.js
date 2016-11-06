@@ -4,62 +4,52 @@
 angular.module('integracion')
     .controller('HomeCtrl', function ($scope, $http, $timeout, $filter, $state, LoginService, HomeService) {
 
-        $scope.successMessage = "";
-        $scope.infoMessage = "";
-        $scope.dangerMessage = "";
         $scope.productoDetalle = null;
         $scope.filters = HomeService.getFilters();
-
-        $scope.sorting = {
-            'sortBy': 'precio',
-            'reverse': false
-        };
 
         $scope.title = "Bienvenidx, " + LoginService.getUserName() + "!";
 
         $scope.carrito = HomeService.getCarrito();
 
         $scope.products = [];
-        HomeService.getProducts()
-            .then(function (products) {
-                $scope.products = products;
-                sortProducts();
-            })
-            .catch(function (data) {
-                //console.log(data);
-            });
+        $scope.filteredProducts = [];
 
-        function sortProducts() {
-            $scope.sortedProducts = $filter('orderBy')($scope.products, $scope.sorting.sortBy, $scope.sorting.reverse);
-        }
+        $scope.getAll = function () {
+            $scope.filters.bestSellers = false;
+            $scope.searchProduct = "";
+            HomeService.getProducts()
+                .then(function (products) {
+                    $scope.products = products;
+                    $scope.filterProducts();
+                })
+                .catch(function (data) {
+                    //console.log(data);
+                });
+        };
+        $scope.getAll();
 
-        $scope.$watch('sorting.sortBy', function () {
-            $scope.sorting.reverse = false;
-            sortProducts();
-        });
-
-        $scope.$watch('sorting.reverse', function () {
-            sortProducts();
-        });
+        $scope.filterProducts = function () {
+            $scope.filteredProducts = $filter('productsFilter')($scope.products, $scope.searchProduct);
+        };
 
         $scope.sortBy = function (propertyName) {
-            $scope.sorting.reverse = ($scope.propertyName === propertyName) ? !$scope.sorting.reverse : false;
-            $scope.sorting.sortBy = propertyName;
+            $scope.filters.sorting.reverse = ($scope.propertyName === propertyName) ? !$scope.filters.sorting.reverse : false;
+            $scope.filters.sorting.sortBy = propertyName;
         };
 
         $scope.confirmCarrito = function () {
             if ($scope.carrito.items.length === 0) {
-                errorMessage("El carrito esta vacio");
+                HomeService.errorMessage("El carrito esta vacio");
                 return;
             }
 
             HomeService.confirmCarrito()
                 .then(function (data) {
                     $scope.close();
-                    sendMessage(data);
+                    HomeService.sendMessage(data);
                 })
                 .catch(function (data) {
-                    errorMessage(data);
+                    HomeService.errorMessage(data);
                 });
         };
 
@@ -71,27 +61,16 @@ angular.module('integracion')
         function updateCarritoInServer(accion) {
             HomeService.sendCarrito(accion)
                 .then(function (data) {
-                    sendMessage(data);
+                    HomeService.sendMessage(data);
                 })
                 .catch(function (data) {
-                    errorMessage(data);
+                    HomeService.errorMessage(data);
                 });
         }
 
         $scope.getBestSellers = function () {
             $scope.searchProduct = "";
-            $scope.products = $filter('filter')($scope.products, {ranking: ""});
-        };
-
-        $scope.getAll = function () {
-            $scope.searchProduct = "";
-            HomeService.getProducts()
-                .then(function (products) {
-                    $scope.products = products;
-                })
-                .catch(function (data) {
-                    console.log(data);
-                });
+            $scope.filters.bestSellers = true;
         };
 
         $scope.showFilters = function () {
@@ -112,22 +91,23 @@ angular.module('integracion')
             LoginService.logOut();
         };
 
-        function errorMessage(msg) {
-            $scope.alertMessage = msg;
-            $timeout(function () {
-                $scope.alertMessage = "";
-            }, 3000);
-        }
-
-        function sendMessage(msg) {
-            $scope.successMessage = msg;
-            $timeout(function () {
-                $scope.successMessage = "";
-            }, 3000);
-        }
-
         $scope.goSales = function () {
             $state.go('sales');
         };
 
+        $scope.$watchCollection('filters', function () {
+            $scope.filterProducts();
+        }, true);
+
+        $scope.$watchCollection('filters.sorting', function () {
+            $scope.filterProducts();
+        }, true);
+
+        $scope.$watchCollection('filters.date', function () {
+            $scope.filterProducts();
+        }, true);
+
+        $scope.$watchCollection('filters.price', function () {
+            $scope.filterProducts();
+        }, true);
     });

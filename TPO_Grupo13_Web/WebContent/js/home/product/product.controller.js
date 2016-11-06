@@ -4,6 +4,8 @@
 angular.module('integracion')
     .controller('ProductCtrl', function ($scope, $timeout, HomeService) {
 
+        $scope.quantity = 0;
+
         $scope.getBg = function (url) {
             return {
                 'background': 'url("' + url + '")',
@@ -13,11 +15,6 @@ angular.module('integracion')
         };
 
         $scope.add = function () {
-            HomeService.addToCarrito($scope.product);
-
-            $scope.successMessage = "Producto agregado al carrito";
-            $timeout(function () {
-                $scope.successMessage = "";
-            }, 3000);
+            HomeService.addToCarrito($scope.product, $scope.quantity);
         };
     });

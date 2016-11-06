@@ -34,3 +34,11 @@
 .product .product-action {
     height: 40px;
 }
+
+.product .product-ranking {
+    float: left;
+    font-size: 20px;
+    padding: 5px 15px;
+    background: gold;
+    margin-left: -15px;
+}

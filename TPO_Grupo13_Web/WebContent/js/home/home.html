@@ -99,16 +99,16 @@
                     </div>
                     </div>
 
-    <div ng-show="successMessage" class="alert alert-success">
-        <strong>Success!</strong> {{successMessage}}
+    <div ng-show="filters.messages.success" class="alert alert-success">
+        <strong>Ok!</strong> {{filters.messages.success}}
     </div>
 
-    <div ng-show="infoMessage" class="alert alert-info">
-        <strong>Info!</strong> {{infoMessage}}
+    <div ng-show="filters.messages.info" class="alert alert-info">
+        <strong>Info!</strong> {{filters.messages.info}}
     </div>
 
-    <div ng-show="alertMessage" class="alert alert-danger">
-        <strong>Danger!</strong> {{alertMessage}}
+    <div ng-show="filters.messages.alert" class="alert alert-danger">
+        <strong>Error!</strong> {{filters.messages.alert}}
     </div>
 
     <br>
@@ -129,27 +129,27 @@
     <div class="row" style="font-family: calibri;font-size:initial;font-weight: bold;">
         <div class="col-xs-12">
             <span>Ordenar por</span>
-            <select style="background:#dcdcdc" ng-model="sorting.sortBy">
+            <select style="background:#dcdcdc" ng-model="filters.sorting.sortBy">
                 <option value="precio">Precio</option>
                 <option value="tipo">Tipo</option>
                 <option value="fecha">Fecha</option>
                 <option value="ranking">Ranking</option>
             </select>
-            <span style="cursor: pointer" ng-click="sorting.reverse = !sorting.reverse">Invertir orden</span>
+            <span style="cursor: pointer" ng-click="filters.sorting.reverse = !filters.sorting.reverse">Invertir orden</span>
         </div>
     </div>
 <br>
     <div class="products-list">
 
-        <div ng-repeat="item in sortedProducts| orderBy:sorting.sortBy:sorting.reverse | productsFilter:searchProduct" ng-if="$index % 3 == 0" class="row">
-            <product class="col-xs-4" product="sortedProducts[$index]"></product>
-            <product class="col-xs-4" product="sortedProducts[$index + 1]" ng-if="sortedProducts.length > ($index + 1)"></product>
-            <product class="col-xs-4" product="sortedProducts[$index + 1]" ng-if="sortedProducts.length > ($index + 2)"></product>
+        <div ng-repeat="item in filteredProducts" ng-if="$index % 3 == 0" class="row">
+            <product class="col-xs-4" product="filteredProducts[$index]"></product>
+            <product class="col-xs-4" product="filteredProducts[$index + 1]" ng-if="filteredProducts.length > ($index + 1)"></product>
+            <product class="col-xs-4" product="filteredProducts[$index + 2]" ng-if="filteredProducts.length > ($index + 2)"></product>
         </div>
 
     </div>
 
-    <div ng-show=false class="table-responsive">
+    <div ng-if=false class="table-responsive">
         <table class="table">
             <thead>
             <tr>

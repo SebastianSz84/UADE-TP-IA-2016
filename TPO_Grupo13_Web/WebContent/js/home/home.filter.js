@@ -2,7 +2,7 @@
  * Created by gyauny on 30/10/16.
  */
 angular.module('integracion')
-    .filter('productsFilter', function (HomeService) {
+    .filter('productsFilter', function (HomeService, $filter) {
 
         var filters = HomeService.getFilters();
 
@@ -13,6 +13,7 @@ angular.module('integracion')
 
         return function (items, search, filter) {
             var filtered = [];
+
 
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
@@ -26,11 +27,15 @@ angular.module('integracion')
                     continue;
                 }
 
+                if (filters.bestSellers && !item.ranking) {
+                    continue;
+                }
+
                 if (!search || coincidence(item, search)) {
                     filtered.push(item);
                 }
             }
 
-            return filtered;
+            return $filter('orderBy')(filtered, filters.sorting.sortBy, filters.sorting.reverse);
         };
     });

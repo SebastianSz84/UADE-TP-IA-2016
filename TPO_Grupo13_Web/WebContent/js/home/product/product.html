@@ -1,4 +1,7 @@
 <div class="product">
+    <div class="product-ranking" ng-if="product.ranking">
+        {{product.ranking}}
+    </div>
     <div class="image-container" ng-style="getBg(product.foto)">
     </div>
     <div class="product-name">
@@ -8,8 +11,9 @@
         {{product.precio}}
     </div>
     <div class="product-action">
+        <input style="width: 40px" type="number" min="1" ng-model="quantity"/>
         <button type="button" class="btn btn-primary" ng-click="add()">
-            Agregar Carrito
+            Agregar al carrito
         </button>
     </div>
 </div>
