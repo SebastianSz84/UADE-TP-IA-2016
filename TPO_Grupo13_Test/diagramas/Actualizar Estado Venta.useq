@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="controllers.BusinessDelegate" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/controllers/BusinessDelegate.java" binary="false" label="businessDelegate" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="144" y="0"/>    
+    <execution id="2">      
+      <position height="204" width="126" x="5" y="101"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="controllers.ControladorBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/controllers/ControladorBean.java" binary="false" label="controladorBean" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="267" y="0"/>    
+    <execution id="4">      
+      <position height="162" width="119" x="135" y="122"/>    
+    </execution>  
+  </object>  
+  <object id="12" language="java" name="dao.VentaDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/VentaDAOBean.java" binary="false" label="ventaDAOBean" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="494" y="0"/>    
+    <execution id="7">      
+      <position height="21" width="109" x="258" y="143"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="109" x="258" y="242"/>    
+    </execution>  
+  </object>  
+  <object id="13" language="java" name="entities.Venta" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/entities/Venta.java" binary="false" label="venta" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="623" y="0"/>    
+    <execution id="9">      
+      <position height="21" width="55" x="538" y="207"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="actualizarEstadoVenta(int,java.lang.String):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="get(int):entities.Venta" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="8" operation="setEstado(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="saveEntity(T)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>
+</sequence-diagram>

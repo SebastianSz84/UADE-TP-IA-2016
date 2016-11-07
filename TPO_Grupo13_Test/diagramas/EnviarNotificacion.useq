@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="integracion.AdminNotificacionesBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/AdminNotificacionesBean.java" binary="false" 
+    label="adminNotificacionesBean" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="257" y="0"/>    
+    <execution id="2">      
+      <position height="54" width="0" x="0" y="86"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="integracion.NotificadorLogMonBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/NotificadorLogMonBean.java" binary="false" 
+    label="notificadorLogMonBean" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="18" width="0" x="0" y="104"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="54" width="0" x="0" y="157"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="54" width="0" x="0" y="219"/>    
+    </execution>    
+    <execution id="12">      
+      <position height="54" width="0" x="0" y="320"/>    
+    </execution>    
+    <execution id="15">      
+      <position height="54" width="0" x="0" y="390"/>    
+    </execution>    
+    <execution id="18">      
+      <position height="54" width="0" x="0" y="477"/>    
+    </execution>    
+    <execution id="21">      
+      <position height="54" width="0" x="0" y="571"/>    
+    </execution>    
+    <execution id="24">      
+      <position height="54" width="0" x="0" y="636"/>    
+    </execution>    
+    <execution id="27">      
+      <position height="54" width="0" x="0" y="705"/>    
+    </execution>  
+  </object>  
+  <object id="30" language="java" name="java.util.Properties" project="TPO_Grupo13_EJB" 
+    file="C:/Program Files/Java/jre1.8.0_73/lib/rt.jar" binary="true" label="properties" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="18" width="0" x="0" y="175"/>    
+    </execution>  
+  </object>  
+  <object id="31" language="java" name="javax.naming.InitialContext" project="TPO_Grupo13_EJB" 
+    file="C:/Program Files/Java/jre1.8.0_73/lib/rt.jar" binary="true" label="initialContext" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="11">      
+      <position height="18" width="0" x="0" y="237"/>    
+    </execution>    
+    <execution id="32">      
+      <position height="72" width="0" x="0" y="277"/>    
+    </execution>    
+    <execution id="34">      
+      <position height="18" width="0" x="0" y="313"/>    
+    </execution>    
+    <execution id="35">      
+      <position height="72" width="0" x="0" y="367"/>    
+    </execution>    
+    <execution id="37">      
+      <position height="18" width="0" x="0" y="403"/>    
+    </execution>  
+  </object>  
+  <object id="38" language="java" name="javax.jms.ConnectionFactory" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EAR/EarContent/lib/jboss-client.jar" binary="true" label="connectionFactory" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="14">      
+      <position height="18" width="0" x="0" y="338"/>    
+    </execution>  
+  </object>  
+  <object id="39" language="java" name="javax.jms.Connection" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EAR/EarContent/lib/jboss-client.jar" binary="true" label="connection" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="17">      
+      <position height="18" width="0" x="0" y="408"/>    
+    </execution>  
+  </object>  
+  <object id="40" language="java" name="javax.jms.Session" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EAR/EarContent/lib/jboss-client.jar" binary="true" label="session" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="20">      
+      <position height="18" width="0" x="0" y="495"/>    
+    </execution>  
+  </object>  
+  <object id="41" language="java" name="helpers.ParserJson" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/helpers/ParserJson.java" binary="false" label="parserJson" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="23">      
+      <position height="18" width="0" x="0" y="589"/>    
+    </execution>  
+  </object>  
+  <object id="42" language="java" name="javax.jms.Session" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EAR/EarContent/lib/jboss-client.jar" binary="true" label="session1" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="26">      
+      <position height="18" width="0" x="0" y="654"/>    
+    </execution>  
+  </object>  
+  <object id="43" language="java" name="resultadoOperacionDTOs.ResultadoOperacionDTO" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/resultadoOperacionDTOs/ResultadoOperacionDTO.java" binary="false" 
+    label="resultadoOperacionDTO" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="29">      
+      <position height="18" width="0" x="0" y="723"/>    
+    </execution>  
+  </object>  
+  <message id="3" 
+    operation="asincronica(java.lang.String,integracion.interfaces.Configuracion):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="Properties()" asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" operation="InitialContext()" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="13" operation="createConnection(java.lang.String,java.lang.String):javax.jms.Connection" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="16" operation="createSession():javax.jms.Session" asynchronous="false">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="19" operation="createProducer(javax.jms.Destination):javax.jms.MessageProducer" asynchronous="false">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="22" operation="toString(T):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="25" operation="createTextMessage(java.lang.String):javax.jms.TextMessage" asynchronous="false">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>  
+  <message id="28" operation="ResultadoOperacionDTO(boolean,java.lang.String)" asynchronous="false">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="29"/>  
+  </message>  
+  <message id="33" operation="lookup(java.lang.String):java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="34"/>  
+  </message>  
+  <message id="36" operation="lookup(javax.naming.Name):java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="37"/>  
+  </message>
+</sequence-diagram>

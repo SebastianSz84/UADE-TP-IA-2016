@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.11" icons="true">  
+  <object id="1" language="java" name="servlets.ServletVenta" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/servlets/ServletVenta.java" binary="false" label="servletVenta" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="2">      
+      <position height="54" width="0" x="0" y="89"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="controllers.BusinessDelegate" project="TPO_Grupo13_Web" 
+    file="/TPO_Grupo13_Web/src/controllers/BusinessDelegate.java" binary="false" label="businessDelegate" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="18" width="0" x="0" y="107"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="54" width="0" x="0" y="140"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="controllers.ControladorBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/controllers/ControladorBean.java" binary="false" label="controladorBean" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="18" width="0" x="0" y="158"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="54" width="0" x="0" y="214"/>    
+    </execution>    
+    <execution id="13">      
+      <position height="54" width="0" x="0" y="298"/>    
+    </execution>    
+    <execution id="16">      
+      <position height="54" width="0" x="0" y="378"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="dao.BaseDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/BaseDAOBean.java" binary="false" label="baseDAOBean" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="18" width="0" x="0" y="232"/>    
+    </execution>  
+  </object>  
+  <object id="20" language="java" name="dao.CarritoDAOBean" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/dao/CarritoDAOBean.java" binary="false" label="carritoDAOBean" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="15">      
+      <position height="18" width="0" x="0" y="316"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="integracion.interfaces.AdminNotificaciones" project="TPO_Grupo13_EJB" 
+    file="/TPO_Grupo13_EJB/ejbModule/integracion/interfaces/AdminNotificaciones.java" binary="false" 
+    label="adminNotificaciones" type="interface" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="18">      
+      <position height="18" width="0" x="0" y="396"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="confirmCarrito(dto.CarritoDTO):resultadoOperacionDTOs.ResultadoOperacionVentaDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="confirmarCarrito(dto.CarritoDTO):resultadoOperacionDTOs.ResultadoOperacionVentaDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="11" operation="saveEntity(T)" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="14" operation="borrarListaItems(entities.Carrito):entities.Carrito" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="17" operation="enviarInfoVenta(dto.VentaDTO):resultadoOperacionDTOs.ResultadoOperacionDTO" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>
+</sequence-diagram>
