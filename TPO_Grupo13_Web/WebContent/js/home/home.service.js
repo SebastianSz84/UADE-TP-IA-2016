@@ -127,7 +127,7 @@ angular.module('integracion')
                     'data': carritoData
                 })
                     .success(function (data) {
-                        carritoData.length = 0;
+                        carritoData.items.length = 0;
                         resolve(data);
                     })
                     .error(function (data, status) {

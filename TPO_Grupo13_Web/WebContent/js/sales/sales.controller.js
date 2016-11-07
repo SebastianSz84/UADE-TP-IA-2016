@@ -12,7 +12,7 @@ angular.module('integracion')
     			$scope.message = "";
     		}
     		else
-    			$scope.message = "Usted no posee ninguna venta aun";
+    			$scope.message = "Usted no posee ninguna compra aun";
         })
         .catch(function (data) {
             //console.log(data);
