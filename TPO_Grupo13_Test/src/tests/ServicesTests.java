@@ -2,6 +2,7 @@ package tests;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.jms.ConnectionFactory;
@@ -11,11 +12,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import dto.ProductoDTO;
 import helpers.ParserJson;
+import integracion.dto.ProductoDEDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
 public class ServicesTests {
@@ -47,20 +49,26 @@ public class ServicesTests {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void TestNuevoProductoMDB() {
 		// ARRANGE
 
 		// Armo el dto que voy a enviar
-		ProductoDTO prodDTO = new ProductoDTO();
+		ProductoDEDTO prodDTO = new ProductoDEDTO();
 		prodDTO.setTipo("Tipo");
-		prodDTO.setCodigo(11);
-		prodDTO.setDatosExtra("algunos datos extra");
-		prodDTO.setDescripcion("alguna descripcion");
+		prodDTO.setCodArticulo(11);
+		Map<String, String> datosExtra = new HashedMap();
+
+		datosExtra.putIfAbsent("claveDatoExtra1", "valor de datoExtra1");
+		datosExtra.putIfAbsent("claveDatoExtra2", "valor de datoExtra2");
+
+		prodDTO.setDatosExtra(datosExtra);
+		prodDTO.setDescripcion("alguna descripcion2");
 		prodDTO.setMarca("alguna marca");
 		prodDTO.setNombre("algun nombre");
 		prodDTO.setOrigen("algun origen");
-		prodDTO.setPrecio(123.45678);
+		prodDTO.setPrecio((float) 123.45678);
 		prodDTO.setFoto("alguna url de imagen");
 		prodDTO.setIdDeposito("G01");
 
@@ -76,7 +84,7 @@ public class ServicesTests {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://192.168.0.12:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://192.168.16.84:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "guest");
 			env.put(Context.SECURITY_CREDENTIALS, "guest");
 			namingContext = new InitialContext(env);

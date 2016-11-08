@@ -152,7 +152,12 @@ public class ControladorBean implements Controlador {
 	public ResultadoOperacionDTO nuevoProducto(ProductoDTO prodDTO) {
 
 		try {
-			Producto p = new Producto();
+			Producto p = buscarProducto(prodDTO.getCodigo());
+
+			if (p == null) {
+				p = new Producto();
+				p.setCodigo(prodDTO.getCodigo());
+			}
 
 			p.setCodigo(prodDTO.getCodigo());
 			p.setDatosExtra(prodDTO.getDatosExtra());
@@ -164,12 +169,17 @@ public class ControladorBean implements Controlador {
 			p.setFoto(prodDTO.getFoto());
 			p.setTipo(prodDTO.getTipo());
 			p.setIdDeposito(prodDTO.getIdDeposito());
+
 			productoDAOBean.saveEntity(p);
 
 			return new ResultadoOperacionDTO(true, "Nuevo producto creado con exito");
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
 		}
+	}
+
+	private Producto buscarProducto(Integer codigo) {
+		return productoDAOBean.get(codigo);
 	}
 
 	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO, String accion) {
