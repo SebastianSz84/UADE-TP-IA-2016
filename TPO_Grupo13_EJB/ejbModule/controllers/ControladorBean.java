@@ -209,8 +209,7 @@ public class ControladorBean implements Controlador {
 		try {
 			Venta v = loadVenta(c);
 			ventaDAOBean.saveEntity(v);
-			Carrito carrito = new Carrito();
-			loadCarrito(carrito, c);
+			Carrito carrito = carritoDAOBean.get(c.getIdUsuario());
 			carritoDAOBean.borrarListaItems(carrito);
 			VentaDTO venDTO = v.getDTO();
 			admNotif.enviarInfoVenta(venDTO);
