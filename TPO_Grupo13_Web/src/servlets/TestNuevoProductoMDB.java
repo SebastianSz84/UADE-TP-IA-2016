@@ -95,7 +95,7 @@ public class TestNuevoProductoMDB extends HttpServlet {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://10.100.34.205:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://10.100.56.66:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "guest");
 			env.put(Context.SECURITY_CREDENTIALS, "guest");
 			namingContext = new InitialContext(env);
