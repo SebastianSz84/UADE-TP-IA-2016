@@ -19,8 +19,8 @@ import resultadoOperacionDTOs.ResultadoOperacionDTO;
  * Message-Driven Bean implementation class for: NuevoProductoMDB
  */
 @MessageDriven(activationConfig = {
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "jms/queue/deposito"),
-		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "deposito")
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/jboss/exported/jms/queue/deposito"),
+		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:/jboss/exported/jms/queue/deposito")
 public class NuevoProductoMDB implements MessageListener {
 
 	@EJB
@@ -40,6 +40,7 @@ public class NuevoProductoMDB implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			String nuevoProdJSON = ((TextMessage) message).getText();
+			System.out.println("Llegada de Producto nuevo: " + nuevoProdJSON);
 			ProductoDTO prodDTO = new Gson().fromJson(nuevoProdJSON, ProductoDTO.class);
 			ResultadoOperacionDTO res = controladorBean.nuevoProducto(prodDTO);
 			if (res.sosExitoso()) {
