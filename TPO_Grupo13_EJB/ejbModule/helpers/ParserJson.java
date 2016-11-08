@@ -49,4 +49,8 @@ public class ParserJson {
 	public static <T> String toString(T cls) {
 		return new Gson().toJson(cls);
 	}
+
+	public static <T> T fromJson(String nuevoProdJSON, Class<T> cls) {
+		return new Gson().fromJson(nuevoProdJSON, cls);
+	}
 }

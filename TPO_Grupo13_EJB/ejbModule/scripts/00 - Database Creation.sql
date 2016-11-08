@@ -1,6 +1,11 @@
 USE [master]
 GO
 
+IF EXISTS(SELECT * FROM sys.databases WHERE name = 'UADE-TP-IA-2016')
+BEGIN
+	DROP DATABASE [UADE-TP-IA-2016]
+END
+
 /****** Object:  Database [UADE-TP-IA-2016]    Script Date: 20/09/2016 03:41:35 p.m. ******/
 CREATE DATABASE [UADE-TP-IA-2016]
 

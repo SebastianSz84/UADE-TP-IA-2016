@@ -9,10 +9,9 @@ import javax.jms.TextMessage;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-
 import controllers.interfaces.Controlador;
-import dto.ProductoDTO;
+import helpers.ParserJson;
+import integracion.dto.ProductoDEDTO;
 import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
 /**
@@ -39,10 +38,10 @@ public class NuevoProductoMDB implements MessageListener {
 	 */
 	public void onMessage(Message message) {
 		try {
+			logger.info("++ NuevoProductoMDB: Llego un nuevo producto.");
 			String nuevoProdJSON = ((TextMessage) message).getText();
-			System.out.println("Llegada de Producto nuevo: " + nuevoProdJSON);
-			ProductoDTO prodDTO = new Gson().fromJson(nuevoProdJSON, ProductoDTO.class);
-			ResultadoOperacionDTO res = controladorBean.nuevoProducto(prodDTO);
+			ProductoDEDTO prodDEDTO = ParserJson.fromJson(nuevoProdJSON, ProductoDEDTO.class);
+			ResultadoOperacionDTO res = controladorBean.nuevoProducto(prodDEDTO.toProductoDTO());
 			if (res.sosExitoso()) {
 				logger.info("++ Nuevo producto agregado: " + res.getMessage());
 			} else {
