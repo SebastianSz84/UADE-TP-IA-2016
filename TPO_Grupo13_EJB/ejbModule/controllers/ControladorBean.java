@@ -212,6 +212,7 @@ public class ControladorBean implements Controlador {
 			Carrito carrito = carritoDAOBean.get(c.getIdUsuario());
 			carritoDAOBean.borrarListaItems(carrito);
 			VentaDTO venDTO = v.getDTO();
+			venDTO.setUsuario(v.getUsuario().getDTO());
 			admNotif.enviarInfoVenta(venDTO);
 			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
 		} catch (Exception ex) {

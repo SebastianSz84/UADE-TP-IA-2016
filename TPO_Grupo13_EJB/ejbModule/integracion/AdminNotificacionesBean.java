@@ -29,7 +29,7 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 
 	@Override
 	public ResultadoOperacionDTO enviarInfoVenta(VentaDTO venta) {
-		return notificador.sincronica(ParserJson.toString(venta), configuracion);
+		return notificador.sincronica(ParserJson.toString(venta.convertirLMDTO()), configuracion);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 			if (configuracion.getTipo().equals("Async")) {
 				return notificador.asincronica(notif, configuracion);
 			} else {
-				return notificador.sincronica(notif, configuracion);
+				return notificador.sincronica(ParserJson.toString(notif), configuracion);
 			}
 		}
 	}

@@ -37,12 +37,12 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/json");
 
-			String mensajeJSON = ParserJson.toString(notif);
+			// String mensajeJSON = ParserJson.toString(notif);
 
-			logger.info("SALIDA SINC JSON: \n" + mensajeJSON);
-			System.out.print("SALIDA SINC JSON: \n" + mensajeJSON);
+			logger.info("SALIDA SINC JSON: \n" + notif);
+			System.out.print("SALIDA SINC JSON: \n" + notif);
 
-			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
+			IOUtils.write(notif, urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				String respuesta = "++ERROR: " + urlConnection.getResponseCode();
 				logger.error(respuesta);

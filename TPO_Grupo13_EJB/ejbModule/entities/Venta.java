@@ -104,7 +104,6 @@ public class Venta implements Serializable {
 			lista.add(iv.getDTO());
 		}
 		dto.setItems(lista);
-		// dto.setUsuario(usuario.getDTO());
 		return dto;
 	}
 

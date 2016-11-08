@@ -12,7 +12,7 @@ public class VentaLMDTO implements Serializable {
 	private double longitud;
 	private String fechaHoraVenta; // Es un getdate default en la base de datos
 	private double monto;
-	private String nombrePortal = "Portal Web Grupo 13";
+	private String nombrePortal = "G13";
 	private List<ItemVentaLMDTO> itemsVenta;
 
 	public VentaLMDTO() {
