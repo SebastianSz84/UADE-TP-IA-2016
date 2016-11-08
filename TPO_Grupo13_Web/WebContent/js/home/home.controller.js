@@ -42,28 +42,35 @@ angular.module('integracion')
                 HomeService.errorMessage("El carrito esta vacio");
                 return;
             }
-
+            $scope.isLoading = true;
             HomeService.confirmCarrito()
                 .then(function (data) {
                     $scope.close();
                     HomeService.sendMessage(data);
+                    $scope.isLoading = false;
                 })
                 .catch(function (data) {
                     HomeService.errorMessage(data);
+                    $scope.isLoading = false;
                 });
         };
 
         $scope.removeItem = function (key) {
-            $scope.carrito.items.splice(key, 1);
-            updateCarritoInServer('delete');
+        	if(!$scope.isLoading){
+            	$scope.isLoading = true;
+                $scope.carrito.items.splice(key, 1);
+                updateCarritoInServer('delete');
+        	}
         };
 
         function updateCarritoInServer(accion) {
             HomeService.sendCarrito(accion)
                 .then(function (data) {
+                	$scope.isLoading = false;
                     HomeService.sendMessage(data);
                 })
                 .catch(function (data) {
+                	$scope.isLoading = false;
                     HomeService.errorMessage(data);
                 });
         }
