@@ -43,6 +43,9 @@ angular.module('integracion')
                     .success(function (data) {
                         if (angular.isObject(data)) {
                             carritoData.length = 0;
+                            angular.forEach(data.items, function(item, key){
+                                item.subTotal = item.producto.precio * parseInt(item.cantidad);
+                            });
                             angular.copy(data.items, carritoData.items);
                             resolve();
                         }
