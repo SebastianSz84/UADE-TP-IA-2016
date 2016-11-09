@@ -226,7 +226,7 @@ public class ControladorBean implements Controlador {
 			admNotif.enviarInfoVenta(venDTO);
 			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
 		} catch (Exception ex) {
-			return new ResultadoOperacionVentaDTO(false, "Error al crear producto : " + ex.getMessage(), null);
+			return new ResultadoOperacionVentaDTO(false, "Error al registrar la venta: " + ex.getMessage(), null);
 		}
 	}
 

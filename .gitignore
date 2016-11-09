@@ -5,3 +5,4 @@ build
 bin
 TPO_Grupo13_Web/WebContent/.idea
 TPO_Grupo13_EJB/build/*
+TPO_Grupo13_EJB/ejbModule/META-INF/log4j.properties

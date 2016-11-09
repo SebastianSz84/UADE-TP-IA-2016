@@ -37,8 +37,6 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			urlConnection.setRequestMethod("POST");
 			urlConnection.setRequestProperty("Content-Type", "application/json");
 
-			// String mensajeJSON = ParserJson.toString(notif);
-
 			logger.info("SALIDA SINC JSON: \n" + notif);
 			System.out.print("SALIDA SINC JSON: \n" + notif);
 
@@ -66,6 +64,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			String port = conf.getPuerto();
 			String user = conf.getUser();
 			String pass = conf.getPass();
+			String jms = conf.getJms();
 
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
@@ -78,7 +77,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
 			ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
 			// buscar la Cola en JNDI
-			String destinationString = System.getProperty("destination", "jms/queue/logmonasync");
+			String destinationString = System.getProperty("destination", jms);
 			Destination destination = (Destination) context.lookup(destinationString);
 			// crear la connection y la session a partir de la connection
 			Connection connection = connectionFactory.createConnection(user, pass);
@@ -87,21 +86,21 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			// crear un producer para enviar mensajes usando la session
 			MessageProducer producer = session.createProducer(destination);
 
-			// Armo el Json que voy a enviar
-			String notifJson = ParserJson.toString(notif);
-			logger.info("SALIDA ASYNC JSON: \n" + notifJson);
-			System.out.print("SALIDA JSON: \n" + notifJson);
+			logger.info("SALIDA ASYNC JSON: \n" + notif);
+			System.out.print("SALIDA JSON: \n" + notif);
 
 			// crear un mensaje de tipo text y setearle el contenido
 			TextMessage message = session.createTextMessage();
-			message.setText(notifJson);
+			message.setText(notif);
 			// enviar el mensaje
 			producer.send(message);
 			// se cierra la sesion y devuelve mensaje de exito
 			connection.close();
+			logger.info("Operacion correcta: " + notif);
 			return new ResultadoOperacionDTO(true, "Operacion correcta: " + notif);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("Error en notificacion asincronica: " + e.getMessage());
 			return new ResultadoOperacionDTO(false, "Error en notificacion asincronica: " + e.getMessage());
 		}
 	}

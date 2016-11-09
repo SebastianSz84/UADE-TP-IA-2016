@@ -21,6 +21,7 @@ public class ConfiguracionBean implements Configuracion {
 	private String pass;
 	private String url;
 	private String tipo;
+	private String jms;
 	private Properties props;
 	private static String propFileName = "config.properties";
 	private InputStream inputStream;
@@ -124,7 +125,7 @@ public class ConfiguracionBean implements Configuracion {
 
 	@Override
 	public String toString() {
-		return ip + "\n" + puerto + "\n" + user + "\n" + pass + "\n" + url;
+		return ip + "\n" + puerto + "\n" + user + "\n" + pass + "\n" + url + "\n" + jms;
 	}
 
 	@Override
@@ -135,5 +136,15 @@ public class ConfiguracionBean implements Configuracion {
 	@Override
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	@Override
+	public String getJms() {
+		return jms;
+	}
+
+	@Override
+	public void setJms(String jms) {
+		this.jms = jms;
 	}
 }

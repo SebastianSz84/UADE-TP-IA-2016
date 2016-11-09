@@ -28,4 +28,8 @@ public interface Configuracion {
 	String getTipo();
 
 	void setTipo(String tipo);
+
+	String getJms();
+
+	void setJms(String jms);
 }
