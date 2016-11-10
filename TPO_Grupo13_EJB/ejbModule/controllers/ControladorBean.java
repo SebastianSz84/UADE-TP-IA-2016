@@ -138,8 +138,7 @@ public class ControladorBean implements Controlador {
 				Producto p = productoDAOBean.get(r.getProducto().getCodigo(), r.getProducto().getIdDeposito());
 
 				ranking.setProducto(p);
-				ranking.setCodigoProducto(p.getCodigo());
-				// ranking.setIdDeposito(p.getIdDeposito());
+				ranking.setIdProducto(p.getId());
 				ranking.setPosicion(r.getPosicion());
 
 				rankingDAOBean.saveEntity(ranking);

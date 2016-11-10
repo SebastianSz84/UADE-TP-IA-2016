@@ -26,7 +26,7 @@ public class ItemVenta implements Serializable {
 	@Column
 	private double precio;
 	@ManyToOne
-	@JoinColumn(name = "codigoProducto")
+	@JoinColumn(name = "IdProducto")
 	private Producto producto;
 
 	public ItemVenta() {
