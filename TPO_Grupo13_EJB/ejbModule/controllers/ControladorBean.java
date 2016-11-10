@@ -135,7 +135,7 @@ public class ControladorBean implements Controlador {
 
 				Ranking ranking = new Ranking();
 
-				Producto p = productoDAOBean.get(r.getProducto().getCodigo());
+				Producto p = productoDAOBean.get(r.getProducto().getCodigo(), r.getProducto().getIdDeposito());
 
 				ranking.setProducto(p);
 				ranking.setCodigoProducto(p.getCodigo());
@@ -153,11 +153,10 @@ public class ControladorBean implements Controlador {
 	public ResultadoOperacionDTO nuevoProducto(ProductoDTO prodDTO) {
 
 		try {
-			Producto p = buscarProducto(prodDTO.getCodigo());
+			Producto p = buscarProducto(prodDTO.getCodigo(), prodDTO.getIdDeposito());
 
 			if (p == null) {
 				p = new Producto();
-				p.setCodigo(prodDTO.getCodigo());
 			}
 
 			p.setCodigo(prodDTO.getCodigo());
@@ -179,8 +178,8 @@ public class ControladorBean implements Controlador {
 		}
 	}
 
-	private Producto buscarProducto(Integer codigo) {
-		return productoDAOBean.get(codigo);
+	private Producto buscarProducto(Integer codigo, String idDeposito) {
+		return productoDAOBean.get(codigo, idDeposito);
 	}
 
 	public ResultadoOperacionDTO crearCarrito(CarritoDTO carritoDTO, String accion) {
@@ -267,6 +266,7 @@ public class ControladorBean implements Controlador {
 
 			Producto p = new Producto();
 
+			p.setId(itemDto.getProducto().getId());
 			p.setCodigo(itemDto.getProducto().getCodigo());
 			p.setDatosExtra(itemDto.getProducto().getDatosExtra());
 			p.setDescripcion(itemDto.getProducto().getDescripcion());
@@ -292,6 +292,7 @@ public class ControladorBean implements Controlador {
 		for (ItemCarritoDTO ic : c.getItems()) {
 			Producto p = new Producto();
 
+			p.setId(ic.getProducto().getId());
 			p.setCodigo(ic.getProducto().getCodigo());
 			p.setDatosExtra(ic.getProducto().getDatosExtra());
 			p.setDescripcion(ic.getProducto().getDescripcion());

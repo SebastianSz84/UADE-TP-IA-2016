@@ -1,18 +1,13 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSContext;
-import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueSender;
-import javax.jms.QueueSession;
-import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,9 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.BusinessDelegate;
-import dto.ProductoDTO;
 import helpers.ParserJson;
+import integracion.dto.ProductoDEDTO;
 
 /**
  * Servlet implementation class TestNuevoProductoMDB
@@ -40,41 +34,18 @@ public class TestNuevoProductoMDB extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		final String QUEUE_LOOKUP = "jms/queue/deposito";
-		final String CONNECTION_FACTORY = "ConnectionFactory";
-
-		PrintWriter out = response.getWriter();
-		try {
-			Context context = new InitialContext();
-			QueueConnectionFactory factory = (QueueConnectionFactory) context.lookup(CONNECTION_FACTORY);
-			QueueConnection connection = factory.createQueueConnection();
-			QueueSession session = connection.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
-
-			Queue queue = (Queue) context.lookup(QUEUE_LOOKUP);
-			QueueSender sender = session.createSender(queue);
-
-			TextMessage message = session.createTextMessage();
-
-			ProductoDTO prodDTO = BusinessDelegate.getInstancia().listadoProductos().getProductos().get(0);
-
-			System.out.println(ParserJson.toString(prodDTO));
-
-			message.setText(ParserJson.toString(prodDTO));
-			sender.send(message);
-
-			session.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ProductoDTO prodDTO = new ProductoDTO();
+		ProductoDEDTO prodDTO = new ProductoDEDTO();
 		prodDTO.setTipo("Tipo");
-		prodDTO.setCodigo(11);
-		prodDTO.setDatosExtra("algunos datos extra");
+		prodDTO.setCodArticulo(11);
+
+		Map<String, String> datosExtra = new HashMap<String, String>();
+		datosExtra.put("algunDatoExtra", "algunValorExtra");
+
+		prodDTO.setDatosExtra(datosExtra);
 		prodDTO.setDescripcion("alguna descripcion");
 		prodDTO.setMarca("alguna marca");
 		prodDTO.setNombre("algun nombre");
@@ -95,7 +66,7 @@ public class TestNuevoProductoMDB extends HttpServlet {
 			// Set up the namingContext for the JNDI lookup
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			env.put(Context.PROVIDER_URL, "http-remoting://10.100.56.66:8080");
+			env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
 			env.put(Context.SECURITY_PRINCIPAL, "guest");
 			env.put(Context.SECURITY_CREDENTIALS, "guest");
 			namingContext = new InitialContext(env);

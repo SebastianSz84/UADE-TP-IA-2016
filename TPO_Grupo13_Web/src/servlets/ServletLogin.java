@@ -26,7 +26,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	public ServletLogin() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +34,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -45,8 +43,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
 		String userName = request.getParameter("user");
 		String password = request.getParameter("password");
 		ResultadoOperacionUsuarioDTO res = BusinessDelegate.getInstancia().login(userName, password);

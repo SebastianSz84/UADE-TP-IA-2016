@@ -8,7 +8,7 @@ import entities.Producto;
 
 @Local
 public interface ProductoDAO extends BaseDAO {
-	public Producto get(int codigo);
+	public Producto get(int codigo, String idDeposito);
 
 	public List<Producto> listProductos();
 

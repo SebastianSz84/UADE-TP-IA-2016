@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,6 +21,9 @@ public class Producto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@Column
 	private Integer codigo;
 	@Column
 	private String nombre;
@@ -46,6 +51,14 @@ public class Producto implements Serializable {
 
 	public Producto() {
 		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getCodigo() {
@@ -126,6 +139,7 @@ public class Producto implements Serializable {
 
 	public ProductoDTO getDTO() {
 		ProductoDTO dto = new ProductoDTO();
+		dto.setId(id);
 		dto.setTipo(tipo);
 		dto.setCodigo(codigo);
 		dto.setDatosExtra(datosExtra);

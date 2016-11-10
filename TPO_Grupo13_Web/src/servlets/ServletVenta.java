@@ -78,7 +78,9 @@ public class ServletVenta extends HttpServlet {
 			ProductoDTO p = new ProductoDTO();
 			JsonObject jb = itemsBS.get(i).getAsJsonObject();
 			JsonObject jb1 = jb.getAsJsonObject("producto");
+			p.setId(jb1.get("id").getAsInt());
 			p.setCodigo(jb1.get("codigo").getAsInt());
+			p.setIdDeposito(jb1.get("idDeposito").getAsString());
 			p.setDatosExtra(jb1.get("datosExtra").getAsString());
 			p.setDescripcion(jb1.get("descripcion").getAsString());
 			p.setMarca(jb1.get("marca").getAsString());

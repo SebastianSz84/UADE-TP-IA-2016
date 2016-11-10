@@ -40,7 +40,7 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 			if (configuracion.getTipo().equals("Async")) {
 				return notificador.asincronica(notif, configuracion);
 			} else {
-				return notificador.sincronica(ParserJson.toString(notif), configuracion);
+				return notificador.sincronica(notif, configuracion);
 			}
 		}
 	}

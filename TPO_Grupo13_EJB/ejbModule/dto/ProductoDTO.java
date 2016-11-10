@@ -6,6 +6,7 @@ import java.util.Date;
 public class ProductoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private Integer codigo;
 	private String nombre;
 	private String descripcion;
@@ -18,6 +19,14 @@ public class ProductoDTO implements Serializable {
 	private Date fechaAlta;
 	private String tipo;
 	private String idDeposito;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getCodigo() {
 		return codigo;

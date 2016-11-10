@@ -11,7 +11,7 @@ public class ProductoDEDTO {
 	private String nombre;
 	private String descripcion;
 	private String marca;
-	private float precio;
+	private double precio;
 	private String foto;
 	private String origen;
 	private String tipo;
@@ -57,12 +57,12 @@ public class ProductoDEDTO {
 		this.marca = marca;
 	}
 
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
-		this.precio = precio;
+	public void setPrecio(double d) {
+		this.precio = d;
 	}
 
 	public String getFoto() {
@@ -121,7 +121,7 @@ public class ProductoDEDTO {
 		prodDTO.setMarca(this.marca);
 		prodDTO.setNombre(this.nombre);
 		prodDTO.setOrigen(this.origen);
-		prodDTO.setPrecio(Double.parseDouble(Float.toString(this.precio)));
+		prodDTO.setPrecio(this.precio);
 		prodDTO.setRanking(0);
 		prodDTO.setTipo(this.tipo);
 

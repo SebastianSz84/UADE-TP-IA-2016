@@ -76,7 +76,9 @@ public class TestInformarVenta extends HttpServlet {
 
 			ProductoDTO pr = r.getProductos().get(i);
 
+			p.setId(pr.getId());
 			p.setCodigo(pr.getCodigo());
+			p.setIdDeposito(pr.getIdDeposito());
 			p.setDatosExtra(pr.getDatosExtra());
 			p.setDescripcion(pr.getDescripcion());
 			p.setMarca(pr.getMarca());
