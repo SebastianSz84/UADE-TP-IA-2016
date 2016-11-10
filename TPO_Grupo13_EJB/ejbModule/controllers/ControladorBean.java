@@ -139,11 +139,12 @@ public class ControladorBean implements Controlador {
 
 				ranking.setProducto(p);
 				ranking.setCodigoProducto(p.getCodigo());
+				// ranking.setIdDeposito(p.getIdDeposito());
 				ranking.setPosicion(r.getPosicion());
 
 				rankingDAOBean.saveEntity(ranking);
 			}
-			return new ResultadoOperacionDTO(true, "BestSellers acutalizados con exito");
+			return new ResultadoOperacionDTO(true, "BestSellers actualizados con exito");
 		} catch (Exception ex) {
 			return new ResultadoOperacionDTO(false, "Error al actualizar BestSellers : " + ex.getMessage());
 		}

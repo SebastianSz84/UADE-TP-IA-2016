@@ -30,12 +30,6 @@ public class ServicioRestBestSellers {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String bestSellers(String jsonBestSellers) {
-		// Datos de prueba
-		//
-		// {"ranking":[
-		// {"codigo":"1","posicion":"3"}
-		// ]}
-
 		try {
 			JsonObject jObj = ParserJson.parsearJsonObject(jsonBestSellers);
 			JsonArray itemsBS = jObj.getAsJsonArray("ranking");
