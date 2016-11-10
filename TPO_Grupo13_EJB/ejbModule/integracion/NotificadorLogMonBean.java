@@ -31,7 +31,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	@Override
 	public ResultadoOperacionDTO sincronica(String notif, Configuracion conf) {
 		try {
-			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
+			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getRestAudit());
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
@@ -64,7 +64,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			String port = conf.getPuerto();
 			String user = conf.getUser();
 			String pass = conf.getPass();
-			String jms = conf.getJms();
+			String jms = conf.getJmsAudit();
 
 			final Properties env = new Properties();
 			env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
@@ -108,7 +108,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 	@Override
 	public ResultadoOperacionDTO infVenta(VentaDTO venta, Configuracion conf) {
 		try {
-			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getUrl());
+			URL url = new URL("http://" + conf.getIp() + ":" + conf.getPuerto() + "/" + conf.getInfVenta());
 
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
@@ -132,7 +132,7 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			return new ResultadoOperacionDTO(true, "Respuesta de Informar Venta: " + respuesta);
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error al intentar mandar info venta sincronico: " + e.getStackTrace().toString());
+			logger.error("Error al intentar mandar info venta sincronico: " + e.getStackTrace().toString() + "\n");
 			return new ResultadoOperacionDTO(false, "Se ha producido un error: " + e.getMessage());
 		}
 	}

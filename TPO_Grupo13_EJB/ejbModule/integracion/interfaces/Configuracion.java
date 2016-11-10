@@ -21,15 +21,19 @@ public interface Configuracion {
 
 	void setPass(String pass);
 
-	String getUrl();
-
-	void setUrl(String url);
-
 	String getTipo();
 
 	void setTipo(String tipo);
 
-	String getJms();
+	String getRestAudit();
 
-	void setJms(String jms);
+	void setRestAudit(String restAudit);
+
+	String getInfVenta();
+
+	void setInfVenta(String infVenta);
+
+	String getJmsAudit();
+
+	void setJmsAudit(String jmsAudit);
 }

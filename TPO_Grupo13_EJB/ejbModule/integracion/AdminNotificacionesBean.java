@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dto.VentaDTO;
-import helpers.ParserJson;
 import integracion.interfaces.AdminNotificaciones;
 import integracion.interfaces.Configuracion;
 import integracion.interfaces.NotificadorLogMon;
@@ -29,7 +28,7 @@ public class AdminNotificacionesBean implements AdminNotificaciones {
 
 	@Override
 	public ResultadoOperacionDTO enviarInfoVenta(VentaDTO venta) {
-		return notificador.sincronica(ParserJson.toString(venta.convertirLMDTO()), configuracion);
+		return notificador.infVenta(venta, configuracion);
 	}
 
 	@Override

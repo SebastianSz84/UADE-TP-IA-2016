@@ -19,9 +19,11 @@ public class ConfiguracionBean implements Configuracion {
 	private String puerto;
 	private String user;
 	private String pass;
-	private String url;
 	private String tipo;
-	private String jms;
+	private String infVenta;
+	private String restAudit;
+	private String jmsAudit;
+
 	private Properties props;
 	private static String propFileName = "config.properties";
 	private InputStream inputStream;
@@ -53,9 +55,11 @@ public class ConfiguracionBean implements Configuracion {
 				this.setIp(getPropiedad("ip"));
 				this.setPass(getPropiedad("pass"));
 				this.setPuerto(getPropiedad("puerto"));
-				this.setUrl(getPropiedad("url"));
 				this.setUser(getPropiedad("user"));
 				this.setTipo(getPropiedad("tipo"));
+				this.setInfVenta(getPropiedad("infVenta"));
+				this.setJmsAudit(getPropiedad("jmsAudit"));
+				this.setRestAudit(getPropiedad("restAudit"));
 			}
 		} catch (Exception e) {
 			System.out.println("Error al leer la configuración: " + e.getMessage());
@@ -114,18 +118,8 @@ public class ConfiguracionBean implements Configuracion {
 	}
 
 	@Override
-	public String getUrl() {
-		return url;
-	}
-
-	@Override
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	@Override
 	public String toString() {
-		return ip + "\n" + puerto + "\n" + user + "\n" + pass + "\n" + url + "\n" + jms;
+		return ip + "\n" + puerto + "\n" + user + "\n" + pass;
 	}
 
 	@Override
@@ -139,12 +133,32 @@ public class ConfiguracionBean implements Configuracion {
 	}
 
 	@Override
-	public String getJms() {
-		return jms;
+	public String getRestAudit() {
+		return restAudit;
 	}
 
 	@Override
-	public void setJms(String jms) {
-		this.jms = jms;
+	public void setRestAudit(String restAudit) {
+		this.restAudit = restAudit;
+	}
+
+	@Override
+	public String getInfVenta() {
+		return infVenta;
+	}
+
+	@Override
+	public void setInfVenta(String infVenta) {
+		this.infVenta = infVenta;
+	}
+
+	@Override
+	public String getJmsAudit() {
+		return jmsAudit;
+	}
+
+	@Override
+	public void setJmsAudit(String jmsAudit) {
+		this.jmsAudit = jmsAudit;
 	}
 }

@@ -39,6 +39,7 @@ public class ServicioRestBestSellers {
 				RankingDTO itBS = new RankingDTO();
 				ProductoDTO p = new ProductoDTO();
 				p.setCodigo(itemsBS.get(i).getAsJsonObject().get("codigo").getAsInt());
+				p.setIdDeposito(itemsBS.get(i).getAsJsonObject().get("nombreDeposito").getAsString());
 				itBS.setProducto(p);
 				itBS.setPosicion(itemsBS.get(i).getAsJsonObject().get("posicion").getAsInt());
 				listaBestSellers.add(itBS);
