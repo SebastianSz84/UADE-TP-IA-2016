@@ -17,8 +17,8 @@ public class Ranking implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "codigoProducto", unique = true, nullable = false)
-	private Integer codigoProducto;
+	@Column(name = "IdProducto", unique = true, nullable = false)
+	private Integer idProducto;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -26,12 +26,12 @@ public class Ranking implements Serializable {
 
 	private Integer posicion;
 
-	public Integer getCodigoProducto() {
-		return codigoProducto;
+	public Integer getIdProducto() {
+		return idProducto;
 	}
 
-	public void setCodigoProducto(Integer codigoProducto) {
-		this.codigoProducto = codigoProducto;
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
 	}
 
 	public Integer getPosicion() {
