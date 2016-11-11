@@ -50,7 +50,7 @@ public class ParserJson {
 		return new Gson().toJson(cls);
 	}
 
-	public static <T> T fromJson(String nuevoProdJSON, Class<T> cls) {
-		return new Gson().fromJson(nuevoProdJSON, cls);
+	public static <T> T fromJson(String json, Class<T> cls) {
+		return new Gson().fromJson(json, cls);
 	}
 }
