@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class NotificacionLMDTO {
 	private String fecha;
-	private String tipo = "PortalWEB";
+	private String tipo = "Portal";
 	private String modulo = "G13";
 	private String descripcion;
 
