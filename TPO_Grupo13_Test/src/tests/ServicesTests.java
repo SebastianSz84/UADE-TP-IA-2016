@@ -34,7 +34,8 @@ public class ServicesTests {
 			urlConnection.setRequestProperty("Content-Type", "application/json");
 
 			// ACT
-			IOUtils.write("{\"ranking\":[{\"codigo\":\"1857363\",\"posicion\":\"1\"}]}",
+			IOUtils.write(
+					"{\"ranking\":[{\"codigo\":\"1858018\",\"nombreDeposito\":\"G01\",\"posicion\":\"1\"},{\"codigo\":\"1858013\",\"nombreDeposito\":\"G01\",\"posicion\":\"2\"}]}",
 					urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
@@ -170,6 +171,32 @@ public class ServicesTests {
 			if (context != null) {
 				context.close();
 			}
+		}
+	}
+
+	@Test
+	public void TestEstadoDespacho() {
+		try {
+
+			// ARRANGE
+			URL url = new URL("http://localhost:8080/TPO_Grupo13_Web/rest/despacho/actualizarEstado");
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setDoOutput(true);
+			urlConnection.setRequestMethod("POST");
+			urlConnection.setRequestProperty("Content-Type", "application/json");
+
+			// ACT
+			IOUtils.write("{\"numeroVenta\":1, \"estado\":\"Entregada\"}", urlConnection.getOutputStream());
+			if (urlConnection.getResponseCode() != 200) {
+				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
+			}
+
+			// ASSERT
+			String response = IOUtils.toString(urlConnection.getInputStream());
+			System.out.println("Respuesta: " + response);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 }
