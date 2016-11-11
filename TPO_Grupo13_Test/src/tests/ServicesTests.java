@@ -35,7 +35,7 @@ public class ServicesTests {
 
 			// ACT
 			IOUtils.write(
-					"{\"ranking\":[{\"codigo\":\"1858018\",\"nombreDeposito\":\"G01\",\"posicion\":\"1\"},{\"codigo\":\"1858013\",\"nombreDeposito\":\"G01\",\"posicion\":\"2\"}]}",
+					"{\"ranking\":[{\"codigo\":\"1858018\",\"nombreDeposito\":\"G01\",\"posicion\":1},{\"codigo\":\"1858013\",\"nombreDeposito\":\"G01\",\"posicion\":2}]}",
 					urlConnection.getOutputStream());
 			if (urlConnection.getResponseCode() != 200) {
 				throw new RuntimeException("Error de conexión: " + urlConnection.getResponseCode());
