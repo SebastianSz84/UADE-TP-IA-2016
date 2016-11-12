@@ -50,6 +50,7 @@ angular.module('integracion')
                     $scope.isLoading = false;
                 })
                 .catch(function (data) {
+                    $scope.close();
                     HomeService.errorMessage(data);
                     $scope.isLoading = false;
                 });
