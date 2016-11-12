@@ -147,9 +147,9 @@
     <div class="products-list">
 
         <div ng-repeat="item in filteredProducts" ng-if="$index % 3 == 0" class="row">
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index]" ng-click="openDetail(filteredProducts[$index])"></product>
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 1]" ng-click="openDetail(filteredProducts[$index + 1])" ng-if="filteredProducts.length > ($index + 1)"></product>
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 2]" ng-click="openDetail(filteredProducts[$index + 1])" ng-if="filteredProducts.length > ($index + 2)"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index]"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 1]" ng-if="filteredProducts.length > ($index + 1)"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 2]" ng-if="filteredProducts.length > ($index + 2)"></product>
         </div>
 
     </div>

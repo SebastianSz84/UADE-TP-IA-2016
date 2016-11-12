@@ -2,7 +2,7 @@
     <div class="product-ranking" ng-if="product.ranking">
         {{product.ranking}}
     </div>
-    <div class="image-container" ng-style="getBg(product.foto)">
+    <div class="image-container" ng-style="getBg(product.foto)" ng-click="openDetails()">
     </div>
     <div class="product-name">
         {{product.nombre}}

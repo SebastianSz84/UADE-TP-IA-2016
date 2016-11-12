@@ -84,8 +84,8 @@ angular.module('integracion')
             $scope.filters.show = !$scope.filters.show;
         };
 
-        $scope.openDetail = function (item) {
-            $scope.productoDetalle = item;
+        $scope.openDetail = function (args) {
+            $scope.productoDetalle = args;
             $("#myModal").modal();
         };
 
@@ -101,6 +101,10 @@ angular.module('integracion')
         $scope.goSales = function () {
             $state.go('sales');
         };
+
+    	$scope.$on('openDetails', function(args){
+    		$scope.openDetail(args.targetScope.product);
+    	});
 
         $scope.$watchCollection('filters', function () {
             $scope.filterProducts();

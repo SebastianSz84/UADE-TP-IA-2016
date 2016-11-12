@@ -18,4 +18,10 @@ angular.module('integracion')
         $scope.add = function () {
             HomeService.addToCarrito($scope.product, $scope.quantity);
         };
+        
+        $scope.openDetails = function () {
+        	$scope.$emit('openDetails', {
+        		item: $scope.item
+        	});
+        };
     });
