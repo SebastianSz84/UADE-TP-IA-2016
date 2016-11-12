@@ -2,7 +2,7 @@
  * Created by gyauny on 24/10/16.
  */
 angular.module('integracion')
-    .service('HomeService', function ($http, $q, $state, $localStorage, $timeout, LoginService) {
+    .service('HomeService', function ($http, $q, $state, $localStorage, $timeout, LoginService, Constants) {
 
         var carritoData = {
             "idUsuario": LoginService.getUser().id,
@@ -35,7 +35,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletGetCarrito',
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ServletGetCarrito',
                     'data': {
                         'userId': LoginService.getUserId()
                     }
@@ -70,7 +70,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'get',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ListadoProductos'
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ListadoProductos'
                 })
                     .success(function (data) {
                         angular.forEach(data, function (item, key) {
@@ -89,7 +89,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'get',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ServletVenta',
                     'params': {
                         'idUsuario': LoginService.getUserId()
                     }
@@ -107,7 +107,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletCarrito',
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ServletCarrito',
                     'data': {
                         'accion': accion,
                         'carrito': carritoData
@@ -126,7 +126,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletVenta',
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ServletVenta',
                     'data': carritoData
                 })
                     .success(function (data) {
