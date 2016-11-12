@@ -16,6 +16,7 @@ import resultadoOperacionDTOs.ResultadoOperacionDTO;
 
 public class TestJSON {
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void getJSONfromAVenta() {
 		ProductoDTO producto = new ProductoDTO();

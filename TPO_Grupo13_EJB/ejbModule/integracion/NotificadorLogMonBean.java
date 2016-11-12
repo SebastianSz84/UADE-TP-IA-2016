@@ -40,7 +40,8 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			logger.info("SALIDA SINC JSON: \n" + notif);
 			System.out.print("SALIDA SINC JSON: \n" + notif);
 
-			IOUtils.write(notif, urlConnection.getOutputStream());
+			// IOUtils.write(notif, urlConnection.getOutputStream());
+			IOUtils.write(notif.toCharArray(), urlConnection.getOutputStream(), "UTF-8");
 			if (urlConnection.getResponseCode() != 200) {
 				String respuesta = "++ERROR: " + urlConnection.getResponseCode();
 				logger.error(respuesta);
@@ -120,9 +121,8 @@ public class NotificadorLogMonBean implements NotificadorLogMon {
 			logger.info("SALIDA INFVENTA JSON: \n" + mensajeJSON);
 			System.out.print("SALIDA INFVENTA JSON: \n" + mensajeJSON);
 
-			IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
-			// IOUtils.write(mensajeJSON.toCharArray(),
-			// urlConnection.getOutputStream(), "UTF-8");
+			// IOUtils.write(mensajeJSON, urlConnection.getOutputStream());
+			IOUtils.write(mensajeJSON.toCharArray(), urlConnection.getOutputStream(), "UTF-8");
 
 			if (urlConnection.getResponseCode() != 200) {
 				String respuesta = "++ERROR: " + urlConnection.getResponseCode();
