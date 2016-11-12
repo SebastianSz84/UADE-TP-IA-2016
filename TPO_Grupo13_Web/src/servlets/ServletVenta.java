@@ -102,6 +102,7 @@ public class ServletVenta extends HttpServlet {
 		response.setContentType("application/text");
 		if (res == null || !res.sosExitoso()) {
 			out.print(res.getMessage());
+			response.setStatus(500);
 		} else {
 			out.print(res.getMessage());
 		}

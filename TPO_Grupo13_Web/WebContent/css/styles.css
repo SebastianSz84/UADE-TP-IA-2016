@@ -16,7 +16,6 @@
 
 .product .image-container {
     height: 240px;
-    background-size: cover;
     cursor: pointer;
 }
 
@@ -41,4 +40,11 @@
     padding: 5px 15px;
     background: gold;
     margin-left: -15px;
+}
+
+select {
+    background: #f0ad4e !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px !important;
 }

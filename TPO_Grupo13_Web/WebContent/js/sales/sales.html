@@ -12,7 +12,8 @@
           <h4 class="modal-title">Producto: {{producto.nombre}}</h4>
         </div>
         <div class="modal-body">
-			<div>
+			<div style="text-align: center;"
+			>
 				<img style="height:400px; width:500px" src="{{producto.foto}}">
 			</div>
 			<ul>
@@ -78,7 +79,7 @@
       <tr ng-repeat="(key, item) in details">
         <td style="cursor: pointer;"  ng-click="openDetailProd(item)" data-target="#myModal" data-toggle="modal">{{item.producto.nombre}}</td>
         <td>{{item.cantidad}}</td>
-        <td>{{item.precio}}</td>
+        <td>{{item.precio | currency}}</td>
       </tr>
     </tbody>
   </table>

@@ -10,7 +10,7 @@ angular.module('integracion')
             return $q(function (resolve, reject) {
                 $http({
                     'method': 'post',
-                    'url': 'http://localhost:8080/TPO_Grupo13_Web/ServletLogin',
+                    'url': Constants.baseUrl +'TPO_Grupo13_Web/ServletLogin',
                     'params': {
                         'user': username,
                         'password': password

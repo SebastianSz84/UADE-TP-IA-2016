@@ -10,11 +10,18 @@ angular.module('integracion')
             return {
                 'background': 'url("' + url + '")',
                 'background-position': 'center',
-                'background-size': 'cover'
+                'background-size': 'contain',
+                'background-repeat' : 'no-repeat'
             };
         };
 
         $scope.add = function () {
             HomeService.addToCarrito($scope.product, $scope.quantity);
+        };
+        
+        $scope.openDetails = function () {
+        	$scope.$emit('openDetails', {
+        		item: $scope.item
+        	});
         };
     });
