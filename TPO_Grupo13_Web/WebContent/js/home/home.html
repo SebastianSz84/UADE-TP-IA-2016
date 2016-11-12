@@ -24,8 +24,8 @@
                             <tr ng-repeat="(key, item) in carrito.items">
                                 <td>{{item.producto.nombre}}</td>
                                 <td>{{item.cantidad}}</td>
-                                <td>${{item.producto.precio}}</td>
-                                <td>${{item.subTotal}}</td>
+                                <td>{{item.producto.precio | currency}}</td>
+                                <td>{{item.subTotal | currency}}</td>
                                 <td style="cursor:pointer;" ><span class="glyphicon glyphicon-remove" ng-click="removeItem(key)"></span></td>
                             </tr>
                             </tbody>
@@ -35,10 +35,15 @@
                         No tiene elementos en el carrito.
                     </div>
                     <div ng-if="productoDetalle">
-                        <img style="height:400px; width:500px" ng-src="{{productoDetalle.foto}}">
-                        <div>
-                            {{productoDetalle.datosExtra}}
-                        </div>
+						<div>
+							<img style="height:400px; width:500px" src="{{productoDetalle.foto}}">
+						</div>
+						<ul>
+						  <li ng-show="productoDetalle.marca">Marca: {{productoDetalle.marca}}</li>
+						  <li ng-show="productoDetalle.descripcion" >Descripcion: {{productoDetalle.descripcion}}</li>
+						  <li ng-show="productoDetalle.origen">Origen: {{productoDetalle.origen}}</li>
+						  <li ng-show="productoDetalle.datosExtra">Datos extra: {{productoDetalle.datosExtra}}</li>
+						</ul>
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0;">
@@ -114,12 +119,12 @@
     <br>
 
     <div class="row" style="font-family: calibri;font-size:initial;font-weight: bold;" ng-show="filters.show">
-            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6" style="color:#0ed80e">
+            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6">
                 <div>Precio</div> 
                 <span>Min</span><input type="number" min="0" ng-model="filters.price.min"/>
                 <span>Max</span><input type="number" min="1" ng-model="filters.price.max"/>
             </div>
-            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6" style="color:#d8209e">
+            <div class="col-xs-6 col-md-6 col-sm-4 col-lg-6">
                 <div>Fecha</div>
                 <span>Desde</span><input type="date" ng-model="filters.date.from"/>
                 <span>Hasta</span><input type="date" ng-model="filters.date.to"/>
@@ -142,9 +147,9 @@
     <div class="products-list">
 
         <div ng-repeat="item in filteredProducts" ng-if="$index % 3 == 0" class="row">
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index]"></product>
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 1]" ng-if="filteredProducts.length > ($index + 1)"></product>
-            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 2]" ng-if="filteredProducts.length > ($index + 2)"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index]" ng-click="openDetail(filteredProducts[$index])"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 1]" ng-click="openDetail(filteredProducts[$index + 1])" ng-if="filteredProducts.length > ($index + 1)"></product>
+            <product class="col-xs-12 col-sm-4" product="filteredProducts[$index + 2]" ng-click="openDetail(filteredProducts[$index + 1])" ng-if="filteredProducts.length > ($index + 2)"></product>
         </div>
 
     </div>

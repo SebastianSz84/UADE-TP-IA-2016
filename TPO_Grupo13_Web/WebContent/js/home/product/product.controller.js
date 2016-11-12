@@ -10,7 +10,8 @@ angular.module('integracion')
             return {
                 'background': 'url("' + url + '")',
                 'background-position': 'center',
-                'background-size': 'cover'
+                'background-size': 'contain',
+                'background-repeat' : 'no-repeat'
             };
         };
 

@@ -8,7 +8,7 @@
         {{product.nombre}}
     </div>
     <div class="product-price">
-        {{product.precio}}
+        {{product.precio | currency}}
     </div>
     <div class="product-action">
         <input style="width: 40px" type="number" min="1" ng-model="quantity"/>

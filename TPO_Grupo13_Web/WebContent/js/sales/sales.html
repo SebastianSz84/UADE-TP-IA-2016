@@ -78,7 +78,7 @@
       <tr ng-repeat="(key, item) in details">
         <td style="cursor: pointer;"  ng-click="openDetailProd(item)" data-target="#myModal" data-toggle="modal">{{item.producto.nombre}}</td>
         <td>{{item.cantidad}}</td>
-        <td>{{item.precio}}</td>
+        <td>{{item.precio | currency}}</td>
       </tr>
     </tbody>
   </table>
