@@ -36,7 +36,7 @@
                     </div>
                     <div ng-if="productoDetalle">
 						<div>
-							<img style="height:400px; width:500px" src="{{productoDetalle.foto}}">
+							<img style="height:400px; width:500px" ng-src="{{productoDetalle.foto}}">
 						</div>
 						<ul>
 						  <li ng-show="productoDetalle.marca">Marca: {{productoDetalle.marca}}</li>
