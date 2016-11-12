@@ -206,24 +206,33 @@ public class ControladorBean implements Controlador {
 				n = new NotificacionLMDTO("Se quito un producto del carrito");
 			}
 
-			admNotif.enviarNotificacion(ParserJson.toString(n));
+			ResultadoOperacionDTO r = admNotif.enviarNotificacion(ParserJson.toString(n));
 
-			return new ResultadoOperacionDTO(true, "Carrito guardado");
+			if (r.sosExitoso()) {
+				return new ResultadoOperacionDTO(true, "Carrito guardado");
+			} else {
+				return new ResultadoOperacionDTO(false, "Error al enviar notificacion: " + r.getMessage());
+			}
 		} catch (Exception ex) {
-			return new ResultadoOperacionDTO(false, "Error al crear producto : " + ex.getMessage());
+			return new ResultadoOperacionDTO(false, "Error al guardar el carrito : " + ex.getMessage());
 		}
 	}
 
 	public ResultadoOperacionVentaDTO confirmarCarrito(CarritoDTO c) {
+		Venta v = loadVenta(c);
 		try {
-			Venta v = loadVenta(c);
 			ventaDAOBean.saveEntity(v);
-			Carrito carrito = carritoDAOBean.get(c.getIdUsuario());
-			carritoDAOBean.borrarListaItems(carrito);
 			VentaDTO venDTO = v.getDTO();
 			venDTO.setUsuario(v.getUsuario().getDTO());
-			admNotif.enviarInfoVenta(venDTO);
-			return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
+			ResultadoOperacionDTO r = admNotif.enviarInfoVenta(venDTO);
+			if (r.sosExitoso()) {
+				Carrito carrito = carritoDAOBean.get(c.getIdUsuario());
+				carritoDAOBean.borrarListaItems(carrito);
+				return new ResultadoOperacionVentaDTO(true, "Se registro una venta", venDTO);
+			} else {
+				ventaDAOBean.deleteEntity(v);
+				return new ResultadoOperacionVentaDTO(false, "Error al registrar la venta: " + r.getMessage(), null);
+			}
 		} catch (Exception ex) {
 			return new ResultadoOperacionVentaDTO(false, "Error al registrar la venta: " + ex.getMessage(), null);
 		}
